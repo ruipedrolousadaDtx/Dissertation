@@ -1,0 +1,20 @@
+*.aux
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+# *.pdf
+*.synctex.gz
+*.toc
+*.xdv
+*.fls
+*.fdb_latexmk
+*.blg
+*.acn
+*.bbl
+*.glo
+*.glsdefs
+*.ist

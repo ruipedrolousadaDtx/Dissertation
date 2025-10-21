@@ -1,0 +1,452 @@
+@book{KeR88
+  , author    =	{B.W. Kernighan and D.M. Ritchie}
+  , title     =	{The C Programming Language (ANSI C)}
+  , edition   =	{2nd}
+  , publisher =	{Prentice Hall Software series}
+  , year      =	{1988}
+  , keywords  = {Programming, Imperative}
+}
+@book{BW88
+  , noAUTHOR = "Richard Bird and Philip Wadler"
+  , author    = "R. Bird and P. Wadler"
+  , TITLE = "Introduction to Functional Programming"
+  , publisher = "Prentice-Hall"
+  , YEAR = "1988"
+  , keywords  = {Programming, Functional}
+}
+@book{GRM97
+  , title     = {The LaTeX Graphics Companion}
+  , author    = {Michel Goossens and Sebastian Rahtz and Frank Mittelbach}
+  , publisher = {Addison-Wesley}
+  , year      = {1997}
+  , note      = {ISBN 0-201-85469-4}
+  , keywords  = {LaTeX, Programming, Graphics}
+}
+@book{Fl99
+  , title     =   {Java in a Nutshell}
+  , author=   {D. Flanagan}
+  , publisher =   {O'Reilly \& Associates}
+  , edition=  {3rd}
+  , year  =   {1999}
+  , keywords  = {Java, Programming, OO}
+}
+@book{La86
+  , KEY = "La86"
+  , AUTHOR = "L. Lamport"
+  , TITLE = "\LaTeX\ --- A Document Preparation System"
+  , PUBLISHER = "Addison-Wesley Publishing Company"
+  , EDITION = "\nth5"
+  , YEAR = "1986"
+  , keywords  = {LaTeX}
+}
+
+@article{Kusuma2022,
+   abstract = {The increasingly massive use of digital technology requires that the application architecture be designed to have high availability and reliability. This is because when an application cannot be accessed, it will cause no small loss to the organization. Therefore, the development and operation teams must be able to detect when their system is not working well. For that, we need a system that can monitor application performance. In this research, a system is developed to collect telemetry data, namely metrics and traces from an online donation backend application based on the REST API. OpenTelemetry produces telemetry as an open-source telemetry instrumentation tool. Then the telemetry data is collected by the OpenTelemetry Collector which is then stored on the backend of each telemetry. Metrics are sent to Prometheus and traces are sent to Jaeger. The data metrics collected are throughput, request latency, and error rate which are visualized using the Grafana dashboard. The test results show that the monitoring system can collect real-time metrics data with an average delay of 13,8 seconds. The system can also detect when an anomaly occurs in the app and sends notifications via Slack. In addition, the trace data collected can be used to simplify the debugging process when an error occurs in the application. However, the implementation of OpenTelemetry in a REST API-based backend application to monitor metrics and traces has a negative impact on the performance of the application itself, which can reduce the number of request throughput with an average decrease of 23.32% and increase request latency with an average increase of 22.80%.},
+   author = {Guntoro Yudhy Kusuma and Unan Yusmaniar Oktiawati},
+   doi = {10.22146/jise.v3i1.5000},
+   issue = {1},
+   journal = {Journal of Internet and Software Engineering},
+   title = {Application Performance Monitoring System Design Using Opentelemetry and Grafana Stack},
+   volume = {3},
+   year = {2022}
+}
+@article{Blinowski2022,
+   abstract = {Context. Since its proclamation in 2012, microservices-based architecture has gained widespread popularity due to its advantages, such as improved availability, fault tolerance, and horizontal scalability, as well as greater software development agility. Motivation. Yet, refactoring a monolith to microservices by smaller businesses and expecting that the migration will bring benefits similar to those reported by top global companies, such as Netflix, Amazon, eBay, and Uber, might be an illusion. Indeed, for systems that do not have thousands of concurrent users and can be scaled vertically, the benefits of such migration have not been sufficiently investigated, while the existing evidence is inconsistent. Objective. The purpose of this paper is to compare the performance and scalability of monolithic and microservice architectures on a reference web application. Method. The application was implemented in four different versions, covering not only two different architectural styles (monolith vs. microservices) but also two different implementation technologies (Java vs. C#.NET). Next, we conducted a series of controlled experiments in three different deployment environments (local, Azure Spring Cloud, and Azure App Service). Findings. The key lessons learned are as follows: (1) on a single machine, a monolith performs better than its microservice-based counterpart; (2) The Java platform makes better use of powerful machines in case of computation-intensive services when compared to.NET; the technology platform effect is reversed when non-computationally intensive services are run on machines with low computational capacity; (3) vertical scaling is more cost-effective than horizontal scaling in the Azure cloud; (4) scaling out beyond a certain number of instances degrades the application performance; (5) implementation technology (either Java or C#.NET) does not have a noticeable impact on the scalability performance.},
+   author = {Grzegorz Blinowski and Anna Ojdowska and Adam Przybylek},
+   doi = {10.1109/ACCESS.2022.3152803},
+   issn = {21693536},
+   journal = {IEEE Access},
+   title = {Monolithic vs. Microservice Architecture: A Performance and Scalability Evaluation},
+   volume = {10},
+   year = {2022}
+}
+@inproceedings{Ghofrani2018,
+   abstract = {Microservices have been one of the fastest-rising trends in the development of enterprise applications and enterprise application landscapes. Even though various mapping studies investigated the open challenges around microservices from literature, it is difficult to have a clear view of existing challenges in designing, developing, and maintaining systems based on microservices architecture as it is perceived by practitioners. In this paper, we present the results of an empirical survey to assess the current state of practice and collect challenges in microservices architecture. Therefore, we synthesize the 25 collected results and produce a clear overview for answering our research questions. The result of our study can be a basis for planning future research and applications of microservices architecture.},
+   author = {Javad Ghofrani and Daniel Lübke},
+   issn = {16130073},
+   booktitle = {CEUR Workshop Proceedings},
+   title = {Challenges of microservices architecture: A survey on the state of the practice},
+   volume = {2072},
+   year = {2018}
+}
+@inproceedings{Rocha2023,
+   abstract = {Microservices emerged due to the massive adoption of cloud computing and the need to integrate legacy systems. However, there still needs to be a greater understanding of adopting a microservice-based architectural style. Besides, there is a need for guidelines to operationalize those microservices. We conducted a grey literature review to identify commonly used architectural patterns and how they are implemented following design patterns. We present two key contributions. Firstly, we identified four architectural patterns and 23 design patterns. Secondly, we identified a catalog of tools for implementing the main patterns adopted when using the microservices style. The Proxy and the SAGA patterns are the most used in communicating and linking data for services. Additionally, tools such as Kubernetes, Docker, and Amazon WS are the most used for implementing microservices and deploying them into containers.},
+   author = {Fabio Gomes Rocha and Michel S. Soares and Guillermo Rodriguez},
+   doi = {10.5753/cibse.2023.24693},
+   booktitle = {CIbSE 2023 - XXVI Ibero-American Conference on Software Engineering},
+   title = {Patterns in Microservices-based Development: A Grey Literature Review},
+   year = {2023}
+}
+@article{Taherizadeh2020,
+   abstract = {Nowadays, different types of computing-intensive services such as mechanical, aerospace, civil and environmental applications are often deployed on the cloud since it offers a convenient on-demand model for renting resources and easy-to-use elastic infrastructures. Moreover, the modern software engineering disciplines exploit orchestration tools such as Kubernetes to run cloud applications based on a set of microservices packaged in containers. On the one hand, in order to ensure the users’ experience, it is necessary to allocate enough number of container instances before the workload intensity surges at runtime. On the other hand, renting expensive cloud-based resources can be unaffordable over a long period of time. Therefore, the choice of a reactive auto-scaling method may significantly affect both response time and resource utilisation. This paper presents a set of key factors which should be considered in the development of auto-scaling methods. Through a set of experiments, a discussion follows to help shed light on how such factors influence the performance of auto-scaling methods under different workload conditions such as on-and-off, predictable and unpredictable bursting workload patterns. Due to suitable results, the proposed set of key factors are exploited in the PrEstoCloud software system for microservice-native cloud-based computationally-intensive applications.},
+   author = {Salman Taherizadeh and Marko Grobelnik},
+   doi = {10.1016/j.advengsoft.2019.102734},
+   issn = {18735339},
+   journal = {Advances in Engineering Software},
+   title = {Key influencing factors of the Kubernetes auto-scaler for computing-intensive microservice-native cloud-based applications},
+   volume = {140},
+   year = {2020}
+}
+@inproceedings{Salah2017,
+   abstract = {Applications developed to fulfil distributed systems needs have been growing rapidly. Major evolutions have happened beginning with basic architecture relying on initiated request by a client to a processing side referred to as the server. Such architectures were not enough to cope up with the fast ever-increasing number of requests and need to utilize network bandwidth. Mobile agents attempted to overcome such drawbacks but did cope up for so long with the growing technology platforms. Service Oriented Architecture (SOA) then evolved to be one of the most successful representations of the client-server architecture with an added business value that provides reusable and loosely coupled services. SOA did not meet customers and business expectations as it was still relying on monolithic systems. Resilience, scalability, fast software delivery and the use of fewer resources are highly desirable features. Microservices architecture came to fulfil those expectations of system development, yet it comes with many challenges. This paper illustrates how distributed systems evolved from the traditional client-server model to the recently proposed microservices architecture. All architectures are reviewed containing brief definitions, some related work and reasoning of why they had to evolve. A feature comparison of all architectures is also provided.},
+   author = {Tasneem Salah and M. Jamal Zemerly and Chan Yeob Yeun and Mahmoud Al-Qutayri and Yousof Al-Hammadi},
+   doi = {10.1109/ICITST.2016.7856721},
+   booktitle = {2016 11th International Conference for Internet Technology and Secured Transactions, ICITST 2016},
+   title = {The evolution of distributed systems towards microservices architecture},
+   year = {2017}
+}
+@misc{OpenTelemetryAuthors2025,
+   author = {OpenTelemetry Authors},
+   title = {OpenTelemetry Documentation},
+   year = {2025}
+}
+@inproceedings{Fu2012,
+   abstract = {This paper presents a set of innovative algorithms and a system, named Log Master, for mining correlations of events that have multiple attributions, i.e., node ID, application ID, event type, and event severity, in logs of large-scale cloud and HPC systems. Different from traditional transactional data, e.g., supermarket purchases, system logs have their unique characteristics, and hence we propose several innovative approaches to mining their correlations. We parse logs into an n-ary sequence where each event is identified by an informative nine-tuple. We propose a set of enhanced apriori-like algorithms for improving sequence mining efficiency, we propose an innovative abstractionevent correlation graphs (ECGs) to represent event correlations, and present an ECGs-based algorithm for fast predicting events. The experimental results on three logs of production cloud and HPC systems, varying from 433490 entries to 4747963 entries, show that our method can predict failures with a high precision and an acceptable recall rates. © 2012 IEEE.},
+   author = {Xiaoyu Fu and Rui Ren and Jianfeng Zhan and Wei Zhou and Zhen Jia and Gang Lu},
+   doi = {10.1109/SRDS.2012.40},
+   issn = {10609857},
+   booktitle = {Proceedings of the IEEE Symposium on Reliable Distributed Systems},
+   title = {Logmaster: Mining event correlations in logs of large-scale cluster systems},
+   year = {2012}
+}
+@article{Thakur2022,
+   abstract = {Cloud-native is a strategy for developing and running applications that take advantage of the benefits of the cloud computing model. Companies building and operating applications by using a cloud-native architecture bring fresh ideas to the market faster and address customer demands more quickly. In the face of failures and extremely unpredictable demand, today's cloud-native application ecosystem is becoming highly dispersed, diversified, and complicated, making it impossible to forecast its behaviour. Observability is growing rapidly as a critical skill for monitoring and managing cloud-native applications in order to assure client satisfaction. Cloud-native Computing Foundation (CNCF) has introduced OpenTelemetry as its incubating project, which is an observability framework for cloud-native software. OpenTelemetry, which is an open-source framework for distributed tracing, has emerged as the industry's leading standard for distributed tracing. This paper focuses on providing a systematic literature review of various services provided by OpenTelemetry.},
+   author = {Aadi Thakur and M. B. Chandak},
+   doi = {10.53730/ijhs.v6ns2.8972},
+   issn = {2550-6978},
+   journal = {International journal of health sciences},
+   title = {review on opentelemetry and HTTP implementation},
+   year = {2022}
+}
+@inproceedings{Zhang2023,
+   abstract = {Today's distributed tracing frameworks are ill-equipped to troubleshoot rare edge-case requests. The crux of the problem is a trade-off between specificity and overhead. On the one hand, frameworks can indiscriminately select requests to trace when they enter the system (head sampling), but this is unlikely to capture a relevant edge-case trace because the framework cannot know which requests will be problematic until after-the-fact. On the other hand, frameworks can trace everything and later keep only the interesting edge-case traces (tail sampling), but this has high overheads on the traced application and enormous data ingestion costs. In this paper we circumvent this trade-off for any edge-case with symptoms that can be programmatically detected, such as high tail latency, errors, and bottlenecked queues. We propose a lightweight and always-on distributed tracing system, Hindsight, which implements a retroactive sampling abstraction: instead of eagerly ingesting and processing traces, Hindsight lazily retrieves trace data only after symptoms of a problem are detected. Hindsight is analogous to a car dash-cam that, upon detecting a sudden jolt in momentum, persists the last hour of footage. Developers using Hindsight receive the exact edge-case traces they desire without undue overhead or dependence on luck. Our evaluation shows that Hindsight scales to millions of requests per second, adds nanosecond-level overhead to generate trace data, handles GB/s of data per node, transparently integrates with existing distributed tracing systems, and successfully persists full, detailed traces in real-world use cases when edge-case problems are detected.},
+   author = {Lei Zhang and Zhiqiang Xie and Vaastav Anand and Ymir Vigfusson and Jonathan Mace},
+   booktitle = {Proceedings of the 20th USENIX Symposium on Networked Systems Design and Implementation, NSDI 2023},
+   title = {The Benefit of Hindsight: Tracing Edge-Cases in Distributed Systems},
+   year = {2023}
+}
+@article{Sambasivan2014,
+   abstract = {End-to-end tracing captures the work ow of causally-related activity (e.g., work done to process a request) within and among the components of a distributed system. As distributed systems grow in scale and complexity, such tracing is becoming a critical tool for management tasks like diagnosis and resource accounting. Drawing upon our experiences building and using end-to-end tracing infrastructures, this paper distills the key design axes that dictate trace utility for important use cases. Developing tracing infrastructures without explicitly understanding these axes and choices for them will likely result in infrastructures that are not useful for their intended purposes. In addition to identifying the design axes, this paper identi es good design choices for various tracing use cases, contrasts them to choices made by previous tracing implementations, and shows where prior implementations fall short. It also identi es remaining challenges on the path to making tracing an integral part of distributed system design.},
+   author = {Raja R Sambasivan and Rodrigo Fonseca and Ilari Shafer and Gregory R Ganger},
+   journal = {Carnegie Mellon University Parallel Data Lab Technical Report},
+   title = {So, you want to trace your distributed system? Key design insights from years of practical experience},
+   year = {2014}
+}
+@article{Sigelman2010,
+   abstract = {Modern Internet services are often implemented as complex, large-scale distributed systems. These applications are constructed from collections of software modules that may be developed by different teams, perhaps in different programming languages, and could span many thousands of machines across multiple physical facilities. Tools that aid in understanding system behavior and reasoning about performance issues are invaluable in such an environment. Here we introduce the design of Dapper, Googles production distributed systems tracing infrastructure, and describe how our design goals of low overhead, application-level transparency, and ubiquitous deployment on a very large scale system were met. Dapper shares conceptual similarities with other tracing systems, particularly Magpie 3 and X-Trace 12, but certain design choices were made that have been key to its success in our environment, such as the use of sampling and restricting the instrumentation to a rather small number of common libraries. The main goal of this paper is to report on our experience building, deploying and using the system for over two years, since Dappers foremost measure of success has been its usefulness to developer and operations teams. Dapper began as a self-contained tracing tool but evolved into a monitoring platform which has enabled the creation of many different tools, some of which were not anticipated by its designers. We describe a few of the analysis tools that have been built using Dapper, share statistics about its usage within Google, present some example use cases, and discuss lessons learned so far.},
+   author = {Benjamin H Sigelman and Luiz Andr and Mike Burrows and Pat Stephenson and Manoj Plakal and Donald Beaver and Saul Jaspan and Chandan Shanbhag},
+   issn = {<null>},
+   issue = {April},
+   journal = {Google Research},
+   title = {Dapper , a Large-Scale Distributed Systems Tracing Infrastructure},
+   year = {2010}
+}
+@inproceedings{Bajer2017,
+   abstract = {The goal of this publication is to describe the implementation of an Elastisearch, Logstash and Kibana (ELK) stack to process IoT data. Although, those tools were designed to be used mainly for handling large number of log data, they can be applied also to store, search and visualise other type of information - including IoT data. In order to show practical implementation of the idea, selected devices installed in thebuilding of ABB Corporate Research in Krakow has been used. In prepared system, real data generated by various subsystems in this building has been integrated into one Elasticsearch based solution for further processing. Later on, this data will be used to develop data analytics to extract and visualize meaningful insights about building operations. In addition, selected data is sent to the Azure cloud to use its abilities in big data processing and machine learning.},
+   author = {Marcin Bajer},
+   doi = {10.1109/FiCloudW.2017.101},
+   booktitle = {Proceedings - 2017 5th International Conference on Future Internet of Things and Cloud Workshops, W-FiCloud 2017},
+   title = {Building an IoT data hub with elasticsearch, Logstash and Kibana},
+   volume = {2017-January},
+   year = {2017}
+}
+@article{Khan2022,
+   abstract = {DevOps is a set of practices and a cultural movement that aims to break down barriers between development and operation teams to improve collaboration and communication. Different organizations have embraced DevOps principles due to the massive potential, such as a much shorter time to production, increased reliability and stability. However, despite the widespread adoption of DevOps and its infrastructure, there is a lack of understanding and literature on the key concepts, practices, tools, and challenges associated with implementing DevOps strategies. The main goal of this research paper is to explore and discuss challenges related to DevOps culture and practices. Moreover, it describes how DevOps works in an organization, provides a detailed explanation of DevOps, and investigates the cultural challenges that organizations face when implementing DevOps. The proposed paper reveals ten critical challenges that need to be addressed in adopting the DevOps culture. The challenges are further analyzed on the basis of the various continents. According to the findings, the following critical challenges are considered during the implementation of a DevOps culture: lack of collaboration and communication, Lack of skill and knowledge, complicated infrastructure, Lack of management, Lack of DevOps approach, and trust confidence problems.},
+   author = {Muhammad Shoaib Khan and Abudul Wahid Khan and Faheem Khan and Muhammad Adnan Khan and Taeg Keun Whangbo},
+   doi = {10.1109/ACCESS.2022.3145970},
+   issn = {21693536},
+   journal = {IEEE Access},
+   title = {Critical Challenges to Adopt DevOps Culture in Software Organizations: A Systematic Review},
+   volume = {10},
+   year = {2022}
+}
+@book{Humble2010,
+   abstract = {One of the major aims of this book is to improve collaboration between the people responsible for delivering software. In particular, we have in mind developers, testers, systems and database administrators, and managers. We cover topics from traditional configuration management, source code control, release planning, auditing, compliance, and integration to the automation of your building, testing, and deployment processes. We also describe techniques such as automated acceptance testing, dependency management, database migration, and the creation and management of testing and production environments. Many people involved in creating software consider these activities secondary to writing code. However, in our experience they take up a great deal of time and effort, and are critical to successful software delivery. When the risks surrounding these activities are not managed adequately, they can end up costing a lot of money, often more than the cost of building the software in the first place.},
+   author = {Jezz Humble and David Farley},
+   issn = {1098-6596},
+   journal = {Continuous delivery},
+   title = {Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation},
+   year = {2010}
+}
+@book{Burns2015,
+   abstract = {Predicting the binding mode of flexible polypeptides to proteins is an important task that falls outside the domain of applicability of most small molecule and protein−protein docking tools. Here, we test the small molecule flexible ligand docking program Glide on a set of 19 non-α-helical peptides and systematically improve pose prediction accuracy by enhancing Glide sampling for flexible polypeptides. In addition, scoring of the poses was improved by post-processing with physics-based implicit solvent MM- GBSA calculations. Using the best RMSD among the top 10 scoring poses as a metric, the success rate (RMSD ≤ 2.0 Å for the interface backbone atoms) increased from 21% with default Glide SP settings to 58% with the enhanced peptide sampling and scoring protocol in the case of redocking to the native protein structure. This approaches the accuracy of the recently developed Rosetta FlexPepDock method (63% success for these 19 peptides) while being over 100 times faster. Cross-docking was performed for a subset of cases where an unbound receptor structure was available, and in that case, 40% of peptides were docked successfully. We analyze the results and find that the optimized polypeptide protocol is most accurate for extended peptides of limited size and number of formal charges, defining a domain of applicability for this approach.},
+   author = {Brendan Burns},
+   issn = {1098-6596},
+   issue = {9},
+   journal = {O'Reilly},
+   title = {Designing Distributed Systems},
+   volume = {53},
+   year = {2015}
+}
+@article{Garcia-Molina1987,
+   abstract = {Long lived transactions (LLTs) hold on to database resources for relatively long periods of time, significantly delaying the termination of shorter and more common transactions. To alleviate these problems we propose the notion of a saga. A LLT is a saga if it can be written as a sequence of transactions that can be interleaved with other transactions. The database management system guarantees that either all the transactions in a saga are successfully completed or compensating transactions are run to amend a partial execution. Both the concept of saga and its implementation are relatively simple, but they have the potential to improve performance significantly. We analyze the various implementation issues related to sagas, including how they can be run on an existing system that does not directly support them. We also discuss techniques for database and LLT design that make it feasible to break up LLTs into sagas. © 1987, ACM. All rights reserved.},
+   author = {Hector Garcia-Molina and Kenneth Salem},
+   doi = {10.1145/38714.38742},
+   issn = {01635808},
+   issue = {3},
+   journal = {ACM SIGMOD Record},
+   title = {Sagas},
+   volume = {16},
+   year = {1987}
+}
+@article{Rogers2022,
+   abstract = {This article provides a review of the book Implementing Domain-Driven Design, written by Vaughn Vernon and published by Addison Wesley, © 2013, ISBN-13: 978-0-32183457-7, 612 pp., $64.99.},
+   author = {David S. Rogers},
+   doi = {10.1145/3539814.3539822},
+   issn = {0163-5948},
+   issue = {3},
+   journal = {ACM SIGSOFT Software Engineering Notes},
+   title = {Implementing Domain-Driven Design (by V. Vernon)},
+   volume = {47},
+   year = {2022}
+}
+@article{Soldani2018,
+   abstract = {Citation for published version (APA): Soldani, J., Tamburri, D. A., & van den Heuvel, W-J. (2018). The pains and gains of microservices: a systematic grey literature review. Journal of Systems and Software, 146, 215-232. https://doi. a b s t r a c t The design, development, and operation of microservices are picking up more and more momentum in the IT industry. At the same time, academic work on the topic is at an early stage, and still on the way to distilling the actual "Pains & Gains" of microservices as an architectural style. Having witnessed this gap, we set forth to systematically analyze the industrial grey literature on microservices, to identify the technical/operational pains and gains of the microservice-based architectural style. We conclude by discussing research directions stemming out from our analysis.},
+   author = {Jacopo Soldani and Damian Andrew Tamburri and Willem-Jan Van and Den Heuvel},
+   journal = {The Journal of Systems and Software},
+   title = {The pains and gains of microservices The Journal of Systems and Software The pains and gains of microservices: A Systematic grey literature review},
+   volume = {146},
+   year = {2018}
+}
+@article{Richardson2018,
+   abstract = {Microservices Patterns teaches you how to develop and deploy production-quality microservices-based applications. This invaluable set of design patterns builds on decades of distributed system experience, adding new patterns for writing services and composing them into systems that scale and perform reliably under real-world conditions. More than just a patterns catalog, this practical guide offers experience-driven advice to help you design, implement, test, and deploy your microservices-based application.},
+   author = {Chris Richardson},
+   journal = {Manning Publications},
+   title = {Microservices Patterns},
+   year = {2018}
+}
+@inproceedings{Bailey2013,
+   abstract = {More than forty years ago, Melvin Conway published his seminal paper on the relationship between software architecture and development organizations, a phenomenon now known as "Conway's Law." We reviewed the literature to see how Conway's Law has been interpreted and used over the past decade. In particular, we looked at the types of organizations to which people have applied Conway's Law and the behaviors that people consider to be prescribed or proscribed by Conway. This pilot study attempts to articulate many of the views currently held within the software engineering community regarding Conway's Law. By doing so we hope to facilitate further meaningful studies of Conway. © 2013 IEEE.},
+   author = {Sabrina E. Bailey and Sneha S. Godbole and Charles D. Knutson and Jonathan L. Krein},
+   doi = {10.1109/RESER.2013.14},
+   booktitle = {Proceedings - 2013 3rd International Workshop on Replication in Empirical Software Engineering Research, RESER 2013},
+   title = {A decade of Conway's Law: A literature review from 2003-2012},
+   year = {2013}
+}
+@article{Aziz2020,
+   abstract = {In recent years, enterprise service bus (ESB) has become a favorable adoption as a technology category in the IT industry as it provides secure and guaranteed delivery of services. The elasticity of Enterprise Service Bus (ESB) enables numerous applications to exchange information makes it a significant middleware layer responsible for transferring information in a Service-Oriented Architecture (SOA). ESB is presently the utmost promising tactic for the integration of business applications in distributed and diverse environments. It also offers essential infrastructure support for transforming messages or data, intelligent routing, and protocol transformation. The idea of ESBs emerged from the requirements to move out from traditional integration patterns, that becomes difficult to manage with the passage of time. Our study aim is to understand and provide ongoing research topics, challenges and future directions concerning ESB applications. A systematic mapping study (SMS) is therefore implemented to categorize the selected papers into the following classification: contribution type, ESB applications, research type and their approaches. We have extracted a total of twenty-two papers for this systematic study and they are classified according to defined criteria. The findings of this SMS are discussed and researchers were provided with suggestions on possible directions for future research.},
+   author = {Omer Aziz and Muhammad Shoaib Farooq and Adnan Abid and Rubab Saher and Naeem Aslam},
+   doi = {10.1109/ACCESS.2020.2972195},
+   issn = {21693536},
+   journal = {IEEE Access},
+   title = {Research Trends in Enterprise Service Bus (ESB) Applications: A Systematic Mapping Study},
+   volume = {8},
+   year = {2020}
+}
+@article{Liu2013,
+   abstract = {A quantitative description of a complex system is inherently limited by our ability to estimate the system's internal state fromexperimentally accessible outputs. Although the simultaneous measurement of all internal variables, like allmetabolite concentrations in a cell, offers a complete description of a system's state, in practice experimental access is limited to only a subset of variables, or sensors. A system is called observable if we can reconstruct the system's complete internal state from its outputs. Here, we adopt a graphical approach derived fromthe dynamical laws that govern a systemto determine the sensors that are necessary to reconstruct the full internal state of a complex system. We apply this approach to biochemical reaction systems, finding that the identified sensors are not only necessary but also sufficient for observability. The developed approach can also identify the optimal sensors for target or partial observability, helping us reconstruct selected state variables from appropriately chosen outputs, a prerequisite for optimal biomarker design. Given the fundamental role observability plays in complex systems, these results offer avenues to systematically explore the dynamics of a wide range of natural, technological and socioeconomic systems.},
+   author = {Yang Yu Liu and Jean Jacques Slotine and Albert Laśzló Barab́asi},
+   doi = {10.1073/pnas.1215508110},
+   issn = {00278424},
+   issue = {7},
+   journal = {Proceedings of the National Academy of Sciences of the United States of America},
+   title = {Observability of complex systems},
+   volume = {110},
+   year = {2013}
+}
+@inproceedings{Jahed2019,
+   abstract = {The heterogeneity and complexity of Internet of Things (IoT) applications present new challenges to the software development process. Model-Driven Software Development (MDSD) is increasingly being recognized as a key paradigm in tackling many of these challenges, as evident by the emergence of a significant number of MDSD frameworks targeting IoT in the past couple of years. At the heart of IoT applications are embedded and realtime systems, a domain where model-driven development is well-established and many existing tools have a proven track record. Unfortunately, only a handful of these tools support out-of-the-box integration with the IoT. In this work, we discuss the different design and implementation decisions for enabling existing actor-oriented MDSD tools for the IoT. Moreover, we propose an integration approach based on the use of proxy actors and system interfaces. The approach offers seamless and flexible integration of external IoT devices into the user's model. We implement and evaluate our approach using the MDSD tool Papyrus for Realtime as a testbed.},
+   author = {Karim Jahed and Juergen Dingel},
+   doi = {10.1109/MiSE.2019.00022},
+   booktitle = {Proceedings - 2019 IEEE/ACM 11th International Workshop on Modelling in Software Engineering, MiSE 2019},
+   title = {Enabling model-driven software development tools for the internet of things},
+   year = {2019}
+}
+@inproceedings{Railic2021,
+   abstract = {Regardless of the size of organizations, they are migrating to microservice architecture for multiple reasons. Many of them have found that by embracing microservice architecture they can deliver software faster and efficiently. Managing small, fine-grained, and autonomous services is easier and allows teams to work on them independently. Adaptation of Agile practices together with methodologies such as the twelve-factor app for building microservices, enable flexibility, efficiency, and increase the speed of delivering the software. However, implementing a repeatable, adaptable, and reliable process for releasing software can be very challenging. Continuous Integration, Delivery, and Deployment workflows are determined by organization cultures and preferences as well as technical requirements. This paper presents an approach on how to design and implement a CI/CD process following the best practices on the build, test, deploy, and release processes. It also describes the challenges of designing CI/CD systems, and it outlines potential answers to those challenges.},
+   author = {Njegos Railic and Mihajlo Savic},
+   doi = {10.1109/INFOTEH51037.2021.9400696},
+   booktitle = {2021 20th International Symposium INFOTEH-JAHORINA, INFOTEH 2021 - Proceedings},
+   title = {Architecting Continuous Integration and Continuous Deployment for Microservice Architecture},
+   year = {2021}
+}
+@book{Newman2015,
+   abstract = {Distributed systems have become more fine-grained in the past 10 years, shifting from code-heavy monolithic applications to smaller, self-contained microservices. But developing these systems brings its own set of headaches. With lots of examples and practical advice, this book takes a holistic view of the topics that system architects and administrators must consider when building, managing, and evolving microservice architectures.Microservice technologies are moving quickly. Author Sam Newman provides you with a firm grounding in the concepts while diving into current solutions for modeling, integrating, testing, deploying, and monitoring your own autonomous services. You’ll follow a fictional company throughout the book to learn how building a microservice architecture affects a single domain.Discover how microservices allow you to align your system design with your organization’s goalsLearn options for integrating a service with the rest of your systemTake an incremental approach when splitting monolithic codebasesDeploy individual microservices through continuous integrationExamine the complexities of testing and monitoring distributed servicesManage security with user-to-service and service-to-service modelsUnderstand the challenges of scaling microservice architectures},
+   author = {Sam Newman},
+   journal = {O'Reilly},
+   title = {Building Microservices},
+   year = {2015}
+}
+@misc{,
+   author = {Jaeger Authors},
+   title = {Jaeger Documentation},
+   url = {https://www.jaegertracing.io/docs/1.22/}
+}
+@misc{,
+   author = {Prometheus Authors},
+   title = {Prometheus Documentation},
+   url = {https://prometheus.io/docs/}
+}
+@misc{,
+   author = {Grafana Labs},
+   title = {Grafana Documentation},
+   url = {https://grafana.com/docs}
+}
+@book{NYGARD2018,
+   abstract = {A single dramatic software failure can cost a company millions of dollars - but can be avoided with simple changes to design and architecture. This new edition of the best-selling industry standard shows you how to create systems that run longer, with fewer failures, and recover better when bad things happen. New coverage includes DevOps, microservices, and cloud-native architecture. Stability antipatterns have grown to include systemic problems in large-scale systems. This is a must-have pragmatic guide to engineering for production systems. If you're a software developer, and you don't want to get alerts every night for the rest of your life, help is here. With a combination of case studies about huge losses - lost revenue, lost reputation, lost time, lost opportunity - and practical, down-to-earth advice that was all gained through painful experience, this book helps you avoid the pitfalls that cost companies millions of dollars in downtime and reputation. Eighty percent of project life-cycle cost is in production, yet few books address this topic. This updated edition deals with the production of today's systems - larger, more complex, and heavily virtualized - and includes information on chaos engineering, the discipline of applying randomness and deliberate stress to reveal systematic problems. Build systems that survive the real world, avoid downtime, implement zero-downtime upgrades and continuous delivery, and make cloud-native applications resilient. Examine ways to architect, design, and build software - particularly distributed systems - that stands up to the typhoon winds of a flash mob, a Slashdotting, or a link on Reddit. Take a hard look at software that failed the test and find ways to make sure your software survives.},
+   author = {M. NYGARD},
+   journal = {Isbn},
+   title = {Release It!: Design and Deploy Production-Ready Software. The Pragmatic Bookshelf.},
+   year = {2018}
+}
+@inproceedings{Goli2021,
+   abstract = {Microservice architecture is the mainstream pattern for developing large-scale cloud applications as it allows for scaling application components on demand and independently. By designing and utilizing autoscalers for microservice applications, it is possible to improve their availability and reduce the cost when the traffic load is low. In this paper, we propose a novel predictive autoscaling approach for microservice applications which leverages machine learning models to predict the number of required replicas for each microservice and the effect of scaling a microservice on other microservices under a given workload. Our experimental results show that the proposed approach in this work offers better performance in terms of response time and throughput than HPA, the state-of-the-art autoscaler in the industry, and it takes fewer actions to maintain a desirable performance and quality of service level for the target application.},
+   author = {Alireza Goli and Nima Mahmoudi and Hamzeh Khazaei and Omid Ardakanian},
+   doi = {10.5220/0010407701900198},
+   issn = {21845042},
+   booktitle = {International Conference on Cloud Computing and Services Science, CLOSER - Proceedings},
+   title = {A Holistic Machine Learning-based Autoscaling Approach for Microservice Applications},
+   volume = {2021-April},
+   year = {2021}
+}
+@article{Burns2016,
+   abstract = {Though Widespread Interest in software containers is a relatively recent phenomenon, at Google we have been managing Linux containers at scale for more than 10 years and built three different containermanagement systems in that time. Each system is heavily influenced by its predecessors, even though they were developed for different reasons. This article describes the lessons we've learned from developing and operating them. The first unified container-management system developed at Google was the system we internally call Borg.7 It was built to manage both long-running services and batch jobs, which had previously been handled by two separate systems: Babysitter and the Global Work Queue. The latter's architecture strongly influenced Borg, but was focused on batch jobs; both predated Linux control groups. Borg shares machines between these two types of applications as a way of increasing resource utilization and thereby reducing costs. Such sharing was possible because container support in the Linux kernel was becoming available (indeed, Google contributed much of the container code to the Linux kernel), which enabled better isolation between latency-sensitive user-facing services and CPU-hungry batch processes.},
+   author = {Brendan Burns and Brian Grant and David Oppenheimer and Eric Brewer and John Wilkes},
+   doi = {10.1145/2890784},
+   issn = {15577317},
+   issue = {5},
+   journal = {Communications of the ACM},
+   title = {Borg, omega, and kubernetes},
+   volume = {59},
+   year = {2016}
+}
+@article{Pahl2019,
+   abstract = {—Containers as a lightweight technology to virtualise applications have recently been successful, particularly to manage applications in the cloud. Often, the management of clusters of containers becomes essential and the orchestration of the construction and deployment becomes a central problem. This emerging topic has been taken up by researchers, but there is currently no secondary study to consolidate this research. We aim to identify, taxonomically classify and systematically compare the existing research body on containers and their orchestration and specifically the application of this technology in the cloud. We have conducted a systematic mapping study of 46 selected studies. We classified and compared the selected studies based on a characterisation framework. This results in a discussion of agreed and emerging concerns in the container orchestration space, positioning it within the cloud context, but also moving it closer to current concerns in cloud platforms, microservices and continuous development.},
+   author = {Claus Pahl and Antonio Brogi and Jacopo Soldani and Pooyan Jamshidi},
+   doi = {10.1109/TCC.2017.2702586},
+   issn = {21687161},
+   issue = {3},
+   journal = {IEEE Transactions on Cloud Computing},
+   title = {Cloud container technologies: A state-of-the-art review},
+   volume = {7},
+   year = {2019}
+}
+@book{Turnbull2014,
+   abstract = {Reduced insulin/insulin-like growth factor 1 (IGF-1) signaling has been associated with longevity in various model organisms. However, the role of insulin/IGF-1 signaling in human survival remains controversial. The aim of this study was to test whether circulating IGF-1 axis parameters associate with old age survival and functional status in nonagenarians from the Leiden Longevity Study. This study examined 858 Dutch nonagenarian (males≥89 years; females≥91 years) siblings from 409 families, without selection on health or demographic characteristics. Nonagenarians were divided over sex-specific strata according to their levels of IGF-1, IGF binding protein 3 and IGF-1/IGFBP3 molar ratio. We found that lower IGF-1/IGFBP3 ratios were associated with improved survival: nonagenarians in the quartile of the lowest ratio had a lower estimated hazard ratio (95% confidence interval) of 0.73 (0.59 – 0.91) compared to the quartile with the highest ratio (ptrend=0.002). Functional status was assessed by (Instrumental) Activities of Daily Living ((I)ADL) scales. Compared to those in the quartile with the highest IGF-1/IGFBP3 ratio, nonagenarians in the lowest quartile had higher scores for ADL (ptrend=0.001) and IADL (ptrend=0.003). These findings suggest that IGF-1 axis parameters are associated with increased old age survival and better functional status in nonagenarians from the Leiden Longevity Study.},
+   author = {James Turnbull},
+   issn = {19454589},
+   issue = {11},
+   journal = {Aging},
+   title = {The Docker Book: Containerization is the new virtualization},
+   volume = {7},
+   year = {2014}
+}
+@inproceedings{Villamizar2015,
+   abstract = {Cloud computing provides new opportunities to deploy scalable application in an efficient way, allowing enterprise applications to dynamically adjust their computing resources on demand. In this paper we analyze and test the microservice architecture pattern, used during the last years by large Internet companies like Amazon, Netflix and LinkedIn to deploy large applications in the cloud as a set of small services that can be developed, tested, deployed, scaled, operated and upgraded independently, allowing these companies to gain agility, reduce complexity and scale their applications in the cloud in a more efficient way. We present a case study where an enterprise application was developed and deployed in the cloud using a monolithic approach and a microservice architecture using the Play web framework. We show the results of performance tests executed on both applications, and we describe the benefits and challenges that existing enterprises can get and face when they implement microservices in their applications.},
+   author = {Mario Villamizar and Oscar Garces and Harold Castro and Mauricio Verano and Lorena Salamanca and Rubby Casallas and Santiago Gil},
+   doi = {10.1109/ColumbianCC.2015.7333476},
+   booktitle = {2015 10th Colombian Computing Conference, 10CCC 2015},
+   title = {Evaluating the monolithic and the microservice architecture pattern to deploy web applications in the cloud},
+   year = {2015}
+}
+@misc{Merkel2014,
+   abstract = {Docker promises the ability to package applications and their dependencies into lightweight containers that move easily between different distros, start up quickly and are isolated from each other.},
+   author = {Dirk Merkel},
+   issn = {1075-3583},
+   issue = {239},
+   journal = {Linux Journal},
+   title = {Docker: lightweight Linux containers for consistent development and deployment},
+   volume = {2014},
+   year = {2014}
+}
+@misc{Lewis2014,
+   abstract = {The term "Microservice Architecture" has sprung up over the last few years to describe a particular way of designing software applications as suites of independently deployable services. While there is no precise definition of this architectural style, there are certain common characteristics around organization around business capability, automated deployment, intelligence in the endpoints, and decentralized control of languages and data.},
+   author = {James Lewis},
+   journal = {martinfowler.com},
+   title = {Microservices - A definition of this new architectural term},
+   year = {2014}
+}
+@misc{Jamshidi2018,
+   abstract = {Microservices are an architectural approach emerging out of service-oriented architecture, emphasizing self-management and lightweightness as the means to improve software agility, scalability, and autonomy. This article examines microservice evolution from the technological and architectural perspectives and discusses key challenges facing future microservice developments.},
+   author = {Pooyan Jamshidi and Claus Pahl and Nabor C. Mendonca and James Lewis and Stefan Tilkov},
+   doi = {10.1109/MS.2018.2141039},
+   issn = {07407459},
+   issue = {3},
+   journal = {IEEE Software},
+   title = {Microservices: The journey so far and challenges ahead},
+   volume = {35},
+   year = {2018}
+}
+@article{Soldani2022,
+   abstract = {The proliferation of services and service interactions within microservices and cloud-native applications, makes it harder to detect failures and to identify their possible root causes, which is, on the other hand crucial to promptly recover and fix applications. Various techniques have been proposed to promptly detect failures based on their symptoms, viz., observing anomalous behaviour in one or more application services, as well as to analyse logs or monitored performance of such services to determine the possible root causes for observed anomalies. The objective of this survey is to provide a structured overview and qualitative analysis of currently available techniques for anomaly detection and root cause analysis in modern multi-service applications. Some open challenges and research directions stemming out from the analysis are also discussed.},
+   author = {Jacopo Soldani and Antonio Brogi},
+   doi = {10.1145/3501297},
+   issn = {15577341},
+   issue = {3},
+   journal = {ACM Computing Surveys},
+   title = {Anomaly Detection and Failure Root Cause Analysis in (Micro) Service-Based Cloud Applications: A Survey},
+   volume = {55},
+   year = {2022}
+}
+@inbook{Dragoni2017,
+   abstract = {Microservices is an architectural style inspired by service-oriented computing that has recently started gaining popularity. Before presenting the current state of the art in the field, this chapter reviews the history of software architecture, the reasons that led to the diffusion of objects and services first, and microservices later. Finally, open problems and future challenges are introduced. This survey primarily addresses newcomers to the discipline, while offering an academic viewpoint on the topic. In addition, we investigate some practical issues and point out a few potential solutions.},
+   author = {Nicola Dragoni and Saverio Giallorenzo and Alberto Lluch Lafuente and Manuel Mazzara and Fabrizio Montesi and Ruslan Mustafin and Larisa Safina},
+   doi = {10.1007/978-3-319-67425-4_12},
+   booktitle = {Present and Ulterior Software Engineering},
+   title = {Microservices: Yesterday, today, and tomorrow},
+   year = {2017}
+}
+@inproceedings{Liu2020,
+   abstract = {Microservices are emerging as a new computing paradigm which is a suitable complementation of cloud computing. Microservices will decompose traditional monolithic applications into a set of fine-grained services, which can be independently developed, tested, and deployed. However, there are many challenges of microservices. This paper provides a comprehensive overview of microservices. More specifically, firstly, we systematically compare traditional monolithic architecture, service-oriented architecture (SOA), and microservices architecture. Secondly, we give an overview of the container technology. Finally, we outline the technical challenges of microservices, such as performance, debugging and data consistency.},
+   author = {Guozhi Liu and Bi Huang and Zhihong Liang and Minmin Qin and Hua Zhou and Zhang Li},
+   doi = {10.1109/QRS-C51114.2020.00107},
+   booktitle = {Proceedings - Companion of the 2020 IEEE 20th International Conference on Software Quality, Reliability, and Security, QRS-C 2020},
+   title = {Microservices: Architecture, container, and challenges},
+   year = {2020}
+}
+@article{Ding2023,
+   abstract = {Microservices and Kubernetes are widely used in the development and operations of cloud-native applications. By providing automated placement and scaling, Kubernetes has become the main tool for managing microservices. However, existing work and Kubernetes fail to consider the dynamic competition and availability of microservices as well as the problem of shared dependency libraries among multiple microservice instances. To this end, this article proposes an integer nonlinear microservice placement model for Kubernetes with the goal of cost minimization. Specifically, we calculate the number of instances based on microservice availability and construct a model in which the total resource demand of multiple microservice instances exceeds the appropriate proportion of node resources when dynamic resource competition exists and the size of the shared dependency library is less than the node storage capacity. Finally, this article solves the microservice placement model using an improved genetic algorithm. The experimental results demonstrate that higher throughput is obtained with the same costs and that the same throughput is obtained with lower costs.},
+   author = {Zhijun Ding and Song Wang and Changjun Jiang},
+   doi = {10.1109/TCC.2022.3161900},
+   issn = {21687161},
+   issue = {2},
+   journal = {IEEE Transactions on Cloud Computing},
+   title = {Kubernetes-Oriented Microservice Placement With Dynamic Resource Allocation},
+   volume = {11},
+   year = {2023}
+}
+@article{Barakat2017,
+   abstract = {Monolithic applications have some drawbacks and issues. In particular, when new features are added to the monolithic applications the code bases become bigger. With Microservices such issues can be avoided. Microservices are software architecture that consists of small, distributed services that work together. It has many advantages such as simplicity, independent service scalability, using different technologies and simplicity in deployment, but requires knowledge in distributed systems. In this research, an existing microservice-based application has been monitored and analyzed. The Kieker framework has been used for monitoring the application performance and the Kieker trace analysis tools have been used to analyze the application. [ABSTRACT FROM AUTHOR]},
+   author = {Saman Barakat},
+   issn = {18446043},
+   issue = {1},
+   journal = {Journal of Computer Science \& Control Systems},
+   keywords = {Computer software usability,Scalability (Systems engineering),Software architecture,Technology,Trace analysis,analysis microservices,microservices architecture,monitoring microservices},
+   pages = {19-22},
+   title = {Monitoring and Analysis of Microservices Performance.},
+   volume = {10},
+   url = {http://ezp.waldenulibrary.org/login?url=https://search.ebscohost.com/login.aspx?direct=true&db=iih&AN=124588981&site=ehost-live&scope=site},
+   year = {2017}
+}
+@article{Cinque2022,
+   abstract = {Monitoring is a core practice in any software system. Trends in microservices systems exacerbate the role of monitoring and pose novel challenges to data sources being used for monitoring, such as event logs. Current deployments create a distinct log per microservice; moreover, composing microservices by different vendors exacerbates format and semantic heterogeneity of logs. Understanding and traversing the logs from different microservices demands for substantial cognitive work by human experts. This paper proposes a novel approach to accompany microservices logs with black box tracing to help practitioners in making informed decisions for troubleshooting. Our approach is based on the passive tracing of request-response messages of the REpresentational State Transfer (REST) communication model. Differently from many existing tools for microservices, our tracing is application transparent and non-intrusive. We present an implementation called MetroFunnel and conduct an assessment in the context of two case studies: A Clearwater IP Multimedia Subsystem (IMS) setup consisting of Docker microservices and a Kubernetes orchestrator deployment hosting tens of microservices. MetroFunnel allows making useful attributions in traversing the logs; more important, it reduces the size of collected monitoring data at negligible performance overhead with respect to traditional logs.},
+   author = {Marcello Cinque and Raffaele Della Corte and Antonio Pecchia},
+   doi = {10.1109/TSC.2019.2940009},
+   issn = {19391374},
+   issue = {1},
+   journal = {IEEE Transactions on Services Computing},
+   title = {Microservices Monitoring with Event Logs and Black Box Execution Tracing},
+   volume = {15},
+   year = {2022}
+}
+@inproceedings{Mayer2017,
+   abstract = {We present an experimental dashboard for microservice monitoring and management. The dashboard can be adapted to different stakeholder needs and it supports the integration of different monitoring infrastructures for collecting microservice runtime data. Aside from runtime information, the dashboard also supports the integration of other information sources for providing static information about microservices and microservice development. We describe the main motivation for developing the dashboard, explain the basic concepts and present important usage scenarios and views currently supported in the dashboard.},
+   author = {Benjamin Mayer and Rainer Weinreich},
+   doi = {10.1109/ICSAW.2017.44},
+   booktitle = {Proceedings - 2017 IEEE International Conference on Software Architecture Workshops, ICSAW 2017: Side Track Proceedings},
+   title = {A dashboard for microservice monitoring and management},
+   year = {2017}
+}
+@article{Larrucea2018,
+   abstract = {Microservices are small applications with a single responsibility that can be deployed, scaled, and tested independently. They're gaining momentum across industries to facilitate agile delivery mechanisms for service-oriented architecture and to migrate function-oriented legacy architectures toward highly flexible service orientation. This article presents a brief overview of microservice technologies and how to migrate to them.},
+   author = {Xabier Larrucea and Izaskun Santamaria and Ricardo Colomo-Palacios and Christof Ebert},
+   doi = {10.1109/MS.2018.2141030},
+   issn = {07407459},
+   issue = {3},
+   journal = {IEEE Software},
+   title = {Microservices},
+   volume = {35},
+   year = {2018}
+}
+
+

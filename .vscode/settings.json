@@ -1,0 +1,138 @@
+// Workspace settings
+{
+    // The following will hide all the files i dont't want to see in the explorer
+    "files.exclude": {
+        "**/*.aux": true,
+        "**/*.idx": true,
+        "**/*.ilg": true,
+        "**/*.ind": true,
+        "**/*.lof": true,
+        "**/*.log": true,
+        "**/*.lot": true,
+        "**/*.out": true,
+        // "**/*.pdf": true,
+        "**/*.synctex.gz": true,
+        "**/*.toc": true,
+        "**/*.acn": true,
+        "**/*.bbl": true,
+        "**/*.glo": true,
+        "**/*.glsdefs": true,
+        "**/*.ist": true,
+        // "**/*.sty": true,
+        "**/*.blg": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.xdv": true,
+        "**/*.ttf": true,
+        "**/*.acr": true,
+        "**/*.alg": true,
+        "**/*.glg": true,
+        "**/*.gls": true,
+    },
+    "latex-workshop.docker.enabled": true,
+    "latex-workshop.docker.image.latex": "registry.gitlab.com/islandoftex/images/texlive:latest-full",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex",
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "-v",
+                ".:/workspace",
+                "-w",
+                "/workspace",
+                "registry.gitlab.com/islandoftex/images/texlive:latest-full",
+                "xelatex",
+                "%DOCFILE%.tex"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "-v",
+                ".:/workspace",
+                "-w",
+                "/workspace",
+                "registry.gitlab.com/islandoftex/images/texlive:latest-full",
+                "bibtex",
+                "%DOCFILE%.aux"
+            ]
+        },
+        {
+            "name": "makeindex",
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "-v",
+                ".:/workspace",
+                "-w",
+                "/workspace",
+                "registry.gitlab.com/islandoftex/images/texlive:latest-full",
+                "makeindex",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "makeglossaries",
+            "command": "docker",
+            "args": [
+                "run",
+                "--rm",
+                "-v",
+                ".:/workspace",
+                "-w",
+                "/workspace",
+                "registry.gitlab.com/islandoftex/images/texlive:latest-full",
+                "makeglossaries",
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "Compile LaTeX (XeLaTeX, BibTeX, MakeIndex, MakeGlossaries)",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "makeindex",
+                "makeglossaries",
+                "xelatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ilg",
+        "*.ind",
+        "*.lof",
+        "*.log",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist"
+    ],
+    "cSpell.enabled": true,
+    "cSpell.language": "pt-PT,en",
+    "cSpell.files": [
+        "**/*.tex",
+    ],
+    "files.autoSaveDelay": 1000, // auto save a cada segundo
+    "editor.wordWrap": "on",
+    "cSpell.words": [
+        "RepositóriUM"
+    ], // linhas compridas vão para baixo como no overleaf
+}

@@ -1,0 +1,71 @@
+\chapter{Introdução}
+
+(revista ✔)
+
+\section{Contextualização}
+
+As arquiteturas de microserviços têm emergido como uma das abordagens mais populares no desenvolvimento de software moderno, possibilitando a criação de sistemas escaláveis, modulares e fáceis de manter \cite{Larrucea2018}. No entanto, o caráter distribuído dessa arquitetura introduz desafios significativos na monitorização, \textit{logging} e alerta dos seus componentes, especialmente em ambientes dinâmicos e baseados em \textit{containers}, como os geridos com \textit{Docker} e \textit{Kubernetes} \cite{Liu2020}. A necessidade de uma monitorização eficaz torna-se ainda mais crítica em ambientes dinâmicos e baseados em \textit{containers}, nos quais costumam operar aplicações distribuídas, em grande escala, que estão sujeitas a variações constantes nas cargas de trabalho com que têm de lidar. A adoção de estratégias de monitorização é essencial para garantir a estabilidade e o desempenho, permitindo a identificação proativa de anomalias e a resolução eficiente de falhas.
+
+Ferramentas como \textit{Prometheus}, \textit{Grafana}, \textit{ELK Stack} e \textit{Jaeger} são amplamente utilizadas em aplicações de recolha e análise de \textit{logs}, monitorização de métricas e \textit{tracing} distribuído, proporcionando maior visibilidade sobre o comportamento dos serviços em execução. No contexto de aplicações baseadas em microserviços, em que a comunicação entre componentes é altamente distribuída, uma infraestrutura de monitorização desempenha um papel crucial na manutenção da confiabilidade e escalabilidade da plataforma. Assim, garantir a monitorização e o acompanhamento dos serviços e da aplicação desenvolvida permite não apenas detetar rapidamente problemas, mas também implementar respostas automatizadas a eventos críticos, reduzindo o tempo de inatividade e aumentando a eficiência operacional dos sistemas.
+
+
+
+\section{Motivação}
+
+O projeto \textit{R2UT (Ready to Use Technology)} teve como principal objetivo impulsionar a transformação digital da indústria da construção civil em Portugal, promovendo a adoção de modelos de construção modular, industrializada e tecnologicamente avançada. Desenvolvido através da colaboração entre empresas e centros de investigação, o projeto procurou criar soluções inovadoras capazes de aumentar a produtividade, reduzir o desperdício e acelerar o processo construtivo, assegurando elevados padrões de qualidade e sustentabilidade.
+
+No âmbito desta iniciativa, foi desenvolvida uma plataforma digital integrada destinada a suportar as diferentes fases do ciclo de vida dos edifícios pré-fabricados, desde o planeamento e conceção até à operação e manutenção. Esta plataforma combinou tecnologias de automação, \textit{Internet of Things (IoT)} e gestão inteligente de dados, permitindo o acompanhamento em tempo real do desempenho dos sistemas e dispositivos distribuídos.
+
+Contudo, a crescente complexidade da arquitetura da plataforma e o número elevado de serviços distribuídos introduziram novos desafios relacionados com a monitorização, deteção de falhas e gestão do desempenho. Problemas como falhas na comunicação entre serviços, anomalias de desempenho e limitações de escalabilidade podiam comprometer a fiabilidade da infraestrutura e a integridade dos dados captados pelos dispositivos conectados \cite{Barakat2017}.
+
+Neste contexto, esta dissertação teve como foco o desenvolvimento de uma solução de monitorização e gestão de alertas para a plataforma \textit{R2UT}, com o objetivo de garantir observabilidade, estabilidade e eficiência operacional. A solução proposta foi concebida de forma robusta e escalável, permitindo a deteção rápida de falhas e a implementação de respostas automáticas a eventos críticos.
+
+Para tal, foi desenvolvida uma plataforma de monitorização baseada numa arquitetura de microserviços, responsável pela recolha, centralização e análise de \textit{logs}, métricas e \textit{tracing} distribuído, através da integração de ferramentas amplamente utilizadas no ecossistema de observabilidade. O sistema resultante proporciona maior visibilidade sobre o comportamento dos serviços e componentes da aplicação \textit{R2UT}, contribuindo para um ambiente seguro, resiliente e de fácil manutenção, em alinhamento com os objetivos do projeto.
+
+\section{Objetivos}
+Este trabalho visa desenvolver uma plataforma de monitorização e alarmística para o projeto R2UT, assegurando uma gestão centralizada e em tempo real de microserviços através de componentes \textit{open source}. Além de permitir respostas automatizadas a cenários críticos, a plataforma incluirá um \textit{dashboard} interativo para análise e filtragem avançada dos dados de monitorização e \textit{logs}, promovendo escalabilidade e resiliência no ambiente modular.
+Para este trabalho de dissertação foram estabelecidos os seguintes objetivos:
+
+\begin{itemize}
+    \item Desenvolver uma plataforma de monitorização e alarmística para o projeto R2UT, utilizando componentes \textit{open source} com licenças de utilização aberta (como MIT ou Apache 2.0), garantindo segurança, escalabilidade e eficiência \cite{Mayer2017}. 
+    \item Garantir a monitorização dos microserviços da infraestrutura, proporcionando uma visão unificada e em tempo real das operações.
+    \item Estudar e implementar uma estrutura de centralização de \textit{logs} para recolher e consolidar \textit{logs} de todos os microserviços, facilitando a supervisão do fluxo de dados e a identificação de anomalias \cite{Cinque2022}.
+    \item Incluir funcionalidades de resposta automatizada para acionar ações específicas em cenários críticos, como o escalonamento automático (\textit{autoscaling}) de serviços ou a execução de correções automáticas. 
+    \item Desenvolver um \textit{dashboard} intuitivo e interativo para visualização, análise e aplicação de filtros avançados nos dados de monitorização e \textit{logs}, permitindo uma análise precisa e personalizável. 
+\end{itemize}
+
+\break
+
+\section{Trabalho Realizado}
+
+Ao longo deste trabalho, foi concebida e implementada uma plataforma de monitorização e gestão de alertas para o projeto R2UT, com o propósito de reforçar a observabilidade e a capacidade de supervisão da sua infraestrutura de microserviços. A solução foi desenvolvida com recurso a componentes \textit{open source} sob licenças de utilização aberta, como MIT ou Apache 2.0, garantindo elevados níveis de segurança, escalabilidade e eficiência \cite{Mayer2017}.
+
+A plataforma proposta permitiu centralizar a monitorização dos microserviços, oferecendo uma visão consolidada e em tempo real do estado operacional do sistema. Para suportar esta monitorização, foi estudada e implementada uma estrutura de centralização de \textit{logs}, responsável pela recolha, agregação e análise dos registos gerados pelos diferentes serviços. Esta abordagem possibilitou a supervisão contínua do fluxo de dados, bem como a deteção de anomalias e falhas na execução dos componentes distribuídos \cite{Cinque2022}.
+
+Complementarmente, foram desenvolvidos \textit{dashboards} interativos e de fácil utilização, que permitem a visualização e análise detalhada das métricas, \textit{traces} e dos \textit{logs} recolhidos. Este painel oferece funcionalidades avançadas de filtragem e exploração de dados, facilitando a interpretação do comportamento dos serviços e suportando a tomada de decisões operacionais fundamentadas.
+
+A solução implementada contribuiu de forma significativa para a melhoria da visibilidade e resiliência da plataforma R2UT, promovendo uma gestão mais eficiente e proativa dos serviços num ambiente modular, escalável e distribuído.
+
+\break
+
+
+\section{Estrutura do Documento}
+
+Além deste capítulo introdutório, a presente dissertação encontra-se organizada da seguinte forma:
+
+\begin{itemize}
+    \item \textbf{Capítulo 2 – Arquiteturas de Microserviços} \\
+    Este capítulo apresenta a evolução e os fundamentos das arquiteturas de microserviços, explorando a sua emergência como paradigma moderno no desenvolvimento de sistemas distribuídos. São discutidos os princípios que regem este modelo arquitetónico, a sua comparação com arquiteturas monolíticas e orientadas a serviços, bem como os desafios técnicos e organizacionais associados. Por fim, aborda-se a adoção de microserviços em contextos de larga escala e em ambientes de computação em nuvem.
+
+    \item \textbf{Capítulo 3 – Monitorização e Observabilidade em Microserviços} \\
+    Este capítulo analisa a importância da monitorização em sistemas distribuídos e introduz o conceito de observabilidade, sustentado nos seus três pilares fundamentais: \textit{logs}, métricas e \textit{tracing}. São descritas as principais ferramentas e técnicas utilizadas neste domínio, nomeadamente Prometheus, Grafana, Loki/ELK, Jaeger e OpenTelemetry. Adicionalmente, discutem-se os desafios atuais e tendências emergentes, incluindo a integração de abordagens baseadas em Inteligência Artificial para Operações (\textit{AIOps}).
+
+    \item \textbf{Capítulo 4 – Implementação da Solução de Observabilidade} \\
+    Neste capítulo é apresentada a implementação prática da solução proposta, abordando os desafios inerentes à orquestração de \textit{containers} e à integração de ferramentas avançadas de monitorização. São explorados conceitos como \textit{tracing} distribuído, padrões de resiliência, definição de alertas e práticas de observabilidade, fundamentais para assegurar a estabilidade e eficiência de sistemas baseados em microserviços.
+
+    \item \textbf{Capítulo 5 – Conclusões e Trabalho Futuro} \\
+    Este capítulo apresenta as conclusões do trabalho desenvolvido, refletindo sobre os resultados obtidos e os desafios enfrentados. São também discutidas as contribuições do estudo para o projeto R2UT e para o avanço do conhecimento na área da observabilidade de sistemas distribuídos, bem como as perspetivas de evolução e as linhas de trabalho futuro.
+
+    \item \textbf{Capítulo 6 – Próximos Passos} \\
+    
+\end{itemize}

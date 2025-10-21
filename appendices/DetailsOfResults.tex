@@ -1,0 +1,190 @@
+\chapter{Details of results}
+
+\section{Example JSON body for creation of device via API}
+\label{appendix:example}
+\begin{verbatim}
+  {
+  "policyId": "org.eclipse ditto:577247a5-1438-48d5-b485-d41f673cac61",
+  "definition": "com.smarttech:thermostat:1.0.0",
+  "attributes": {
+    "manufacturer": "SmartTech Solutions",
+    "location": "New York, Office 2A",
+    "serialno": "T10039284",
+    "model": "ThermoX Pro 2000"
+  },
+  "features": {
+    "temperature-control": {
+      "definition": [
+        "com.smarttech:thermostat:1.0.0"
+      ],
+      "properties": {
+        "currentTemperature": 22.5,
+        "targetTemperature": 24,
+        "mode": "heating"
+      }
+    },
+    "humidity-sensor": {
+      "properties": {
+        "configuration": {
+          "samplingRateSeconds": 60,
+          "thresholdAlert": 70
+        },
+        "status": {
+          "humidityLevel": 45,
+          "lastUpdated": "2025-06-24T10:00:00Z"
+        }
+      }
+    }
+  }
+}
+\end{verbatim}
+
+\section{Thermostat DBIRTH payload in MQTT}
+\label{appendix:details-of-resultsdbirth}
+\begin{verbatim}
+{
+  "timestamp": {
+    "low": -1719890226,
+    "high": 408,
+    "unsigned": true
+  },
+  "metrics": [
+    {
+      "name": "Temperature",
+      "alias": {
+        "low": 1,
+        "high": 0,
+        "unsigned": true
+      },
+      "timestamp": {
+        "low": -1719890226,
+        "high": 408,
+        "unsigned": true
+      },
+      "datatype": 10,
+      "isNull": true,
+      "properties": {
+        "keys": [
+          "engUnits",
+          "permission"
+        ],
+        "values": [
+          {
+            "type": 12,
+            "stringValue": "inHg"
+          },
+          {
+            "type": 12,
+            "stringValue": "read-write"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Device Control/Rebirth",
+      "alias": {
+        "low": 2,
+        "high": 0,
+        "unsigned": true
+      },
+      "timestamp": {
+        "low": -1719890226,
+        "high": 408,
+        "unsigned": true
+      },
+      "datatype": 11,
+      "isNull": true,
+      "properties": {
+        "keys": [
+          "engUnits",
+          "permission"
+        ],
+        "values": [
+          {
+            "type": 12,
+            "stringValue": "inHg"
+          },
+          {
+            "type": 12,
+            "stringValue": "read-write"
+          }
+        ]
+      }
+    }
+  ],
+  "seq": {
+    "low": 14,
+    "high": 0,
+    "unsigned": true
+  }
+}
+\end{verbatim}
+
+\section{Thermostat payload in MQTT for DDATA}
+\label{appendix:details-of-resultsddata}
+\begin{verbatim}
+{
+  "timestamp": {
+    "low": -1719847593,
+    "high": 408,
+    "unsigned": true
+  },
+  "metrics": [
+    {
+      "alias": {
+        "low": 1,
+        "high": 0,
+        "unsigned": true
+      },
+      "timestamp": {
+        "low": -1719847593,
+        "high": 408,
+        "unsigned": true
+      },
+      "datatype": 10,
+      "properties": {
+        "keys": [
+          "engUnits"
+        ],
+        "values": [
+          {
+            "type": 12,
+            "stringValue": "inHg"
+          }
+        ]
+      },
+      "doubleValue": 3.2944017837137736
+    },
+    {
+      "alias": {
+        "low": 2,
+        "high": 0,
+        "unsigned": true
+      },
+      "timestamp": {
+        "low": -1719847593,
+        "high": 408,
+        "unsigned": true
+      },
+      "datatype": 11,
+      "properties": {
+        "keys": [
+          "engUnits"
+        ],
+        "values": [
+          {
+            "type": 12,
+            "stringValue": "inHg"
+          }
+        ]
+      },
+      "booleanValue": false
+    }
+  ],
+  "seq": {
+    "low": 15,
+    "high": 0,
+    "unsigned": true
+  }
+}
+\end{verbatim}

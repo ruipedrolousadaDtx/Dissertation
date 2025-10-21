@@ -1,0 +1,220 @@
+\chapter{Como Monitorizar uma Arquitetura de Microserviços }
+
+\textbf{\textcolor{red}{todo: (texto copiado do documento word), meter cites, italicos e acronimos depois da revisao por parte do orientador}}
+
+A monitorização de sistemas de software é um pilar fundamental para garantir disponibilidade, boa performance e evolução contínua. Com a emergência de ar-quiteturas de microserviços, a importância da monitorização elevou-se substanci-almente, refletindo a complexidade e a natureza altamente distribuída destes siste-mas.
+Ao contrário das arquiteturas monolíticas, onde a observabilidade podia ser al-cançada através da análise de poucos componentes centralizados, os microserviços exigem uma abordagem descentralizada, integrando métricas, logs e tracing distri-buído para alcançar uma visibilidade de todo o sistema.
+Este capítulo analisa a importância estratégica da monitorização em microservi-ços, discute as principais estratégias e ferramentas utilizadas e identifica os desafi-os inerentes a este novo paradigma arquitetural, fornecendo uma perspetiva crítica e fundamentada sobre o tema.
+
+
+\section{A Importância da Monitorização em Microserviços}
+
+\subsection{Diferença entre monitorizar arquiteturas monolíticas e microserviços}
+
+Em sistemas monolíticos tradicionais, toda a aplicação é geralmente executada num único processo ou num pequeno conjunto de processos homogéneos (Villa-mizar et al., 2015), a monitorização desses sistemas pode centrar-se em métricas simples como utilização de CPU, tempo de resposta global e disponibilidade de uma base de dados centralizada.
+Em contraste, em arquiteturas de microserviços, o sistema é composto por deze-nas ou centenas de serviços autónomos, cada um com o seu próprio ciclo de vida, ambiente de execução e armazenamento de dados (Newman, 2015),
+cada interação entre serviços é uma potencial fonte de falha, e as comunicações distribuídas aumentam significativamente a complexidade de rastrear e diagnosti-car problemas. Monitorizar um sistema baseado em microserviços requer, por isso, uma abordagem holística e descentralizada, onde cada serviço deve ser instrumen-tado individualmente e os dados devem ser agregados de forma coerente para aná-lise e diagnóstico.
+
+\subsection{Impacto da monitorização na fiabilidade e na escalabilidade}
+
+A monitorização eficaz é essencial para:
+
+\begin{itemize}
+    \item Detetar falhas de forma precoce: Pequenas anomalias podem ser indícios de problemas maiores em formação (Burns, 2015);
+    \item Manter a fiabilidade operacional: Ao identificar e isolar serviços degradados rapidamente, evita-se o efeito de cascata de falhas;
+    \item Facilitar a escalabilidade dinâmica: Dados da utilização em tempo real permi-tem ajustar a capacidade dos serviços conforme necessário, beneficiando ple-namente das características da computação em nuvem (Dragoni et al., 2017).
+\end{itemize}
+
+Sem uma infraestrutura de monitorização robusta, as operações em sistemas de microserviços tornam-se arriscadas e insustentáveis.
+
+\subsection{Principais Objetivos da Monitorização}
+
+Os principais objetivos da monitorização em microserviços podem ser resumidos em três grandes áreas (Richardson, 2018):
+
+\begin{itemize}
+    \item Deteção de falhas: Identificar problemas técnicos antes que impactem os utili-zadores;
+    \item Medição de desempenho: Avaliar a performance de serviços individuais e do sistema como um todo;
+    \item Tracing de erros: Seguir o percurso de requisições entre serviços para identifi-car rapidamente o ponto de falha.
+\end{itemize}
+
+\section{Técnicas, Estratégias e Ferramentas de Monitorização}
+
+Existem três pilares clássicos da observabilidade em microserviços (Soldani et al., 2018):
+
+\begin{itemize}
+    \item Logs Centralizados: Registo detalhado de eventos e exceções, estruturados e centralizados num sistema de busca e análise;
+    \item Métricas: Indicadores quantitativos agregados, como taxas de erro, latência e throughput;
+    \item Tracing Distribuído: Rastreio de transações distribuídas que cruzam múltiplos serviços.
+\end{itemize}
+
+Cada pilar fornece uma perspetiva complementar sobre o estado do sistema e, combinados, permitem um diagnóstico completo.
+
+
+\subsection{Logs centralizados}
+
+Os “logs” são registos escritos de eventos específicos que ocorrem numa aplica-ção, detalhando o que aconteceu e quando, estes são fundamentais para uma reso-lução de problemas eficaz e para a compreensão do comportamento do sistema.
+Numa arquitetura de microsserviços, cada serviço independente gera os seus pró-prios logs. Sem um sistema centralizado, gerir e correlacionar estes registos dis-persos torna-se extremamente difícil, dificultando o rastreamento e a depuração de problemas \cite{Soldani2022}. Um sistema de registo centralizado agrega os registos de várias fontes num único local, permitindo a monitorização em tempo real, a pesquisa avançada e analise visual.
+A estruturação e a utilização de IDs de correlação são de importância crítica, a formatação de registos (por exemplo, em JSON) com campos consistentes (da-ta/hora, nomes de serviço, códigos de erro) torna-os mais fáceis de analisar auto-maticamente e de consultar eficientemente. A atribuição de IDs de correlação úni-cos aos pedidos e a sua propagação por todos os serviços envolvidos numa transa-ção é crucial, estes IDs ligam eventos relacionados entre diferentes microsserviços, simplificando a resolução de problemas ao permitir que os engenheiros rastreiem todo o fluxo de um pedido através do sistema distribuído (Fu et al., 2012).
+Ferramentas como o Elastic Stack (ELK), Grafana Loki, permitem armazenar, processar e visualizar logs de forma eficiente (Bajer, 2017).
+Para maximizar a utilidade dos logs:
+
+\begin{itemize}
+    \item Utilizar logs estruturados (ex.: formato JSON);
+    \item Incluir correlações como IDs de transação;
+    \item Manter políticas de retenção e rotação de logs bem definidas.
+\end{itemize}
+
+\subsection{Monitorização de Métricas}
+
+As métricas são pontos de dados numéricos recolhidos ao longo do tempo, forne-cendo uma visão geral quantificável e de alto nível da saúde e das tendências de desempenho de um sistema. Funcionam como os "indicadores do painel de contro-lo" que alertam as equipas para potenciais problemas antes que estes se agravem (Burns, 2015).
+As métricas essenciais para microsserviços incluem:
+
+\begin{itemize}
+    \item Latência: O tempo que um microsserviço demora a responder a um pedido. Uma latência elevada indica respostas lentas, o que afeta diretamente a experi-ência do utilizador e os resultados do negócio;
+    \item Débito (Throughput): O número de pedidos que um microsserviço consegue processar com sucesso por segundo. Um débito elevado indica a capacidade do serviço para lidar com cargas pesadas, o que é crucial durante os períodos de pi-co;
+    \item Latência: O tempo que um microsserviço demora a responder a um pedido. Uma latência elevada indica respostas lentas, o que afeta diretamente a experi-ência do utilizador e os resultados do negócio;
+    \item Taxa de Erros: A percentagem de pedidos que falham ou apresentam erros. Este é um indicador direto da saúde de um microserviço, uma vez que os pedi-dos falhados podem bloquear os utilizadores.
+\end{itemize}
+
+As métricas podem ser categorizadas pelo seu âmbito: de nível de infraestrutura (por exemplo, utilização de CPU, memória, disco), de nível de aplicação (por exemplo, latência de pedidos de serviço, número de pedidos) e métricas de utiliza-dor final (por exemplo, tempos de carregamento da aplicação). A recolha de métri-cas pode ocorrer através de mecanismos de "push" (os serviços enviam métricas para um servidor central) ou "pull" (os sistemas de monitorização recolhem métri-cas dos serviços).
+A captura e análise de métricas são normalmente realizadas através de sistemas como Prometheus. Este sistema recolhe métricas de série temporal de serviços instrumentados, permitindo análises de tendências e geração de alertas com base em limites configuráveis (Burns, 2015).
+
+
+\subsection{Tracing Distribuído}
+
+O tracing distribuído é um componente essencial e único da observabilidade que rastreia pedidos individuais à medida que fluem através de um sistema complexo e distribuído (Sambasivan et al., 2014). Proporciona visibilidade de ponta a ponta, e revela o percurso de um pedido através de múltiplos serviços, bases de dados e saltos de rede.(Zhang et al., 2023)
+Os conceitos fundamentais do rastreamento distribuído incluem:
+
+\begin{itemize}
+    \item Spans: Representam operações individuais dentro de um rastreamento (por exemplo, uma consulta a uma base de dados, uma chamada de API), cada span inclui um nome, tempos de início e fim, e pode ter relações pai-filho com outros spans para mostrar causalidade. Podem também conter etiquetas e registos para contexto adicional (Sambasivan et al., 2014);
+    \item Traces: Uma coleção de spans logicamente conectados que representam o ca-minho de execução completo de ponta a ponta de um único pedido ou transação através do sistema distribuído (Sambasivan et al., 2014);
+\end{itemize}
+
+Os benefícios chave do tracing distribuído são múltiplos:
+
+\begin{itemize}
+    \item Identificação de Gargalos: Permite identificar exatamente qual serviço ou ope-ração está a causar atrasos ou gargalos de desempenho;
+    \item Depuração de Problemas em Produção: Fornece o contexto necessário para depurar problemas complexos em produção, visualizando todo o fluxo do pedi-do;
+    \item Otimização de Desempenho: Ajuda a identificar chamadas desnecessárias ou problemas de alta latência na cadeia de serviços;
+    \item Compreensão de Dependências: Mapeia como os serviços se conectam e inte-ragem, oferecendo insights sobre relações de serviço que podem não ser óbvias a partir do código ou de diagramas arquitetónicos.
+\end{itemize}
+
+Para que o tracing funcione eficazmente através dos limites dos serviços, a infor-mação contextual (como o ID do rastreamento) deve ser propagada de um serviço para o seguinte. O OpenTelemetry, mencionado em secções seguintes, surgiu co-mo o novo padrão de código aberto para instrumentação, fornecendo uma forma unificada de recolher dados de telemetria (métricas, registos e rastreamentos) \cite{Thakur2022}. A adoção do OpenTelemetry garante que os dados recolhidos não estão vinculados a uma plataforma de observabilidade de backend específica oferecendo flexibilidade e preparação para o futuro. Cada serviço pro-paga informações de tracing em cabeçalhos HTTP ou de RPC, o que permite re-construir o fluxo completo (Sigelman et al., 2010).
+
+Ferramentas populares incluem:
+
+\begin{itemize}
+    \item Jaeger: Uma plataforma open-source para tracing;
+    \item OpenTelemetry: Iniciativa para padronizar a coleta de logs, métricas e traces.
+\end{itemize}
+
+\subsection{Ferramentas Comuns na Monitorização }
+
+\begin{table}[H]
+\centering
+\caption{Comparação de Ferramentas de Monitorização}
+\label{tab:comparacao_ferramentas}
+\begin{tabular}{|p{3.5cm}|p{3.5cm}|p{5cm}|p{2.5cm}|}
+\hline
+\textbf{Ferramenta} & \textbf{Tipo de Monitorização} & \textbf{Funcionalidades Principais} & \textbf{Licença} \\
+\hline
+Prometheus & Monitorização de métricas & Coleta de métricas, alertas & Apache 2.0 \\
+\hline
+Grafana & Visualização de métricas & Dashboards interativos & AGPL \\
+\hline
+ELK Stack & Gestão de logs & Recolha, análise de logs & Apache 2.0 \\
+\hline
+Jaeger & Tracing distribuído & Rastreio de chamadas & Apache 2.0 \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Conceito de Observabilidade}
+
+A observabilidade de um sistema é a capacidade de inferir o seu estado interno apenas a partir de saídas externas (Kalman, 1960).
+
+Num contexto de microserviços, isso implica:
+
+\begin{itemize}
+    \item Apresentar de logs detalhados e coerentes;
+    \item Ter métricas ricas e acionáveis;
+    \item Conseguir rastrear a jornada de uma requisição ponta-a-ponta.
+\end{itemize}
+
+A observabilidade eficaz permite que equipas de operações identifiquem rapida-mente a causa e origem de problemas complexos.
+
+\section{Desafios na Monitorização de Microserviços}
+
+\subsection{Alta Cardinalidade de Dados}
+
+Microserviços geram imensas métricas e logs, muitas vezes com altos níveis de cardinalidade (ex.: IDs únicos de utilizadores, IPs, etc.), este grande número de dados pode:
+
+\begin{itemize}
+    \item Saturar bases de dados de séries temporais;
+    \item Dificultar a construção de queries de análise úteis.
+\end{itemize}
+
+Ferramentas como Prometheus lidam mal com métricas com cardinalidade extre-mamente alta, sendo necessária uma gestão criteriosa da instrumentação.
+
+\subsection{Correlação de Eventos Distribuídos}
+
+A identificação da causa raiz de uma falha muitas vezes exige a correlação de múl-tiplos Eventos dispersos em logs, métricas e traces.
+Sem tracing distribuído ou logs estruturados com IDs de correlação, esta tarefa torna-se extremamente difícil (Sigelman et al., 2010).
+
+Estratégias recomendadas:
+
+\begin{itemize}
+    \item Propagação consistente de IDs de tracing;
+    \item Injeção automática de metadados relevantes em logs e métricas.
+\end{itemize}
+
+
+\subsection{Problemas de latência e visibilidade}
+
+Em sistemas distribuídos, a latência é inevitável e pode surgir em múltiplos pon-tos, chamadas de serviço, acesso a bases de dados, comunicação de rede.
+Sem visibilidade detalhada, é impossível identificar rapidamente o local de origem da latência \cite{Railic2021}.
+Além disso, a monitorização deve ser projetada para ser não intrusiva, ou seja, não pode adicionar overhead significativo que degrade ainda mais o desempenho.
+
+
+\section{Estudos de Caso: Exemplos Práticos de Monitorização em Microserviços}
+
+A monitorização de microserviços é um desafio significativo para as organizações que implementam esta arquitetura, dada a natureza distribuída e a complexidade que a caracteriza. Empresas como a Netflix, Amazon e Uber são exemplos de su-cesso na implementação de sistemas de monitorização em grande escala. Estes casos demonstram como as empresas podem manter a fiabilidade e a escalabilidade dos seus serviços enquanto lidam com a complexidade inerente aos microserviços.
+
+\subsection{Netflix: Monitorização em Escala Global}
+
+A Netflix, pioneira na adoção de microserviços, gere um dos maiores sistemas distribuídos do mundo. Para garantir a disponibilidade e o desempenho para mais de 200 milhões de utilizadores, a empresa desenvolveu ferramentas internas de monitorização. O Atlas, uma plataforma de métricas em tempo real, e o Eureka, um serviço de descoberta, são fundamentais para que os microserviços se locali-zem e se registem automaticamente, suportando a escalabilidade dinâmica da ar-quitetura (Newman, 2015).
+A Netflix elevou a monitorização a um novo patamar com o Chaos Engineering, uma prática que envolve a injeção intencional de falhas no sistema. Testes como a suspensão de serviços ou o aumento de latência permitem à equipa identificar pon-tos de fragilidade e garantir que a plataforma é capaz de se recuperar rapidamente de falhas imprevistas (Lewis, 2014).
+A utilização de ferramentas de monitorização como Atlas e Eureka, em conjunto com a prática de Chaos Engineering, contribui para a fiabilidade do sistema, per-mitindo à Netflix operar em uma escala global com alta disponibilidade.
+
+\subsection{Amazon: Escalabilidade e Resiliência em Grande Escala}
+
+A Amazon, através da sua vasta plataforma de e-commerce e dos serviços da Ama-zon Web Services (AWS), lida com uma quantidade massiva de transações e da-dos. A monitorização da sua arquitetura de microserviços é centralizada em ferra-mentas nativas da nuvem para garantir a eficiência operacional e a resiliência (Dragoni et al., 2017).
+O Amazon CloudWatch é a ferramenta primária para monitorizar métricas e logs em tempo real, permitindo a criação de alarmes e a otimização automática da utilização de recursos. Complementarmente, o AWS X-Ray fornece uma solução de tracing distribuído que permite seguir a trajetória das requisições entre os múl-tiplos microserviços. Essa visibilidade de ponta a ponta é crucial para identificar gargalos e falhas, garantindo que a infraestrutura se mantenha robusta e escalável (Dragoni et al., 2017).
+
+\subsection{Uber: Monitorização e Observabilidade para Escalabilidade Global}
+
+A Uber, com a sua operação em escala global, precisa de uma plataforma de moni-torização eficaz para gerir milhões de transações por minuto. A empresa utiliza uma combinação de ferramentas open-source para alcançar uma observabilidade completa (Newman, 2015).
+O Jaeger, uma plataforma de tracing distribuído, é a peça central para rastrear a jornada de cada requisição através dos seus microserviços, o que permite à Uber identificar rapidamente a origem de falhas e gargalos de desempenho. O Promet-heus, por sua vez, é utilizado para a recolha de métricas de cada serviço, como latência e taxa de erros, permitindo a análise contínua do comportamento do sis-tema e a criação de alertas proativos. A orquestração desses serviços é gerida por Kubernetes, garantindo que a infraestrutura possa ser dimensionada de forma au-tomática e segura, suportando a demanda crescente.
+
+\subsection{Conclusão dos Estudos de Caso}
+
+Os casos de estudo da Netflix, Amazon e Uber ilustram que, embora os desafios de monitorização em microserviços sejam significativos, podem ser superados com a adoção de uma abordagem multifacetada. A combinação dos três pilares da obser-vabilidade, logs, métricas e tracing e o uso de ferramentas específicas, sejam elas proprietárias ou open-source, são essenciais para garantir que os sistemas distribu-ídos se mantenham robustos, escaláveis e resilientes em ambientes de alta exigên-cia (Dragoni et al., 2017).
+
+\section{Futuro da Monitorização de Microserviços}
+
+À medida que as arquiteturas de microserviços continuam a evoluir, as ferramentas e práticas de monitorização também acompanham esta evolução. O futuro da mo-nitorização em microserviços está ligado à integração de novas tecnologias e à melhoria da observabilidade, visando garantir um funcionamento ainda mais efici-ente e autónomo dos sistemas distribuídos.
+
+\subsection{Inteligência Artificial e Machine Learning na Monitorização de Microserviços}
+
+Uma das áreas mais promissoras na monitorização de microserviços é o uso de inteligência artificial (IA) e machine learning (ML). Estas tecnologias podem ser aplicadas para detectar anomalias, prever falhas antes que elas ocorram e otimizar o desempenho de sistemas distribuídos. A monitorização preditiva permite que os sistemas identifiquem padrões de comportamento e ajustem automaticamente os recursos para prevenir falhas (Khan et al., 2022).
+A integração de AIOps (Artificial Intelligence for IT Operations) nas platafor-mas de monitorização também está a transformar a forma como os problemas são identificados e resolvidos em tempo real. Ao usar algoritmos de ML para analisar grandes volumes de dados de telemetria, as empresas podem automatizar o proces-so de diagnóstico e correção de falhas, tornando a operação de microserviços ainda mais eficiente (Khan et al., 2022).
+
+\subsection{Observabilidade Previsiva e Automação da Monitorização}
+
+A observabilidade preditiva está a tornar-se uma tendência emergente na monitori-zação de microserviços. Ao analisar dados históricos e comportamentais, os siste-mas poderão prever falhas e otimizar a alocação de recursos antes mesmo que um problema ocorra. Esta abordagem reduzirá o tempo de inatividade e melhorará a resposta a falhas \cite{Kusuma2022}.
+A automação na instrumentação de microserviços também será um ponto-chave no futuro da monitorização. Ferramentas como OpenTelemetry, que permitem a coleta unificada de métricas, logs e traces, irão se tornar ainda mais populares, garantindo que todos os dados de telemetria possam ser acessados e analisados de forma coesa e eficiente \cite{Kusuma2022}.
+
+\subsection{Tecnologias Emergentes para Monitorização em Microserviços}
+
+Além da IA e do ML, outras tecnologias emergentes estão a moldar o futuro da monitorização, como 5G e edge computing. O 5G vai permitir uma comunicação ainda mais rápida e eficiente entre microserviços, enquanto o edge computing aju-dará a descentralizar o processamento de dados, reduzindo a latência e aumentando a performance dos sistemas distribuídos (Dragoni et al., 2017).
+As tecnologias de serverless computing e containers também continuam a evo-luir, exigindo novas abordagens para a monitorização. A integração de ferramentas de monitorização com plataformas como Kubernetes e Docker será fundamental para garantir que as aplicações possam escalar e funcionar sem problemas, inde-pendentemente de como os microserviços sejam orquestrados ou implementados (Dragoni et al., 2017).

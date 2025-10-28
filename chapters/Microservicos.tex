@@ -1,88 +1,94 @@
-\chapter{Microserviços}
+\chapter{Microsserviços}
 
-\textbf{\textcolor{red}{todo: (texto copiado do documento word), meter cites, italicos e acronimos depois da revisao por parte do orientador}}
+Nos últimos anos, as arquiteturas de microserviços tornaram-se uma das abordagens mais populares no desenvolvimento de sistemas de software escaláveis e resilientes. A transformação arquitetural que este tipo de abordagem provocou, impulsionou nas organizações uma crescente necessidade para inovar rapidamente, para que fossem capazes de atender a requisitos de escalabilidade global e responder com total agili-dade às constantes mudanças do mercado no qual se inserem. A mudança tecnológica assentou na evolução de arquiteturas monolíticas para sistemas compostos por múlti-plos serviços independentes. Uma evolução que reflete uma mudança organizacional como também cultural nas organizações. Neste capítulo abordamos o surgimento dos microserviços, a sua evolução histórica e o seu posicionamento no contexto das arqui-teturas de software atuais. Em particular, discutir-se-ão alguns dos desafios inerentes à sua adoção, os seus conceitos fundamentais e o percurso que levou à sua populariza-ção no domínio da Engenharia de Software.
 
-\section{Emergência e Evolução dos Microserviços}
+\section{Emergência e Evolução}
 
 \subsection{Limitações das Arquiteturas Monolíticas}
 
-Antes da emergência dos microserviços, a maioria das aplicações empresariais eram desenvolvidas seguindo uma arquitetura monolítica, na qual todos os com-ponentes, interface de utilizador, lógica de negócio e acesso a dados, são integra-dos num único bloco de código a ser executado. Embora esta abordagem simplifi-que o desenvolvimento inicial, à medida que a aplicação cresce, surgem vários problemas (Villamizar et al., 2015).
-
-Entre os principais problemas identificados destacam-se:
+Antes da emergência dos microsserviços, a maioria das aplicações empresariais eram desenvolvidas seguindo uma arquitetura monolítica, na qual todos os componentes do sistema - interface de utilizador, lógica de negócio e acesso a dados - estão integrados num único bloco de código. Uma única “peça” de software. Embora esta abordagem simplifique o desenvolvimento inicial, à medida que a aplicação vai crescendo e evoluindo vão surgindo vários problemas devido a essa tão grande concentração de serviços num único sistema \cite{Villamizar2015}. A Figura \ref{fig:monolitica_microservicos} apresenta uma comparação estrutural entre uma arquitetura monolítica e uma arquitetura baseada em microsserviços. Entre os principais problemas identificados destacam-se:
 
 \begin{itemize}
-    \item Dificuldade de escalar equipas de desenvolvimento: diferentes equipas precisam de trabalhar no mesmo código, o que leva a conflitos frequentes e à necessidade de coordenação intensiva;
-    \item Ciclo de deploys prolongados: a necessidade de testar e distribuir toda a aplica-ção torna os processos de atualização complexos e arriscados;
-    \item Falta de resiliência: uma falha num único componente pode comprometer toda a aplicação, o que pode gerar uma interrupção generalizada do serviço.
+    \item Dificuldade de escalar equipas de desenvolvimento. Diferentes equipas precisam de trabalhar no mesmo código, o que provoca frequentemente conflitos e a necessidade de uma coordenação intensiva.
+    \item Ciclo de \textit{deployment} prolongados. A necessidade de testar e distribuir toda a aplicação torna os processos de atualização complexos e arriscados;
+    \item Falta de resiliência. A ocorrência de uma falha, num único componente, pode com-prometer toda a aplicação, o que pode gerar uma interrupção generalizada dos serviços do sistema.
 \end{itemize}
 
 Estas limitações tornaram-se ainda mais evidentes com o avanço da computação em nuvem e a exigência por uma disponibilização contínua de serviços.
 
+A Figura~\ref{fig:monolitica_microservicos} evidencia estas diferenças, mostrando como, numa arquitetura monolítica, todos os módulos se encontram num único artefacto, enquanto na arquitetura de microsserviços cada componente opera de forma independente, comunicando através de um API Gateway e podendo utilizar bases de dados próprias.
+
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/Diagramas/monilitica vs microserviços.png}
-    \caption{Arquiteturas Monoliticas vs. Microserviços}
-    % \label{fig:}
+    \includegraphics[width=0.6\textwidth]{images/Diagramas/monilitica vs microsserviços.png}
+    \caption{Comparação entre arquitetura monolítica e arquitetura de microsserviços}
+    \label{fig:monolitica_microservicos}
 \end{figure}
 
-\subsection{De SOA a Microserviços}
-
-O conceito de decompor aplicações monolíticas em serviços autónomos não é novo, a Arquitetura Orientada a Serviços (SOA) surgiu no final dos anos 1990 e início dos anos 2000 como uma tentativa inicial de abordar os problemas impostos pelas arquiteturas monolíticas. Na SOA, as aplicações são organizadas como uma coleção de serviços que interagem por meio de um barramento de mensagens, En-terprise Service Bus (ESB).
-Um Enterprise Service Bus (ESB) é um sistema de middleware que permite a comunicação entre serviços distintos em uma Arquitetura Orientada a Serviços (SOA). O ESB atua como um único intermediário central que gere toda a integra-ção, encaminhamento de mensagens, transformação de dados e políticas de segu-rança para os vários serviços. Embora o ESB simplifique a integração inicial, a sua centralização cria dependências e um potencial ponto de falha, estes fatores contri-buíram para a procura de alternativas mais descentralizadas, como microserviços (Aziz et al., 2020).
+\subsection{De SOA a microsserviços}
 
 
-Embora a SOA tenha introduzido avanços significativos na modularização de sistemas, também criou alguns desafios consideráveis:
+O conceito de decompor aplicações monolíticas em serviços autónomos não é novo. As Arquiteturas Orientadas a Serviços (SOA) surgiram no final dos anos 1990 e início dos anos 2000, como uma primeira forma de abordar os problemas impostos pelas arquiteturas monolíticas. Numa arquitetura deste tipo, as aplicações são organizadas como uma coleção de serviços que interagem por meio de um “barramento” de mensagens - \textit{Enterprise Service Bus} (ESB). Um ESB é um sistema de \textit{middleware} que permite a comunicação entre serviços distintos numa SOA. O ESB atua como um único intermediário central que gere toda a integração, faz o encaminhamento de mensagens, a transformação de dados e aplica as políticas de segurança definidas para os vários serviços do sistema. Embora um ESB simplifique a integração inicial, a sua centralização cria dependências e um potencial ponto de falha do sistema. Fragilidades como estas, fizeram com que se procurassem alternativas mais descentralizadas, como as arquiteturas baseadas em microsserviços \cite{Aziz2020}.
+
+Embora as SOA tenham introduzido avanços significativos na modularização de sis-temas, também criaram alguns desafios consideráveis, nomeadamente:
+
 
 \begin{itemize}
-    \item Complexidade excessiva: a utilização de ESBs centralizados introduziu um ponto único de falha e complexidade operacional;
-    \item Rigidez nos contratos de serviços: alterações nos serviços exigiam mudanças pesadas no barramento e nos consumidores;
-    \item Enfoque excessivo em tecnologias pesadas: padrões como SOAP e WS-* torna-ram as integrações difíceis e pouco ágeis.
+    \item Complexidade excessiva. A utilização de ESB centralizados introduziu um ponto único de falha e complexidade operacional;
+    \item Rigidez nos contratos de serviços. A realização de alterações nos serviços do sistema exigiam mudanças pesadas no barramento e nos consumidores.
+    \item Foco excessivo em tecnologias pesadas. Os padrões SOAP e WS-*, por exemplo, tornaram as integrações difíceis e pouco ágeis.
 \end{itemize}
 
-A arquitetura de microserviços pode ser vista como uma evolução pragmática da SOA, focada na simplicidade, independência e automação de operações, o barra-mento central é eliminado e cada serviço comunica diretamente, eliminando muitas das complexidades associadas aos tradicionais sistemas orientados a serviços.
+A arquitetura de microsserviços pode ser vista como uma evolução pragmática das SOA, mas focada na simplicidade, na independência e na automação de operações. Numa arquitetura de microsserviços, o barramento central é eliminado. Cada serviço comunica diretamente com os outros serviços, o que permite eliminar muitas das complexidades associadas aos tradicionais sistemas orientados a serviços.
+
+A Figura \ref{fig:soa_microservicos} ilustra estas diferenças, evidenciando a centralização do ESB nas arquiteturas SOA em contraste com a comunicação distribuída e independente entre microsserviços.
+
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{images/Diagramas/soa vs microserviços.png}
-    \caption{Arquitetura SOA vs. Microserviços}
-    % \label{fig:digital_twin}
+    \includegraphics[width=0.6\textwidth]{images/Diagramas/soa vs microsserviços.png}
+    \caption{Comparação entre arquitetura SOA e arquitetura de microsserviços}
+    \label{fig:soa_microservicos}
 \end{figure}
 
 \subsection{Fatores Tecnológicos e Organizacionais}
 
-O surgimento dos microserviços não pode ser atribuído apenas a fatores técnicos, fatores organizacionais também desempenharam um papel crucial. Três movimen-tos principais que impulsionaram esta evolução (Newman, 2015):
+O surgimento dos microsserviços não pode ser atribuído apenas a fatores técnicos. Os fatores organizacionais também desempenharam um papel crucial nesse processo. Três dos movimentos principais que impulsionaram esta evolução foram \cite{Newman2015}:
 
 \begin{itemize}
-    \item Computação em Nuvem: A elasticidade da nuvem permitiu que aplicações fossem dimensionadas dinamicamente, o que incentivou arquiteturas a tirar par-tido dessa flexibilidade, os microserviços encaixam naturalmente nesse modelo, permitindo escalar apenas os componentes necessários;
-    \item DevOps e Deploy Contínuo: A cultura DevOps enfatizou a necessidade de inte-grar desenvolvimento e operações, automatizar pipelines de entrega contínua e reduzir ciclos de feedback, os microserviços permitem ciclos de desenvolvimen-to independentes para cada serviço, alinhando-se com esses princípios;
-    \item Containers e gestão de containers: Tecnologias como Docker e Kubernetes simplificaram significativamente a criação, o deploy e a gestão de serviços in-dependentes, tornando viável, em larga escala, o modelo de microserviços.
+    \item \textbf{Computação em Nuvem.} A elasticidade da nuvem permitiu que aplicações fossem dimensionadas dinamicamente, o que incentivou arquiteturas a tirar partido dessa flexibilidade. Os microsserviços encaixam naturalmente nesse modelo, permitindo escalar apenas os componentes necessários.
+    \item \textbf{\textit{DevOps} e \textit{Deployment} Contínuo.} A cultura \textit{DevOps} enfatizou a necessidade de integrar desenvolvimento e operações, automatizar pipelines de entrega contínua e reduzir ciclos de feedback. Os microsserviços permitem ciclos de desenvolvimento independentes para cada serviço, o que os permite alinhar com esses princípios.
+    \item \textbf{\textit{Containers} e gestão de \textit{containers} } Tecnologias como \textit{Docker} ou \textit{Kubernetes} simplificaram significativamente a criação, o \textit{deploy} e a gestão de serviços independentes, tornando viável, em larga escala, o modelo dos microsserviços.
 \end{itemize}
 
-Segundo (Lewis, 2014), a capacidade de alinhar arquitetura de software com estru-turas organizacionais ágeis, inspiradas na "Lei de Conway", foi um dos principais catalisadores para a adoção dos microserviços.
-A “Lei de Conway”, formulada por Melvin Conway em 1968, estabelece que "any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure"(Bailey et al., 2013) ("qualquer organização que projeta um sistema (em sentido amplo) ine-vitavelmente produzirá um design cuja estrutura é uma cópia da estrutura de co-municação da organização"). 
-Essa observação implica que as estruturas organizacionais moldam, de maneira direta ou indireta, a arquitetura dos sistemas que desenvolvem.
+Segundo \cite{Lewis2014}, a capacidade de alinhar arquitetura de software com estruturas organizacionais ágeis, inspiradas na "Lei de Conway", foi um dos principais catalisadores para a adoção dos microsserviços. A “Lei de Conway”, formulada por Melvin Conway em 1968, estabelece que "any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure" \cite{Bailey2013} ("qualquer organização que projeta um sistema (em sentido amplo) inevitavelmente produzirá um design cuja estrutura é uma cópia da estrutura de comunicação da organização"). Essa observação implica que as estruturas organizacionais moldam, de maneira direta ou indireta, a arquitetura dos sistemas que desenvolvem.
 
-\subsection{Popularização dos Microserviços}
 
-O termo "microservices" começou a ganhar popularidade em conferências técnicas por volta de 2011-2012, sendo posteriormente popularizado pelos trabalhos de autores como James Lewis, Martin Fowler e Sam Newman (Lewis, 2014) (New-man, 2015). Empresas pioneiras como Netflix, Amazon, e Uber demonstraram publicamente os benefícios de arquiteturas baseadas em microserviços, mostrando que era possível construir sistemas resilientes, escaláveis e altamente disponíveis a partir da composição de múltiplos serviços pequenos e independentes.
-A experiência e dimensão dessas empresas inspirou uma grande adoção no se-tor, suportada por uma nova geração de ferramentas de observabilidade, platafor-mas de infraestrutura como serviço (IaaS) e metodologias ágeis de desenvolvimen-to.
-Atualmente, os microserviços são amplamente reconhecidos como uma escolha estratégica para sistemas que exigem alta escalabilidade, independência organiza-cional e ciclos de entrega rápidos (Dragoni et al., 2017). No entanto, essa popula-ridade não elimina a complexidade técnica e organizacional que a arquitetura de microserviços impõe, tema que será aprofundado nas próximas secções.
 
-\section{O que são Microserviços?}
+\subsection{Popularização dos Microsserviços}
 
-Após as limitações evidenciadas pelas arquiteturas monolíticas e a emergência de novos paradigmas tecnológicos e organizacionais, os microserviços consolidaram-se como uma abordagem inovadora para o desenvolvimento de sistemas distribuí-dos modernos.
-Este subcapítulo propõe-se a caracterizar a arquitetura de microserviços, destacan-do as suas principais propriedades no cenário atual de engenharia de software.
+O termo microservices começou a ganhar popularidade em conferências técnicas por volta de 2011-2012, sendo posteriormente popularizado pelos trabalhos de autores como James Lewis, Martin Fowler e Sam Newman \cite{Lewis2014,Newman2015}. Empresas pioneiras como Netflix, Amazon, e Uber demonstraram publicamente os benefícios de arquiteturas baseadas em microsserviços, mostrando que era possível construir sistemas resilientes, escaláveis e altamente disponíveis a partir da composição de múltiplos serviços pequenos e independentes.
+A experiência e dimensão dessas empresas inspirou uma grande adoção no setor, suportada por uma nova geração de ferramentas de monitorização e gestão distribuída, plataformas de infraestrutura como serviço (IaaS) e metodologias ágeis de desenvolvimento.
+Atualmente, os microsserviços são amplamente reconhecidos como uma escolha estratégica para sistemas que exigem alta escalabilidade, independência organizacional e ciclos de entrega rápidos \cite{Dragoni2017}. No entanto, essa popularidade não elimina a complexidade técnica e organizacional que a arquitetura de microsserviços impõe, tema que será aprofundado nas próximas secções.
+
+
+\section{O que são microsserviços?}
+
+Após as limitações evidenciadas pelas arquiteturas monolíticas e a emergência de novos paradigmas tecnológicos e organizacionais, os microserviços consolidaram-se como uma abordagem inovadora para o desenvolvimento de sistemas distribuídos modernos.
+
+Nesta secção caracteriza-se a arquitetura de microserviços, destacando as suas principais propriedades no cenário atual de engenharia de software.
 
 \subsection{Definição Formal}
 
 Um microserviço é uma unidade modular de software criada com o intuito de exe-cutar uma funcionalidade especifica integrada num sistema maior. 
-Os microserviços são independentes e autónomos podendo assim ser desenvol-vidos, testados e escalados separados de qualquer outro componente do sistema (Jamshidi et al., 2018).
-A principal característica dos microserviços é a separação de responsabilidades, cada serviço tem o seu propósito no contexto do sistema geral e por isso devem executar apenas o seu código focando-se num único problema (Newman, 2015). Estes serviços são flexíveis e altamente escaláveis e permitem a utilização de tec-nologias distintas na sua implementação permitindo assim o desenvolvimento paralelo e escalabilidade seletiva (Lewis, 2014). Mais do que o tamanho do códi-go, o termo "micro" enfatiza a responsabilidade limitada de cada serviço e a inde-pendência operacional, permitindo que estes sejam desenvolvidos, implementados e escalados de maneira isolada. 
-Segundo (Dragoni et al., 2017) o conceito de microserviços surgiu como um re-finamento de princípios preexistentes, como modularidade, separação de respon-sabilidades e princípios do desenvolvimento orientado a serviços (SOA), mas com ênfase na autonomia e no alinhamento com domínios de negócio.
+Os microsserviços são independentes e autónomos podendo assim ser desenvol-vidos, testados e escalados separados de qualquer outro componente do sistema (Jamshidi et al., 2018).
+A principal característica dos microsserviços é a separação de responsabilidades, cada serviço tem o seu propósito no contexto do sistema geral e por isso devem executar apenas o seu código focando-se num único problema (Newman, 2015). Estes serviços são flexíveis e altamente escaláveis e permitem a utilização de tec-nologias distintas na sua implementação permitindo assim o desenvolvimento paralelo e escalabilidade seletiva (Lewis, 2014). Mais do que o tamanho do códi-go, o termo "micro" enfatiza a responsabilidade limitada de cada serviço e a inde-pendência operacional, permitindo que estes sejam desenvolvidos, implementados e escalados de maneira isolada. 
+Segundo (Dragoni et al., 2017) o conceito de microsserviços surgiu como um re-finamento de princípios preexistentes, como modularidade, separação de respon-sabilidades e princípios do desenvolvimento orientado a serviços (SOA), mas com ênfase na autonomia e no alinhamento com domínios de negócio.
 
 \subsection{Princípios e Principais Características}
 
-São várias as características que definem uma arquitetura de microserviços, entre elas destacam-se:
+São várias as características que definem uma arquitetura de microsserviços, entre elas destacam-se:
 
 \begin{itemize}
     \item Autonomia de Desenvolvimento e Deploy: cada microserviço pode ser desen-volvido, testado, implementado e mantido de forma independentemente (New-man, 2015);
@@ -93,11 +99,11 @@ São várias as características que definem uma arquitetura de microserviços, 
     \item Observabilidade: cada serviço é projetado para expor métricas, logs e tracing distribuído que permitem monitoramento e diagnóstico isolados (Soldani et al., 2018).
 \end{itemize}
 
-Esses princípios alinham a arquitetura de microserviços a práticas modernas de desenvolvimento ágil, DevOps e computação em nuvem.
+Esses princípios alinham a arquitetura de microsserviços a práticas modernas de desenvolvimento ágil, DevOps e computação em nuvem.
 
-\subsection{Componentes Típicos em Arquiteturas de Microserviços}
+\subsection{Componentes Típicos em Arquiteturas de microsserviços}
 
-A implementação prática de microserviços geralmente envolve diversos compo-nentes arquiteturais adicionais:
+A implementação prática de microsserviços geralmente envolve diversos compo-nentes arquiteturais adicionais:
 
 \begin{itemize}
     \item APIs Públicas: cada serviço expõe a sua funcionalidade por meio de uma inter-face bem definida, normalmente baseada em padrões como RESTful APIs ou gRPC;
@@ -107,14 +113,14 @@ A implementação prática de microserviços geralmente envolve diversos compo-n
     \item API Gateway: para unificar o acesso externo aos serviços e gerir autenticação, encaminhamento, caching e controlo de versões (Richardson, 2018).
 \end{itemize}
 
-Estes componentes são fundamentais para garantir que uma arquitetura baseada em microserviços seja robusta, escalável e de fácil manutenção.
+Estes componentes são fundamentais para garantir que uma arquitetura baseada em microsserviços seja robusta, escalável e de fácil manutenção.
 
 \subsection{Comparação com outras Arquiteturas}
 
-Após a apresentação dos princípios e componentes fundamentais da arquitetura de microserviços, torna-se pertinente posicioná-la relativamente a outras abordagens arquiteturais, como o modelo monolítico e a Arquitetura Orientada a Serviços (SOA). Esta comparação é essencial para compreender as diferenças estruturais e organizacionais que motivam a adoção dos microserviços em determinados con-textos.
+Após a apresentação dos princípios e componentes fundamentais da arquitetura de microsserviços, torna-se pertinente posicioná-la relativamente a outras abordagens arquiteturais, como o modelo monolítico e a Arquitetura Orientada a Serviços (SOA). Esta comparação é essencial para compreender as diferenças estruturais e organizacionais que motivam a adoção dos microsserviços em determinados con-textos.
 Embora as três abordagens procurem suportar a construção de sistemas robustos e escaláveis, estas diferem significativamente quanto ao seu âmbito funcional, à forma de comunicação entre componentes e à autonomia de desenvolvimento e operação.
-Enquanto o modelo monolítico, conforme visto, centraliza toda a aplicação num único bloco com forte acoplamento interno, e a SOA tradicional procurou modula-rizar sistemas através de serviços de grande escala coordenados por infraestruturas centrais (como Enterprise Service Buses - ESBs), a arquitetura de microserviços distingue-se pela sua granularidade fina, descentralização operacional e leveza na comunicação entre componentes.
-Segundo (Newman, 2015) e (Dragoni et al., 2017), os microserviços são conce-bidos para que cada serviço corresponda a uma capacidade de negócio específica, podendo ser desenvolvido, implementado e escalado de forma totalmente autóno-ma, sem dependências centralizadas.
+Enquanto o modelo monolítico, conforme visto, centraliza toda a aplicação num único bloco com forte acoplamento interno, e a SOA tradicional procurou modula-rizar sistemas através de serviços de grande escala coordenados por infraestruturas centrais (como Enterprise Service Buses - ESBs), a arquitetura de microsserviços distingue-se pela sua granularidade fina, descentralização operacional e leveza na comunicação entre componentes.
+Segundo (Newman, 2015) e (Dragoni et al., 2017), os microsserviços são conce-bidos para que cada serviço corresponda a uma capacidade de negócio específica, podendo ser desenvolvido, implementado e escalado de forma totalmente autóno-ma, sem dependências centralizadas.
 
 
 \begin{table}[H]
@@ -123,7 +129,7 @@ Segundo (Newman, 2015) e (Dragoni et al., 2017), os microserviços são conce-bi
 \label{tab:comparacao_modelos}
 \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|p{4cm}|}
 \hline
-\textbf{Característica} & \textbf{Arquitetura Monolítica} & \textbf{Arquitetura SOA} & \textbf{Arquitetura de Microserviços} \\
+\textbf{Característica} & \textbf{Arquitetura Monolítica} & \textbf{Arquitetura SOA} & \textbf{Arquitetura de microsserviços} \\
 \hline
 Âmbito funcional & Abrangente e integrado & Serviços de grande escala & Serviços pequenos e focados \\
 \hline
@@ -138,67 +144,67 @@ Autonomia no desenvolvimento & Reduzida & Moderada & Elevada \\
 \end{tabular}
 \end{table}
 
-\section{Arquiteturas de Microserviços e os seus Desafios}
+\section{Arquiteturas de microsserviços e os seus Desafios}
 
-A arquitetura de microserviços representa uma mudança paradigmática no desen-volvimento de sistemas de software, a promessa de maior escalabilidade, flexibili-dade e capacidade de inovação é inegável, mas, na prática, a construção e a opera-ção de sistemas baseados em microserviços trazem consigo um conjunto de desa-fios técnicos e organizacionais que não podem ser ignorados.
-Nesta secção, serão analisados de forma crítica os principais aspetos relaciona-dos à organização de sistemas de microserviços e os desafios emergentes da sua adoção em larga escala.
+A arquitetura de microsserviços representa uma mudança paradigmática no desen-volvimento de sistemas de software, a promessa de maior escalabilidade, flexibili-dade e capacidade de inovação é inegável, mas, na prática, a construção e a opera-ção de sistemas baseados em microsserviços trazem consigo um conjunto de desa-fios técnicos e organizacionais que não podem ser ignorados.
+Nesta secção, serão analisados de forma crítica os principais aspetos relaciona-dos à organização de sistemas de microsserviços e os desafios emergentes da sua adoção em larga escala.
 
-\subsection{Organização de Sistemas de Microserviços}
+\subsection{Organização de Sistemas de microsserviços}
 
-Sistemas baseados em microserviços são compostos por um conjunto de serviços pequenos, especializados e autonomamente desenvolvidos. A sua organização não se limita à existência de múltiplos serviços independentes, mas exige uma conce-ção cuidadosa das relações entre serviços, das suas formas de comunicação e da delimitação das suas fronteiras \cite{Railic2021, Sambasivan2014}. A comunica-ção entre microserviços pode ser síncrona, utilizando APIs RESTful ou gRP, ou assíncrona, através de sistemas de filas como Apache Kafka ou RabbitMQ. A co-municação síncrona facilita o desenvolvimento inicial, mas introduz dependências temporais entre serviços, enquanto a comunicação assíncrona promove uma maior tolerância a falhas, embora acrescente alguma complexidade na gestão da consis-tência dos dados e no seguimento de transações.
+Sistemas baseados em microsserviços são compostos por um conjunto de serviços pequenos, especializados e autonomamente desenvolvidos. A sua organização não se limita à existência de múltiplos serviços independentes, mas exige uma conce-ção cuidadosa das relações entre serviços, das suas formas de comunicação e da delimitação das suas fronteiras \cite{Railic2021, Sambasivan2014}. A comunica-ção entre microsserviços pode ser síncrona, utilizando APIs RESTful ou gRP, ou assíncrona, através de sistemas de filas como Apache Kafka ou RabbitMQ. A co-municação síncrona facilita o desenvolvimento inicial, mas introduz dependências temporais entre serviços, enquanto a comunicação assíncrona promove uma maior tolerância a falhas, embora acrescente alguma complexidade na gestão da consis-tência dos dados e no seguimento de transações.
 A gestão de fronteiras de serviço é um aspeto crucial, um serviço deve encapsu-lar uma capacidade de negócio bem definida, evitando tanto o excesso de granula-ridade, que aumenta a complexidade operacional, como a agregação de múltiplas funcionalidades distintas, que reintroduz os problemas das arquiteturas monolíti-cas. 
 Técnicas como o Domain-Driven Design (Rogers, 2022) são frequentemente utilizadas para identificar limites de contexto adequados e promover o bom funci-onamento interno de cada serviço, a dependência de componentes como API Ga-teways, mecanismos de service discovery e conmunicação assíncrona, já apresen-tados anteriormente, não deve ser vista apenas como um requisito tecnológico, mas como uma estratégia fundamental para garantir a escalabilidade, resiliência e segurança dos serviços.
 
 \subsection{Principais Desafios Técnicos}
 
-Apesar das vantagens teóricas, a implementação prática de sistemas baseados em microserviços traz um conjunto significativo de desafios técnicos que se intensifi-cam com o aumento da complexidade e da escala do sistema. A comunicação dis-tribuída é um dos principais pontos de fragilidade, a utilização de redes para inter-ligar serviços introduz atrasos variáveis, falhas de ligação e a necessidade de im-plementar mecanismos de retry, circuit breaker e timeouts devidamente controla-dos (NYGARD, 2018) (Newman, 2015). Além disso, a gestão de APIs torna-se crítica, exige práticas rigorosas de versionamento para evitar incompatibilidades em tempo de execução (Richardson, 2018).
-A gestão de dados distribuídos constitui outro desafio importante, ao promover a descentralização dos repositórios de dados, a arquitetura de microserviços invia-biliza a utilização de transações ACID tradicionais entre serviços, como alternati-va, padrões como as Sagas \cite{Garcia-Molina1987} e a adoção de consis-tência eventual tornam-se necessários, aumentando a complexidade do desenvol-vimento e das operações.
+Apesar das vantagens teóricas, a implementação prática de sistemas baseados em microsserviços traz um conjunto significativo de desafios técnicos que se intensifi-cam com o aumento da complexidade e da escala do sistema. A comunicação dis-tribuída é um dos principais pontos de fragilidade, a utilização de redes para inter-ligar serviços introduz atrasos variáveis, falhas de ligação e a necessidade de im-plementar mecanismos de retry, circuit breaker e timeouts devidamente controla-dos (NYGARD, 2018) (Newman, 2015). Além disso, a gestão de APIs torna-se crítica, exige práticas rigorosas de versionamento para evitar incompatibilidades em tempo de execução (Richardson, 2018).
+A gestão de dados distribuídos constitui outro desafio importante, ao promover a descentralização dos repositórios de dados, a arquitetura de microsserviços invia-biliza a utilização de transações ACID tradicionais entre serviços, como alternati-va, padrões como as Sagas \cite{Garcia-Molina1987} e a adoção de consis-tência eventual tornam-se necessários, aumentando a complexidade do desenvol-vimento e das operações.
 A monitorização de sistemas distribuídos exige uma abordagem abrangente de observabilidade, métricas detalhadas por serviço, logs estruturados e tracing dis-tribuídos são essenciais para a deteção precoce de problemas e para a análise eficaz de incidentes (Burns, 2015). Ferramentas como Prometheus, Grafana e Jaeger têm sido amplamente utilizadas para este fim, mas exigem configuração e manutenção especializadas.
-A gestão de deploys e versões em ambientes de microserviços também se torna mais complexa, a coordenação de atualizações entre serviços dependentes, a manu-tenção da compatibilidade de APIs e a implementação de estratégias de deploy seguras, como blue-green deployments e canary releases, são práticas indispensá-veis para reduzir o risco de interrupções de serviço \cite{Humble2010}.
+A gestão de deploys e versões em ambientes de microsserviços também se torna mais complexa, a coordenação de atualizações entre serviços dependentes, a manu-tenção da compatibilidade de APIs e a implementação de estratégias de deploy seguras, como blue-green deployments e canary releases, são práticas indispensá-veis para reduzir o risco de interrupções de serviço \cite{Humble2010}.
 
 \subsection{Principais Desafios Organizacionais}
 
-Para além das dificuldades técnicas, a adoção de microserviços implica grandes transformações na organização das equipas de desenvolvimento e na cultura em-presarial. A autonomia das equipas é um dos princípios fundamentais dos micro-serviços, cada equipa deve ser responsável pelo ciclo de vida completo dos servi-ços que desenvolve, desde a conceção até à operação em produção. Esta autonomia reduz a necessidade de coordenação centralizada, mas exige uma forte disciplina na gestão de interfaces e na comunicação entre equipas, a lei de Conway ensina que a arquitetura dos sistemas tende a refletir a estrutura de comunicação da orga-nização (Bailey et al., 2013). Assim, para beneficiar das vantagens dos microservi-ços, é necessário que as fronteiras organizacionais estejam alinhadas com as dos serviços, promovendo equipas pequenas, multifuncionais e responsáveis por do-mínios de negócio bem delimitados.
-A maturidade em práticas de DevOps é outro requisito essencial, a automação de pipelines de integração e entrega contínuas, a gestão centralizada de configura-ções e a monitorização pró-ativa são práticas indispensáveis para garantir a eficá-cia operacional em ambientes de microserviços, organizações que não possuam essa maturidade tendem a enfrentar dificuldades na gestão da complexidade e na manutenção da fiabilidade dos sistemas (Lewis, 2014).
+Para além das dificuldades técnicas, a adoção de microsserviços implica grandes transformações na organização das equipas de desenvolvimento e na cultura em-presarial. A autonomia das equipas é um dos princípios fundamentais dos micro-serviços, cada equipa deve ser responsável pelo ciclo de vida completo dos servi-ços que desenvolve, desde a conceção até à operação em produção. Esta autonomia reduz a necessidade de coordenação centralizada, mas exige uma forte disciplina na gestão de interfaces e na comunicação entre equipas, a lei de Conway ensina que a arquitetura dos sistemas tende a refletir a estrutura de comunicação da orga-nização (Bailey et al., 2013). Assim, para beneficiar das vantagens dos microservi-ços, é necessário que as fronteiras organizacionais estejam alinhadas com as dos serviços, promovendo equipas pequenas, multifuncionais e responsáveis por do-mínios de negócio bem delimitados.
+A maturidade em práticas de DevOps é outro requisito essencial, a automação de pipelines de integração e entrega contínuas, a gestão centralizada de configura-ções e a monitorização pró-ativa são práticas indispensáveis para garantir a eficá-cia operacional em ambientes de microsserviços, organizações que não possuam essa maturidade tendem a enfrentar dificuldades na gestão da complexidade e na manutenção da fiabilidade dos sistemas (Lewis, 2014).
 Finalmente, a cultura de responsabilização deve ser reforçada, cada equipa não deve apenas entregar código funcional, mas assumir a responsabilidade contínua pela qualidade, desempenho e estabilidade dos seus serviços em produção. Este paradigma, frequentemente resumido na expressão "you build it, you run it", re-quer mudanças culturais significativas e um compromisso claro com a excelência operacional (Khan et al., 2022).
 
-\section{Arquiteturas de Microserviços em Grande Escala}
+\section{Arquiteturas de microsserviços em Grande Escala}
 
-A implementação de microserviços em grande escala apresenta desafios únicos em termos de escalabilidade, resiliência e orquestração. Com o aumento da complexi-dade das aplicações, as soluções tradicionais de arquiteturas monolíticas não são suficientes para suportar a exigência de alta disponibilidade e escalabilidade. Para lidar com sistemas complexos compostos por centenas ou milhares de microservi-ços, é fundamental adotar práticas e tecnologias específicas para garantir o bom funcionamento e a escalabilidade das plataformas.
+A implementação de microsserviços em grande escala apresenta desafios únicos em termos de escalabilidade, resiliência e orquestração. Com o aumento da complexi-dade das aplicações, as soluções tradicionais de arquiteturas monolíticas não são suficientes para suportar a exigência de alta disponibilidade e escalabilidade. Para lidar com sistemas complexos compostos por centenas ou milhares de microservi-ços, é fundamental adotar práticas e tecnologias específicas para garantir o bom funcionamento e a escalabilidade das plataformas.
 
 \subsection{Escalabilidade Horizontal}
 
-A escalabilidade horizontal é um dos principais benefícios que os microserviços oferecem, permitindo que os serviços sejam escalados individualmente, conforme a demanda. Esta abordagem contrasta com a escalabilidade vertical, comum em sistemas monolíticos, onde a capacidade do sistema é aumentada por meio do for-talecimento de um único componente(Blinowski et al., 2022). Nos microserviços, cada serviço pode ser replicado de forma independente para lidar com picos de carga sem impactar outros serviços.
-A gestão da escalabilidade horizontal em ambientes distribuídos exige ferra-mentas de orquestração, como o Kubernetes, que permitem o dimensionamento automático dos serviços com base em métricas de desempenho em tempo real. O Kubernetes facilita a criação, gerenciamento e monitorização de containers, permi-tindo que os microserviços sejam escalados automaticamente de acordo com a carga de trabalho (Rocha et al., 2023). Este tipo de escalabilidade garante que os sistemas sejam capazes de lidar com grandes volumes de tráfego sem sobrecarregar recursos ou comprometer a disponibilidade.
+A escalabilidade horizontal é um dos principais benefícios que os microsserviços oferecem, permitindo que os serviços sejam escalados individualmente, conforme a demanda. Esta abordagem contrasta com a escalabilidade vertical, comum em sistemas monolíticos, onde a capacidade do sistema é aumentada por meio do for-talecimento de um único componente(Blinowski et al., 2022). Nos microsserviços, cada serviço pode ser replicado de forma independente para lidar com picos de carga sem impactar outros serviços.
+A gestão da escalabilidade horizontal em ambientes distribuídos exige ferra-mentas de orquestração, como o Kubernetes, que permitem o dimensionamento automático dos serviços com base em métricas de desempenho em tempo real. O Kubernetes facilita a criação, gerenciamento e monitorização de containers, permi-tindo que os microsserviços sejam escalados automaticamente de acordo com a carga de trabalho (Rocha et al., 2023). Este tipo de escalabilidade garante que os sistemas sejam capazes de lidar com grandes volumes de tráfego sem sobrecarregar recursos ou comprometer a disponibilidade.
 
 \subsection{Gestão de Estado}
 
-Em sistemas distribuídos, a gestão do estado dos serviços é um desafio crítico. No modelo de microserviços, é comum que cada serviço tenha a sua própria base de dados, promovendo a descentralização do armazenamento de dados, embora esta abordagem permita maior flexibilidade e agilidade na escala dos serviços, ela tam-bém traz desafios no que diz respeito à consistência dos dados. A descentralização dos dados pode exigir o uso de técnicas como event sourcing e CQRS (Command Query Responsibility Segregation), que ajudam a garantir a integridade dos dados entre os serviços (Richardson, 2018).
-Além disso, a sincronização entre serviços independentes pode ser complexa, especialmente quando se lida com falhas de rede e inconsistências temporárias. O uso de mensagens assíncronas e sistemas de filas de mensagens, como o Kafka ou o RabbitMQ, permite que os microserviços se comuniquem de forma eficiente, mesmo em cenários com alta latência ou falhas temporárias (Dragoni et al., 2017).
+Em sistemas distribuídos, a gestão do estado dos serviços é um desafio crítico. No modelo de microsserviços, é comum que cada serviço tenha a sua própria base de dados, promovendo a descentralização do armazenamento de dados, embora esta abordagem permita maior flexibilidade e agilidade na escala dos serviços, ela tam-bém traz desafios no que diz respeito à consistência dos dados. A descentralização dos dados pode exigir o uso de técnicas como event sourcing e CQRS (Command Query Responsibility Segregation), que ajudam a garantir a integridade dos dados entre os serviços (Richardson, 2018).
+Além disso, a sincronização entre serviços independentes pode ser complexa, especialmente quando se lida com falhas de rede e inconsistências temporárias. O uso de mensagens assíncronas e sistemas de filas de mensagens, como o Kafka ou o RabbitMQ, permite que os microsserviços se comuniquem de forma eficiente, mesmo em cenários com alta latência ou falhas temporárias (Dragoni et al., 2017).
 
 
 \subsection{Orquestração e Automação}
 
-A orquestração e automação são fundamentais para a gestão de microserviços em grande escala. Ferramentas como o Kubernetes não só gerem a criação e escalabi-lidade dos serviços, mas também garantem que eles possam recuperar automatica-mente em caso de falhas. O conceito de auto-healing no Kubernetes assegura que, quando um serviço falha, ele é automaticamente reiniciado ou substituído, mini-mizando o impacto para os utilizadores finais (Burns et al., 2016).
-Além disso, a automação no processo de deploy também é um fator crítico, tec-nologias como CI/CD (Integração Contínua/Entrega Contínua), em conjunto com o Kubernetes e Docker, possibilitam o deploy contínuo e a validação de novas versões dos serviços de forma automatizada, garantindo que os microserviços se-jam atualizados rapidamente, com segurança e sem interromper o funcionamento do sistema \cite{Taherizadeh2020}.
-Em suma, a implementação de microserviços em grande escala exige uma abor-dagem estratégica que envolva escalabilidade horizontal eficiente, gerenciamento robusto de estado e orquestração automatizada. As ferramentas e tecnologias, co-mo Kubernetes, Docker e sistemas de mensagens assíncrona, desempenham um papel fundamental na gestão e operação dessas arquiteturas complexas, garantindo que os sistemas de microserviços possam atender aos requisitos de alta disponibi-lidade e resiliência.
+A orquestração e automação são fundamentais para a gestão de microsserviços em grande escala. Ferramentas como o Kubernetes não só gerem a criação e escalabi-lidade dos serviços, mas também garantem que eles possam recuperar automatica-mente em caso de falhas. O conceito de auto-healing no Kubernetes assegura que, quando um serviço falha, ele é automaticamente reiniciado ou substituído, mini-mizando o impacto para os utilizadores finais (Burns et al., 2016).
+Além disso, a automação no processo de deploy também é um fator crítico, tec-nologias como CI/CD (Integração Contínua/Entrega Contínua), em conjunto com o Kubernetes e Docker, possibilitam o deploy contínuo e a validação de novas versões dos serviços de forma automatizada, garantindo que os microsserviços se-jam atualizados rapidamente, com segurança e sem interromper o funcionamento do sistema \cite{Taherizadeh2020}.
+Em suma, a implementação de microsserviços em grande escala exige uma abor-dagem estratégica que envolva escalabilidade horizontal eficiente, gerenciamento robusto de estado e orquestração automatizada. As ferramentas e tecnologias, co-mo Kubernetes, Docker e sistemas de mensagens assíncrona, desempenham um papel fundamental na gestão e operação dessas arquiteturas complexas, garantindo que os sistemas de microsserviços possam atender aos requisitos de alta disponibi-lidade e resiliência.
 
-\section{Microserviços e Computação em Nuvem}
+\section{microsserviços e Computação em Nuvem}
 
-A integração de microserviços com plataformas de computação em nuvem trans-formou a forma como as empresas desenham e operam seus sistemas. A nuvem oferece uma infraestrutura elástica que facilita a escalabilidade dinâmica, a gestão simplificada e a alta disponibilidade, características essenciais para ambientes de microserviços. Esta secção explora a relação entre microserviços e computação em nuvem, destacando as vantagens, desafios e oportunidades que surgem com o uso de tecnologias de nuvem.
+A integração de microsserviços com plataformas de computação em nuvem trans-formou a forma como as empresas desenham e operam seus sistemas. A nuvem oferece uma infraestrutura elástica que facilita a escalabilidade dinâmica, a gestão simplificada e a alta disponibilidade, características essenciais para ambientes de microsserviços. Esta secção explora a relação entre microsserviços e computação em nuvem, destacando as vantagens, desafios e oportunidades que surgem com o uso de tecnologias de nuvem.
 
 \subsection{Arquitetura Serverless}
 
-O paradigma serverless representa uma evolução dos microserviços, onde a gestão da infraestrutura é totalmente abstraída pelo provedor de nuvem. Em uma arquite-tura serverless, como as oferecidas pelo AWS Lambda, Azure Functions e Google Cloud Functions, as equipas de desenvolvimento podem focar-se apenas na lógica de negócios, sem se preocupar com a gestão de servidores, escalabilidade ou ma-nutenção da infraestrutura subjacente (Dragoni et al., 2017).
-Embora o serverless ofereça grande flexibilidade e escalabilidade automática, ele também apresenta desafios, especialmente quando se lida com tempos de exe-cução curtos e limites de recursos, que podem afetar a performance em sistemas complexos. No entanto, a adoção de microserviços serverless permite reduzir significativamente o custo de operação, já que os utilizadores pagam apenas pelo tempo de execução dos serviços, tornando-se uma escolha vantajosa para muitas aplicações (Richardson, 2018).
+O paradigma serverless representa uma evolução dos microsserviços, onde a gestão da infraestrutura é totalmente abstraída pelo provedor de nuvem. Em uma arquite-tura serverless, como as oferecidas pelo AWS Lambda, Azure Functions e Google Cloud Functions, as equipas de desenvolvimento podem focar-se apenas na lógica de negócios, sem se preocupar com a gestão de servidores, escalabilidade ou ma-nutenção da infraestrutura subjacente (Dragoni et al., 2017).
+Embora o serverless ofereça grande flexibilidade e escalabilidade automática, ele também apresenta desafios, especialmente quando se lida com tempos de exe-cução curtos e limites de recursos, que podem afetar a performance em sistemas complexos. No entanto, a adoção de microsserviços serverless permite reduzir significativamente o custo de operação, já que os utilizadores pagam apenas pelo tempo de execução dos serviços, tornando-se uma escolha vantajosa para muitas aplicações (Richardson, 2018).
 
 \subsection{Custo e Eficiência de Escalabilidade}
 
-A escalabilidade de microserviços na nuvem também traz implicações em termos de eficiência de custos. A nuvem permite que as empresas escalem seus serviços de acordo com a demanda, evitando a necessidade de provisionar recursos fixos, com ferramentas como o Auto Scaling do AWS e o Google Kubernetes Engine (GKE), as empresas podem ajustar dinamicamente a capacidade dos seus serviços para se adaptarem a picos de tráfego e garantir que a utilização dos recursos seja sempre otimizada (Dragoni et al., 2017).
-Essa escalabilidade sob demanda permite uma gestão mais eficiente dos custos operacionais, já que as organizações só pagam pelos recursos consumidos. Além disso, ao combinar a nuvem com a orquestração de microserviços, as empresas conseguem dimensionar os seus sistemas de maneira eficiente, sem comprometer a performance ou a disponibilidade (Blinowski et al., 2022).
+A escalabilidade de microsserviços na nuvem também traz implicações em termos de eficiência de custos. A nuvem permite que as empresas escalem seus serviços de acordo com a demanda, evitando a necessidade de provisionar recursos fixos, com ferramentas como o Auto Scaling do AWS e o Google Kubernetes Engine (GKE), as empresas podem ajustar dinamicamente a capacidade dos seus serviços para se adaptarem a picos de tráfego e garantir que a utilização dos recursos seja sempre otimizada (Dragoni et al., 2017).
+Essa escalabilidade sob demanda permite uma gestão mais eficiente dos custos operacionais, já que as organizações só pagam pelos recursos consumidos. Além disso, ao combinar a nuvem com a orquestração de microsserviços, as empresas conseguem dimensionar os seus sistemas de maneira eficiente, sem comprometer a performance ou a disponibilidade (Blinowski et al., 2022).
 
 \subsection{Desafios da Computação em Nuvem}
 
-Apesar das inúmeras vantagens, a computação em nuvem apresenta desafios que as organizações precisam abordar ao implementar microserviços. A dependência de fornecedor (vendor lock-in) é um dos maiores desafios, pois as organizações po-dem ficar dependentes das ferramentas e serviços específicos de um provedor de nuvem, a portabilidade entre diferentes fornecedores de nuvem pode ser limitada, o que pode dificultar a mudança para outra plataforma caso as necessidades da empresa mudem (Richardson, 2018).
-Outro desafio importante está relacionado à segurança e privacidade dos dados, especialmente quando se lida com dados sensíveis. Embora os fornecedores de nuvem ofereçam medidas robustas de segurança, é responsabilidade da organiza-ção garantir que os microserviços sejam configurados corretamente para proteger os dados em trânsito e em repouso.
+Apesar das inúmeras vantagens, a computação em nuvem apresenta desafios que as organizações precisam abordar ao implementar microsserviços. A dependência de fornecedor (vendor lock-in) é um dos maiores desafios, pois as organizações po-dem ficar dependentes das ferramentas e serviços específicos de um provedor de nuvem, a portabilidade entre diferentes fornecedores de nuvem pode ser limitada, o que pode dificultar a mudança para outra plataforma caso as necessidades da empresa mudem (Richardson, 2018).
+Outro desafio importante está relacionado à segurança e privacidade dos dados, especialmente quando se lida com dados sensíveis. Embora os fornecedores de nuvem ofereçam medidas robustas de segurança, é responsabilidade da organiza-ção garantir que os microsserviços sejam configurados corretamente para proteger os dados em trânsito e em repouso.
 

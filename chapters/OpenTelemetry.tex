@@ -187,7 +187,7 @@ Curva de aprendizagem & Moderada (pipelines OTel) & Mais baixa em cenários simp
 \end{tabular}
 \end{table}
 
-\break
+\clearpage
 
 \section{Arquitetura Detalhada e Implementação da Solução}
 
@@ -430,6 +430,8 @@ De forma a consolidar o papel de cada componente, a Tabela \ref{tab:otel-process
 
 O processador \texttt{transform} utiliza a \textit{OpenTelemetry Transformation Language} (OTTL) para realizar modificações avançadas nos dados de telemetria. Na implementação atual, é utilizado para adicionar o atributo \texttt{service.name} aos sinais de telemetria, converter \textit{timestamps} para um formato padronizado, normalizar níveis de severidade de logs (por exemplo, mapeando diferentes níveis para categorias consistentes como \texttt{INFO}, \texttt{WARN} e \texttt{ERROR}), e aplicar regras de amostragem dinâmica a \textit{traces}. No entanto, devido ao seu elevado grau de flexibilidade e poder expressivo, a sua configuração deve ser cuidadosamente validada para evitar \textit{transformações inconsistentes} (\textit{Unsound Transformations}) ou \textit{conflitos de identidade} (\textit{Identity Conflicts}), que podem comprometer a integridade e a fiabilidade da telemetria.
 
+\clearpage
+
 \item \textbf{Processador \texttt{batch}}\\
 % \subsubsection{Processador \texttt{batch}}
 
@@ -461,7 +463,7 @@ Esta abordagem de amostragem baseada no contexto completo do trace é fundamenta
 
 \end{itemize}
 
-A capacidade do \textit{OpenTelemetry Collector} de modificar todos os aspetos da telemetria --- incluindo a remoção de informações sensíveis através do processador \texttt{transform} ou o enriquecimento consistente de dados com atributos específicos --- posiciona-o como um ponto de controlo estratégico na governação de dados. Esta centralização do controlo significa que os requisitos de conformidade podem ser geridos e aplicados ao nível do Collector, reduzindo a necessidade de alterações individuais nas aplicações ou de configurações complexas específicas dos \textit{backends}.
+A capacidade do \textit{OpenTelemetry Collector} de modificar todos os aspetos da telemetria, incluindo a remoção de informações sensíveis através do processador \texttt{transform} ou o enriquecimento consistente de dados com atributos específicos, posiciona-o como um ponto de controlo estratégico na governação de dados. Esta centralização do controlo significa que os requisitos de conformidade podem ser geridos e aplicados ao nível do Collector, reduzindo a necessidade de alterações individuais nas aplicações ou de configurações complexas específicas dos \textit{backends}.
 
 Esta abordagem não só centraliza significativamente o controlo de dados, como também minimiza a superfície de ataque para fugas acidentais de informação. Além disso, a capacidade de filtrar, agrupar e reduzir a cardinalidade dos dados antes da sua exportação para os \textit{backends} traduz-se diretamente em poupanças substanciais nos custos de ingestão e armazenamento, especialmente em serviços de observabilidade geridos. Ao reduzir o volume e a complexidade dos dados na origem, o Collector melhora o desempenho das consultas nos \textit{backends} e mitiga potenciais problemas de ``crise de identidade'' em métricas, resultando em \textit{dashboards} mais fiáveis. Assim, o Collector assume-se como um componente crítico para assegurar tanto a eficiência económica como a eficiência operacional de toda a \textit{stack} de monitorização.
 

@@ -532,16 +532,3 @@ Os dados são exportados pelo \textit{OpenTelemetry Collector} via OTLP/\textit{
 O Prometheus foi selecionado como sistema de armazenamento de métricas devido à sua robustez no processamento de séries temporais e à linguagem de consulta PromQL, que possibilita análises avançadas e precisas. As métricas das aplicações .NET são recolhidas pelo \textit{OpenTelemetry Collector} e exportadas para o Prometheus, evitando exposição direta dos serviços e centralizando a captura de telemetria.
 
 Complementarmente, as métricas de infraestrutura provenientes do \textit{Node Exporter} são recolhidas diretamente pelo Prometheus através de \textit{scraping} HTTP. Esta abordagem combinada assegura visibilidade tanto ao nível da aplicação como da infraestrutura, proporcionando uma visão abrangente e consistente do desempenho do sistema.
-
-
-% \subsection{Armazenamento de Logs com o Loki}
-
-% O Loki foi escolhido como sistema de armazenamento de logs devido à sua arqui-tetura otimizada para consultas baseadas em etiquetas (labels) em vez de full-text search. Esta abordagem torna-o mais eficiente e menos dispendioso em termos de recursos quando comparado com soluções tradicionais, como o Elasticsearch. Os logs estruturados emitidos pelas APIs .NET são enviados ao OpenTelemetry Collector através do protocolo OTLP e, em seguida, exportados para o Loki. A integração nativa com o Grafana permite que os logs sejam visualizados e correla-cionados facilmente com métricas e traces, proporcionando uma análise unificada.
-
-% \subsection{Armazenamento de Traces com o Jaeger}
-
-% O Jaeger foi adotado como backend de armazenamento e análise de traces distri-buídos, dada a sua capacidade de oferecer visibilidade ponta a ponta sobre o ciclo de vida de uma requisição. Através da identificação do serviço (atributo servi-ce.name), é possível segmentar e filtrar os traces de forma eficaz, identificando gargalos e pontos de falha no percurso entre microserviços. Os dados são exporta-dos pelo OpenTelemetry Collector via protocolo OTLP/gRPC para o endpoint do Jaeger, onde ficam persistidos para consulta e análise detalhada no Grafana.
-
-% \subsection{Armazenamento de Métricas com o Prometheus}
-
-% O Prometheus foi selecionado como sistema de armazenamento de métricas pela sua robustez no tratamento de séries temporais e pela linguagem de consulta PromQL, que possibilita análises avançadas. As métricas da aplicação .NET são recolhidas pelo OpenTelemetry Collector e exportadas para o Prometheus, centra-lizando a coleta e evitando a exposição direta das aplicações. Complementarmente, métricas de infraestrutura provenientes do Node Exporter são recolhidas direta-mente pelo Prometheus através de scraping HTTP. Esta combinação assegura visi-bilidade tanto a nível da aplicação como da infraestrutura, permitindo uma visão abrangente do desempenho do sistema.

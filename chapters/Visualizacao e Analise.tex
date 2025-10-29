@@ -177,90 +177,33 @@ Este método reduz o tempo de análise e materializa o Grafana enquanto \textit{
 para operação e diagnóstico.
 
 
-
-% ---------------
-
-
-% Para fins de demonstração e análise, os dashboards apresentados nesta secção incidem especificamente sobre o microserviço \textit{TicketsManagement}. Esta opção foi tomada com o objetivo de ilustrar o comportamento real da monitorização e dos sinais de telemetria num componente concreto da plataforma, permitindo uma leitura detalhada dos resultados e evitando dispersão analítica. 
-
-% Embora a solução desenvolvida suporte a monitorização integral de todos os microserviços da plataforma R2UT, a inclusão simultânea de múltiplos serviços resultaria em redundância visual e conceptual, uma vez que os padrões observados --- em termos de métricas, logs e rastreamento distribuído --- são replicáveis transversalmente para os restantes componentes. Assim, optar por um serviço representativo permite privilegiar a profundidade da análise em detrimento da quantidade de informação apresentada, assegurando clareza e objetividade.
-
-% A Figura~\ref{fig:dashboard-logs-gerais} apresenta uma visão geral dos \textit{logs} gerados pelo serviço \textit{TicketsManagement}. Este painel permite observar, em tempo real, as entradas de log estruturadas, incluindo o nível de severidade, o conteúdo textual e os metadados associados à requisição. Esta visualização é fundamental para identificar padrões de erro, eventos inesperados ou comportamentos anómalos ao longo do ciclo de execução do serviço.
-
-% Posteriormente, a Figura~\ref{fig:dashboard-logs-erros} destaca especificamente os registos classificados como erros, facilitando a análise de falhas ocorridas no serviço. Este painel permite filtrar problemas por tipo de exceção, código HTTP devolvido e origem interna no microserviço, constituindo uma ferramenta essencial para diagnóstico e redução do \textit{Mean Time to Resolution} (MTTR).
-
-% A Figura~\ref{fig:dashboard-aplicacao} reúne métricas operacionais da API, incluindo taxa de pedidos por segundo, latência média e distribuição temporal das requisições. Estas métricas permitem avaliar a capacidade de resposta do serviço e a sua estabilidade sob diferentes níveis de carga.
-
-% No que respeita aos recursos da infraestrutura, a Figura~\ref{fig:dashboard-k8s} apresenta o uso de CPU e memória ao nível do \textit{pod} e do nó do cluster Kubernetes. Estas informações são essenciais para acompanhar a eficiência e o dimensionamento automático da infraestrutura, garantindo que a aplicação preserva margens adequadas de recursos.
-
-% Por fim, a Figura~\ref{fig:dashboard-trace} ilustra um evento específico capturado pelo rastreamento distribuído, permitindo analisar a sequência de execução de uma requisição e navegar entre logs, spans e metadados associados. Esta integração facilita a correlação entre sintomas observados nos logs e a causa raiz identificada no percurso da requisição.
-
-% ------------------
-
-% Para efeito de apresentação e análise, os dashboards apresentados neste capítulo focam-se exclusivamente nos dados relativos ao serviço específico TicketsManagement. Embora fosse perfeitamente possível incluir visualizações de outros ser-viços da arquitetura, tal abordagem tenderia a revelar informações redundantes, uma vez que os padrões e métricas observados seriam semelhantemente aplicáveis. Assim, esta escolha visa proporcionar uma análise mais clara e exemplar, evitando a dispersão do foco e privilegiando a profundidade sobre a generalidade.
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/all_logs_dashboard.png}
-%     \caption{Painel global de Logs}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/error_logs_dashboard.png}
-%     \caption{Painel de Logs de Erro}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/dashboard.png}
-%     \caption{\textit{Dashboard} de \textit{Logs}}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/cpu_memory_dashboard.png}
-%     \caption{Uso de CPU e Memória}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/metrics_dashboard.png}
-%     \caption{Dashboard de metricas: p95, Taxa de Erro, Pedidos por segundo}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
-% \section{Correlação entre Logs e Traces}
-
-% Um dos principais ganhos trazidos pelo Grafana é a correlação direta entre logs e traces. Com um dashboard dedicado, foi possível implementar múltiplos filtros, incluindo o \texttt{service\_name}, que permitem visualizar os logs emitidos por diferentes serviços e vinculá-los diretamente às requisições (traces) correspondentes que os originaram.
-
-% Cada entrada de log disponibiliza um link direto para o trace associado, simplificando significativamente a depuração e o diagnóstico de problemas. Este recurso proporciona uma visão holística do estado do sistema e das suas interações, facilitando a identificação rápida de causas de falhas ou degradação do serviço.
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/log_expanded.png}
-%     \caption{Log: Correlação Log e Trace}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/trace link por log.png}
-%     \caption{Link para Trace}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=1\textwidth]{images/Grafana/trace_approve.png}
-%     \caption{Trace: Correlação Log e Trace}
-%     % \label{fig:digital_twin}
-% \end{figure}
-
 \section{Alertas}
 
-todo: falar um pouco sobre os alertas, ainda nao implementados, mas de configuracao muito simples
+
+\subsection{Alertas e Notificações Operacionais}
+
+A monitorização eficaz não se limita à visualização passiva de métricas, exige mecanismos de alerta que permitam atuação rápida perante degradações de desempenho, falhas de serviço ou comportamentos anómalos. Para esse fim, foi configurado o \textit{Prometheus AlertManager}, responsável por receber regras de alerta definidas no Prometheus e encaminhar notificações para canais operacionais pré-definidos.
+
+Os alertas constituem um elemento crítico em ambientes \textit{cloud-native}, onde a natureza distribuída e dinâmica dos microsserviços pode levar a falhas rápidas e efeitos em cascata. Assim, foram definidas regras de monitorização orientadas a três objetivos principais: (i) assegurar disponibilidade, (ii) detetar degradação de desempenho e (iii) prevenir saturação de recursos.
+
+A título ilustrativo, foram implementados alertas para as seguintes condições:
+\begin{itemize}
+    \item Taxa de erros HTTP 5xx superior a 5\% durante 5 minutos;
+    \item Latência p95 das requisições superior a 1\,s;
+    \item Utilização de CPU por \textit{pod} superior a 90\% durante período prolongado.
+\end{itemize}
+
+Embora o Grafana também suporte a configuração de alertas diretamente sobre \textit{dashboards}, a opção por utilizar o \textit{AlertManager} reflete as melhores práticas para ambientes de produção, privilegiando uma abordagem declarativa, versionável e escalável. As regras de alerta podem ser geridas em ficheiros YAML, permitindo a sua integração em pipelines CI/CD e garantindo consistência operacional.
+
+No contexto prático deste trabalho, foi integrada uma notificação para o \textit{Slack}, garantindo que as equipas técnicas recebem alertas em tempo real num canal dedicado. Esta abordagem assegura visibilidade imediata sobre incidentes operacionais e permite resposta rápida, contribuindo para a redução do \textit{Mean Time to Detect} (MTTD) e do \textit{Mean Time to Recover} (MTTR).
+
+A Figura~\ref{fig:slack-alerts} exemplifica dois alertas gerados pelo sistema: um associado a uma taxa de erros elevada e outro à utilização excessiva de CPU num \textit{pod} Kubernetes, ilustrando a capacidade do sistema em detetar e notificar eventos críticos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{images/Grafana/alertas.png}
+    \caption{Notificações enviadas para o Slack contendo alertas gerados pelo \textit{AlertManager}, incluindo taxa de erros elevada e utilização excessiva de CPU.}
+    \label{fig:slack-alerts}
+\end{figure}
+
+

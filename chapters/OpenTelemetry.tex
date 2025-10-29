@@ -33,7 +33,7 @@ O Kubernetes desempenha um papel central na arquitetura do R2UT, fornecendo a in
 
 
 
-\subsection{Arquitetura de Microserviços no Kubernetes}
+\subsection{Arquitetura de Microsserviços no Kubernetes}
 
 
 A plataforma R2UT é composta por diversos serviços que interagem entre si, cada um implementado como um microsserviço em \textit{containers}. Esses serviços são organizados num cluster Kubernetes, no qual a comunicação entre os componentes é feita através de APIs e de mensagens assíncronas via Kafka. Isto permite que o sistema seja altamente escalável e eficiente. De seguida, destacam-se alguns dos componentes chave desta arquitetura:
@@ -139,6 +139,8 @@ A adoção do \textit{OpenTelemetry}, contudo, não está isenta de desafios. A 
     \item \textbf{Necessidade de stack complementar.} O \textit{OpenTelemetry} fornece coleta e processamento, mas não inclui armazenamento ou visualização, tornando obrigatória a utilização de ferramentas adicionais como Prometheus, Jaeger, Loki ou Grafana para consulta e análise.
 \end{itemize}
 
+\break
+
 
 \section{Comparação entre OpenTelemetry e a Stack Tradicional de Monitorização (Prometheus, Grafana, Jaeger e Loki)}
 
@@ -185,56 +187,7 @@ Curva de aprendizagem & Moderada (pipelines OTel) & Mais baixa em cenários simp
 \end{tabular}
 \end{table}
 
-
-
-% Importa clarificar que a comparação estabelecida entre OpenTelemetry e a stack composta por Prometheus, Grafana, Jaeger e Loki não deve ser interpretada como uma análise entre ferramentas equivalentes ou mutuamente exclusivas.
-% O OpenTelemetry não se configura como um backend de armazenamento ou vi-sualização de dados. O seu papel principal situa-se na camada de instrumentação, coleta, normalização e encaminhamento de dados de observabilidade (métricas, rastreamentos e registos), ou seja, o OpenTelemetry atua como um padrão unifica-dor para a geração e transporte da telemetria, permitindo que diferentes lingua-gens, bibliotecas e serviços emitam dados num formato consistente (OTLP) e que estes possam ser processados e exportados através do Collector.
-
-% Por contraste, a stack tradicional composta por Prometheus, Grafana, Jaeger e Loki cobre funções predominantemente associadas ao armazenamento persistente, con-sulta e visualização da telemetria:
-
-% \begin{itemize}
-%     \item Prometheus provê a recolha e o armazenamento de séries temporais de métricas, com motor de consulta baseado em PromQL;
-%     \item Grafana oferece a camada de visualização e alertas sobre métricas, logs e outros dados observacionais;
-%     \item Jaeger é especializado no armazenamento, consulta e visualização de rastrea-mentos distribuídos;
-%     \item Loki realiza a ingestão e indexação de registos (logs) para fins de pesquisa e correlação.
-% \end{itemize}
-
-% Assim, mesmo num cenário em que o OpenTelemetry é utilizado como base para a instrumentação e coleta, permanece necessária a adoção de sistemas de backend que assegurem a persistência e exploração dos dados. No caso em estudo, esses papéis continuam a ser desempenhados pelo Prometheus, Grafana, Jaeger e Loki.
-% A comparação, portanto, deve ser entendida no sentido de abordagens distintas para observabilidade:
-% \begin{itemize}
-%     \item No modelo tradicional, cada ferramenta impõe o seu próprio agente ou exporter (e.g., Node Exporter para Prometheus, Jaeger Agent, Promtail para Loki), origi-nando uma coleta fragmentada e heterogénea;
-%     \item No modelo baseado em OpenTelemetry, a coleta é unificada (através do Collec-tor em modo DaemonSet e dos SDKs ou mecanismos de auto-instrumentação), e os mesmos dados podem ser distribuídos de forma flexível para múltiplos backends.
-% \end{itemize}
-
-% Deste modo, a utilização do OpenTelemetry não elimina a necessidade dos bac-kends clássicos, mas antes os complementa, ao introduzir uma camada de padroni-zação e abstração que reduz o acoplamento e aumenta a portabilidade da telemetria no ecossistema de observabilidade.
-
-% \begin{table}[H]
-% \centering
-% \caption{Comparação: OpenTelemetry (OTel) vs Prometheus + Grafana + Jaeger}
-% \label{tab:comparacao_otel_prometheus}
-% \begin{tabular}{|p{5cm}|p{5cm}|p{5cm}|}
-% \hline
-% \textbf{Característica} & \textbf{OpenTelemetry (OTel)} & \textbf{Prometheus + Grafana + Jaeger} \\
-% \hline
-% Instrumentação & Unificada (traces, métricas, log) & Separada por ferramenta \\
-% \hline
-% Padronização & Convenções Semânticas (SemConv) & Cada ferramenta define o seu padrão \\
-% \hline
-% Agnosticidade de backend & Sim, exporta para múltiplos destinos & Não, acoplado a cada backend \\
-% \hline
-% Collector centralizado & Sim, pipelines flexíveis & Não, coletores independentes \\
-% \hline
-% Auto-instrumentação & Suporte amplo & Limitado por ferramenta \\
-% \hline
-% Vendor lock-in & Baixo & Médio / Alto \\
-% \hline
-% Escalabilidade & Alta & Alta, mas com mais componentes \\
-% \hline
-% Curva de aprendizagem & Moderada (pipelines OTel) & Mais baixa para casos simples \\
-% \hline
-% \end{tabular}
-% \end{table}
-\pagebreak
+\break
 
 \section{Arquitetura Detalhada e Implementação da Solução}
 
@@ -274,8 +227,6 @@ Por este motivo, optou-se por manter o Node Exporter como fonte dedicada para m�
 \subsubsection{Camada de Visualização e Análise}
 O Grafana atua como uma interface de utilizador unificada para visualizar e analisar os dados. Esta ferramenta integra os backends (Prometheus, Loki e Jaeger), permitindo a criação de dashboards interativos que mostram as métricas, logs e traces de maneira correlacionada, facilitando o diagnóstico e a tomada de decisões operacionais.
 
-
-\subsection{Fluxo de Telemetria}
 
 \subsection{Fluxo de Telemetria}
 
@@ -365,6 +316,8 @@ O encapsulamento da lógica de instrumentação no pacote \texttt{DTX.Base.Commo
 \end{itemize}
 
 Com esta abordagem, a instrumentação de novos serviços pode ser realizada com mínima intervenção, com a adição do pacote \texttt{DTX.Base.Common}, uma chamada simples ao método de extensão no \texttt{Program.cs} e a definição das variáveis de ambiente necessárias. Isso acelera o desenvolvimento e garante que a monitorização seja uma parte integrante do ciclo de vida da aplicação desde o início.
+
+\break
 
 \section{Coleta de dados com o OpenTelemetry Collector}
 

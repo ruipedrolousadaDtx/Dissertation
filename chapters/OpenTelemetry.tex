@@ -93,7 +93,7 @@ Embora os detalhes sejam explicados nas secções seguintes, vale apresentar aqu
     
     \item \textbf{Exporters / Receivers.} Componentes responsáveis por enviar ou receber telemetria em formatos como \textit{OTLP}, \textit{Jaeger} e \textit{Prometheus}.
     
-    \item \textbf{Collector.} Componente neutro que organiza \textit{pipelines} (\textit{receivers -- processors -- exporters}), permitindo filtragem, enriquecimento, amostragem e distribuição (\textit{fan-out}) de telemetria.
+    \item \textbf{Collector.} Componente neutro que organiza \textit{pipelines} (\textit{receivers - processors - exporters}), permitindo filtragem, enriquecimento, amostragem e distribuição (\textit{fan-out}) de telemetria.
 \end{itemize}
 
 Todos estes componentes trabalham em conjunto para garantir que a telemetria gerada pelo sistema seja relevante, consistente e útil para análise.
@@ -117,7 +117,7 @@ Além disso, atributos de \textit{Resource} (como \texttt{service.name}, \texttt
 
 A adoção do \textit{OpenTelemetry} traz benefícios substanciais no contexto de arquiteturas distribuídas, sobretudo ao padronizar a recolha de telemetria e ao oferecer uma integração unificada para diversos tipos de sinais e plataformas. No entanto, tal como qualquer tecnologia emergente, implica também alguns desafios que precisam ser considerados.
 
-\textbf{Vantagens}
+\textbf{Vantagens:}
 
 \begin{itemize}
     \item \textbf{Padronização e portabilidade.} Uma única camada de instrumentação permite recolher telemetria de diferentes serviços e enviá-la para múltiplas ferramentas, reduzindo dependência de fornecedores e minimizando esforços em processos de migração ou integração.
@@ -129,7 +129,7 @@ A adoção do \textit{OpenTelemetry} traz benefícios substanciais no contexto d
 
 A adoção do \textit{OpenTelemetry}, contudo, não está isenta de desafios. A complexidade de sistemas distribuídos faz com que a instrumentação, operação e gestão da telemetria requeiram planeamento cuidadoso e boas práticas consolidadas.
 
-\textbf{Limitações e Desafios}
+\textbf{Limitações e Desafios:}
 
 \begin{itemize}
     \item \textbf{Curva de configuração e operação.} Pipelines mal definidas podem provocar perda de dados, latências adicionais ou sobrecarga em recursos. O próprio Collector necessita de configuração cuidada e monitorização contínua.
@@ -150,17 +150,17 @@ Antes de procedermos à comparação das diferentes alternativas, importa clarif
 Ou seja, o \textit{OpenTelemetry} atua como um padrão unificador para a geração e transporte de telemetria, permitindo que diferentes linguagens, bibliotecas e serviços emitam dados num formato consistente (OTLP), que podem ser processados e exportados através do \textit{Collector}. Por contraste, a \textit{stack} tradicional composta por Prometheus, Grafana, Jaeger e Loki cobre essencialmente funções de armazenamento persistente, consulta e visualização dos dados recolhidos.
 
 \begin{itemize}
-\item Prometheus realiza a recolha e o armazenamento de séries temporais de métricas, com consultas via PromQL.
-\item Grafana fornece visualização e gestão de alertas sobre métricas, logs e outros dados operacionais.
-\item Jaeger armazena e permite consultar rastreamentos distribuídos.
-\item Loki gere a ingestão e consulta de logs.
+\item \textbf{Prometheus} realiza a recolha e o armazenamento de séries temporais de métricas, com consultas via PromQL.
+\item \textbf{Grafana} fornece visualização e gestão de alertas sobre métricas, logs e outros dados operacionais.
+\item \textbf{Jaeger} armazena e permite consultar rastreamentos distribuídos.
+\item \textbf{Loki} gere a ingestão e consulta de logs.
 \end{itemize}
 
 Assim, mesmo com \textit{OpenTelemetry}, continuam a ser necessários sistemas de \textit{backend} que garantam a persistência e exploração dos dados. A comparação, portanto, reflete abordagens arquiteturais distintas:
 
 \begin{itemize}
-\item No modelo tradicional, cada ferramenta exige o seu próprio \textit{agent} ou \textit{exporter}, resultando numa coleta fragmentada.
-\item Com \textit{OpenTelemetry}, a instrumentação e coleta são unificadas, e os mesmos dados podem ser enviados para múltiplos \textit{backends}.
+\item No \textbf{modelo tradicional}, cada ferramenta exige o seu próprio \textit{agent} ou \textit{exporter}, resultando numa coleta fragmentada.
+\item Com \textbf{\textit{OpenTelemetry}}, a instrumentação e coleta são unificadas, e os mesmos dados podem ser enviados para múltiplos \textit{backends}.
 \end{itemize}
 
 Deste modo, o \textit{OpenTelemetry} não substitui os \textit{backends} clássicos; complementa-os ao introduzir uma camada padronizada e de abstração que reduz o acoplamento e aumenta a portabilidade da telemetria.
@@ -381,14 +381,14 @@ Em síntese, o \textit{OpenTelemetry Operator} simplifica substancialmente a ado
 \end{figure}
 
 
-A abordagem adotada neste trabalho foi a execução do \textit{OpenTelemetry Collector} como um \textit{DaemonSet}, disponibilizando um agente local em cada nó do cluster Kubernetes (Figura \ref{fig:otel-daemonset}). Em cada nó, um \textit{Pod} do Collector expõe \textit{receivers} OTLP por gRPC (porta 4317) e HTTP/Protobuf (porta 4318), recebendo métricas, logs e traces das \textit{workloads} residentes nesse nó.
+A abordagem adotada neste trabalho foi a execução do \textit{OpenTelemetry Collector} como um \textbf{\textit{DaemonSet}}, disponibilizando um agente local em cada nó do cluster Kubernetes (Figura \ref{fig:otel-daemonset}). Em cada nó, um \textit{Pod} do Collector expõe \textit{receivers} OTLP por gRPC (porta 4317) e HTTP/Protobuf (porta 4318), recebendo métricas, logs e traces das \textit{workloads} residentes nesse nó.
 
 Esta decisão foi guiada por três objetivos principais:
 
 \begin{itemize}
-    \item \textbf{Baixa latência na entrega de telemetria} --- evitando transmissões de rede adicionais antes do primeiro processamento;
-    \item \textbf{Resiliência local} --- confinando o impacto de eventuais falhas ao nó específico, sem afetar o resto do cluster;
-    \item \textbf{Simplicidade de integração} --- permitindo que as aplicações publiquem telemetria para um único \textit{endpoint} local, sem a necessidade de mecanismos adicionais de descoberta.
+    \item \textbf{Baixa latência na entrega de telemetria.} Evitando transmissões de rede adicionais antes do primeiro processamento;
+    \item \textbf{Resiliência local.} Confinando o impacto de eventuais falhas ao nó específico, sem afetar o resto do cluster;
+    \item \textbf{Simplicidade de integração.} Permitindo que as aplicações publiquem telemetria para um único \textit{endpoint} local, sem a necessidade de mecanismos adicionais de descoberta.
 \end{itemize}
 
 A adoção do padrão \textit{DaemonSet} resultou numa menor variabilidade na entrega dos sinais, com coleta e pré-processamento a nível local, isolamento de falhas por nó, redução da dependência de rede intra-cluster e uma configuração simplificada do lado das aplicações, uma vez que estas comunicam com um \textit{endpoint} local único.

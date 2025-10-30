@@ -7,7 +7,7 @@ Neste capítulo analisa-se a importância estratégica da monitorização em sis
 
 \section{A Importância da Monitorização}
 
-\subsection{Monitorização de arquiteturas monolíticas e de microsserviços}
+\subsection{Monitorização de Arquiteturas Monolíticas e de Microsserviços}
 
 Em sistemas monolíticos tradicionais, a aplicação é geralmente executada num único processo ou num pequeno conjunto de processos homogéneos \cite{Villamizar2015}. A monitorização desses sistemas pode, assim, centrar-se em métricas simples, como a utilização de CPU, o tempo de resposta global ou a disponibilidade de uma base de dados centralizada. 
 
@@ -16,7 +16,7 @@ Em contraste, em arquiteturas de microsserviços, o sistema é composto por deze
 Monitorizar um sistema baseado em microsserviços requer, por isso, uma abordagem holística e distribuída, na qual cada serviço deve ser instrumentado individualmente e os dados devem ser agregados de forma coerente para suportar a análise e o diagnóstico do comportamento global do sistema.
 
 
-\subsection{Impacto da monitorização na fiabilidade e na escalabilidade}
+\subsection{Impacto da Monitorização na Fiabilidade e na Escalabilidade}
 
 Uma estratégia de monitorização adequada é indispensável para assegurar o funcionamento correto de sistemas distribuídos baseados em microsserviços. A recolha contínua de métricas operacionais, registos de execução e informação sobre interações entre serviços permite antecipar problemas e garantir o desempenho esperado da plataforma.
 
@@ -51,9 +51,9 @@ Os principais objetivos da monitorização em microsserviços podem ser resumido
 Existem três pilares clássicos de monitorização em microsserviços \cite{Soldani2018}:
 
 \begin{itemize}
-    \item \textbf{Logs centralizados} — integram registos detalhados de eventos e exceções, estruturados e agregados num sistema de pesquisa e análise centralizado.
-    \item \textbf{Métricas} — indicadores quantitativos agregados, como taxas de erro, latência e \textit{throughput}.
-    \item \textbf{Tracing distribuído} — registo do percurso de transações que atravessam múltiplos serviços.
+    \item \textbf{Logs centralizados.} Integram registos detalhados de eventos e exceções, estruturados e agregados num sistema de pesquisa e análise centralizado.
+    \item \textbf{Métricas.} Indicadores quantitativos agregados, como taxas de erro, latência e \textit{throughput}.
+    \item \textbf{Tracing distribuído.} Registo do percurso de transações que atravessam múltiplos serviços.
 \end{itemize}
 
 Cada pilar fornece uma perspetiva complementar sobre o estado do sistema e, combinados, permitem uma análise completa e eficaz.
@@ -71,9 +71,9 @@ Ferramentas como \textit{Elastic Stack (ELK)} e \textit{Grafana Loki} permitem a
 As métricas são valores numéricos recolhidos ao longo do tempo e fornecem uma visão quantificável da saúde e tendências de desempenho de um sistema. Funcionam como indicadores do “painel de controlo”, alertando para possíveis problemas antes de impactarem os utilizadores \cite{Burns2015}. Entre as métricas essenciais para microsserviços destacam-se:
 
 \begin{itemize}
-    \item \textbf{Latência} — tempo necessário para um serviço responder a um pedido.
-    \item \textbf{\textit{Throughput}} — número de pedidos processados com sucesso por segundo.
-    \item \textbf{Taxa de erros} — percentagem de falhas em chamadas ou pedidos.
+    \item \textbf{Latência.} Tempo necessário para um serviço responder a um pedido.
+    \item \textbf{\textit{Throughput}.} Número de pedidos processados com sucesso por segundo.
+    \item \textbf{Taxa de erros.} Percentagem de falhas em chamadas ou pedidos.
 \end{itemize}
 
 As métricas podem ser de infraestrutura (CPU, memória, disco), de aplicação (latência, número de pedidos) ou de utilizador final (tempo de carregamento). A recolha pode ocorrer por \textit{push} ou \textit{pull}. Ferramentas como o \textit{Prometheus} recolhem métricas de séries temporais e permitem análises, criação de alertas e visualização de tendências \cite{Burns2015}.
@@ -84,9 +84,9 @@ As métricas podem ser de infraestrutura (CPU, memória, disco), de aplicação 
 O \textit{tracing} distribuído é um processo essencial e único de monitorização, que rastreia pedidos individuais à medida que fluem através de um sistema complexo e distribuído \cite{Sambasivan2014}. Este processo proporciona visibilidade de ponta a ponta, bem como revela o percurso de um pedido através de vários serviços, bases de dados e comunicações entre componentes \cite{Zhang2023}. Os conceitos fundamentais do rastreamento distribuído incluem:
 
 \begin{itemize}
-    \item \textbf{Spans}, que representam operações individuais dentro de um rastreamento, por exemplo, uma consulta a uma base de dados ou uma chamada de API. Cada \textit{span} inclui um nome, tempos de início e fim, e pode ter relações pai--filho com outros \textit{spans} para mostrar causalidade. Além disso, podem também conter etiquetas e registos para contexto adicional \cite{Sambasivan2014}.
+    \item \textbf{Spans.} Representam operações individuais dentro de um rastreamento, por exemplo, uma consulta a uma base de dados ou uma chamada de API. Cada \textit{span} inclui um nome, tempos de início e fim, e pode ter relações pai-filho com outros \textit{spans} para mostrar causalidade. Além disso, podem também conter etiquetas e registos para contexto adicional \cite{Sambasivan2014}.
 
-    \item \textbf{Traces}, que são uma coleção de \textit{spans} logicamente conectados, representando o caminho de execução completo de ponta a ponta de um único pedido ou transação através do sistema distribuído \cite{Sambasivan2014}.
+    \item \textbf{Traces.} São uma coleção de \textit{spans} logicamente conectados, representando o caminho de execução completo de ponta a ponta de um único pedido ou transação através do sistema distribuído \cite{Sambasivan2014}.
 \end{itemize}
 
 Os benefícios chave do \textit{tracing} distribuído incluem:
@@ -127,15 +127,15 @@ A Tabela \ref{tab:monitoring-tools} sintetiza as principais ferramentas utilizad
 A capacidade de monitorizar e diagnosticar um sistema corresponde à aptidão para inferir o seu estado interno a partir das informações externas que este expõe \cite{Kalman1960}. No contexto de microsserviços, isto implica:
 
 \begin{itemize}
-    \item disponibilizar \textit{logs} detalhados e consistentes;
-    \item manter métricas ricas e acionáveis;
-    \item conseguir rastrear o percurso de uma requisição ponta-a-ponta.
+    \item Disponibilizar \textit{logs} detalhados e consistentes;
+    \item Manter métricas ricas e acionáveis;
+    \item Conseguir rastrear o percurso de uma requisição ponta-a-ponta.
 \end{itemize}
 
 Uma monitorização eficaz permite que as equipas identifiquem rapidamente a causa e a origem de problemas complexos.
 
 
-\section{Desafios na Monitorização de Microserviços}
+\section{Desafios na Monitorização de Microsserviços}
 
 A monitorização de arquiteturas baseadas em microsserviços apresenta diversos desafios que resultam da natureza distribuída e altamente dinâmica destes sistemas. Um dos principais problemas é a elevada cardinalidade de dados: microsserviços geram grandes volumes de métricas e \textit{logs}, frequentemente contendo identificadores únicos, endereços IP e atributos dinâmicos. Este nível de cardinalidade pode sobrecarregar bases de dados de séries temporais e dificultar a construção de consultas de análise eficientes, exigindo uma instrumentação criteriosa e controlada. Ferramentas como o Prometheus podem apresentar limitações quando confrontadas com métricas de cardinalidade extremamente alta, tornando necessária uma estratégia seletiva de recolha e agregação de dados.
 

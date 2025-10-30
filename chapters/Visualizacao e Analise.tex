@@ -5,11 +5,11 @@
 A visualização dos dados de telemetria assume um papel crucial para a compreensão e monitorização eficaz de sistemas distribuídos. Embora as ferramentas Prometheus, Jaeger e Loki disponham de interfaces próprias para análise independente de métricas, \textit{traces} e \textit{logs}, a fragmentação das informações pode dificultar a correlação rápida entre estes dados. Por esse motivo, optou-se pelo Grafana como camada de visualização unificada, visando uma experiência integrada e eficiente. Entre as principais vantagens da utilização do Grafana destacam-se:
 
 \begin{itemize}
-\item a centralização das métricas, \textit{logs} e \textit{traces} num único painel interativo;
-\item a capacidade avançada de correlação entre diferentes tipos de dados, facilitando a identificação de causas-raiz em anomalias;
-\item a configuração unificada de alertas abrangendo todas as fontes de dados;
-\item a interface intuitiva e personalizável, acessível a diferentes perfis técnicos;
-\item linguagens de consulta especializadas (\textit{PromQL}, \textit{LogQL}) diretamente integradas na ferramenta.
+\item A centralização das métricas, \textit{logs} e \textit{traces} num único painel interativo;
+\item A capacidade avançada de correlação entre diferentes tipos de dados, facilitando a identificação de causas-raiz em anomalias;
+\item A configuração unificada de alertas abrangendo todas as fontes de dados;
+\item A interface intuitiva e personalizável, acessível a diferentes perfis técnicos;
+\item Linguagens de consulta especializadas (\textit{PromQL}, \textit{LogQL}) diretamente integradas na ferramenta.
 \end{itemize}
 
 O Grafana habilita uma abordagem de ``\textit{single pane of glass}'', essencial para o acompanhamento consolidado do desempenho e da saúde do sistema. Além disso, permite seguir o percurso completo de uma requisição entre microsserviços e analisar a sua evolução temporal, proporcionando uma visão detalhada do comportamento distribuído da aplicação.
@@ -20,7 +20,7 @@ O Grafana habilita uma abordagem de ``\textit{single pane of glass}'', essencial
 
 \section{Organização dos Dashboards}
 
-\subsection{Organização dos Dashboards}
+\subsection{Estrutura Lógica dos Dashboards}
 
 Para garantir uma análise sistemática e eficiente dos dados recolhidos, a plataforma de visualização foi estruturada em diferentes painéis temáticos no Grafana. Esta organização permite um fluxo analítico claro, desde a observação de métricas de alto nível até à inspeção detalhada de eventos específicos, facilitando o diagnóstico rápido de anomalias e a compreensão do comportamento global do sistema.
 

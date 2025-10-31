@@ -172,6 +172,8 @@ A gestão das fronteiras de serviços é um aspeto crucial. Um serviço deve enc
 
 Técnicas como \textit{Domain-Driven Design} (DDD) \cite{Rogers2022} são frequentemente utilizadas para identificar limites de contexto adequados e promover o bom funcionamento interno de cada serviço. A dependência de componentes como \textit{ API Gateways}, mecanismos de \textit{service discovery} e comunicação assíncrona, referidos anteriormente, não deve ser vista apenas como um requisito tecnológico, mas como uma estratégia fundamental para garantir a escalabilidade, resiliência e segurança dos serviços.
 
+\clearpage
+
 \subsection{Principais Desafios Técnicos}
 
 Apesar das vantagens teóricas, a implementação prática de sistemas baseados em microsserviços traz um conjunto significativo de desafios técnicos que se intensificam com o aumento da complexidade e da escala do sistema. A comunicação distribuída é um dos principais pontos de fragilidade: a utilização de redes para interligar serviços introduz atrasos variáveis, falhas de ligação e a necessidade de implementar mecanismos de \textit{retry}, \textit{circuit breaker} e \textit{timeouts} devidamente controlados \cite{Nygard2018,Newman2015}. Além disso, a gestão de APIs torna-se crítica, exigindo práticas rigorosas de versionamento para evitar incompatibilidades em tempo de execução \cite{Richardson2018}.

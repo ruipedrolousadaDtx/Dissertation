@@ -1,4 +1,4 @@
-\chapter{Como Monitorizar uma Arquitetura de Microsserviços }
+\chapter{Monitorização de uma Arquitetura de Microsserviços}
 
 A monitorização de sistemas de software é um pilar fundamental para garantir a disponibilidade, a performance e a evolução contínua das aplicações modernas. Com a emergência das arquiteturas baseadas em microsserviços, a importância da monitorização aumentou substancialmente, refletindo a complexidade e a natureza altamente distribuída destes sistemas. Ao contrário das arquiteturas monolíticas, nas quais a monitorização podia ser realizada através da análise de um conjunto reduzido de componentes centralizados, os microsserviços exigem uma abordagem distribuída, integrando métricas, \textit{logs} e \textit{tracing} distribuído para assegurar um elevado nível de visibilidade e controlo operacional sobre o sistema.
 
@@ -166,7 +166,7 @@ A Uber, com operação em escala global, necessita de uma plataforma de monitori
 
 O \textit{Jaeger}, uma plataforma de \textit{tracing} distribuído, é a peça central para rastrear a jornada de cada requisição através dos seus microsserviços, permitindo identificar rapidamente a origem de falhas e gargalos de desempenho. O \textit{Prometheus}, por sua vez, é utilizado para a recolha de métricas de cada serviço, como latência e taxa de erros, permitindo a análise contínua do comportamento do sistema e a criação de alertas proativos. A orquestração desses serviços é gerida por \textit{Kubernetes}, garantindo que a infraestrutura possa ser dimensionada de forma automática e segura para suportar a procura crescente.
 
-\subsection{Conclusão dos Estudos de Caso}
+\subsection{Conclusão}
 
 Os casos de estudo da Netflix, Amazon e Uber ilustram que, embora os desafios de monitorização em microsserviços sejam significativos, podem ser superados com a adoção de uma abordagem multifacetada. A combinação dos três pilares da monitorização - \textit{logs}, métricas e \textit{tracing} - e o uso de ferramentas específicas, sejam elas proprietárias ou \textit{open-source}, são essenciais para garantir que os sistemas distribuídos se mantenham robustos, escaláveis e resilientes em ambientes de elevada exigência \cite{Dragoni2017}.
 

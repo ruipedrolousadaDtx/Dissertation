@@ -36,12 +36,12 @@ O Kubernetes desempenha um papel central na arquitetura do R2UT, fornecendo a in
 \subsection{Arquitetura de Microsserviços no Kubernetes}
 
 
-A plataforma R2UT é composta por diversos serviços que interagem entre si, cada um implementado como um microsserviço em \textit{containers}. Esses serviços são organizados num cluster Kubernetes, no qual a comunicação entre os componentes é feita através de APIs e de mensagens assíncronas via Kafka. Isto permite que o sistema seja altamente escalável e eficiente. De seguida, destacam-se alguns dos componentes chave desta arquitetura:
+A plataforma R2UT é composta por diversos serviços que interagem entre si, cada um implementado como um microsserviço em \textit{containers}. Esses serviços são organizados num cluster Kubernetes, no qual a comunicação entre os componentes é feita através de APIs e de mensagens assíncronas via \textit{ Kafka}. Isto permite que o sistema seja altamente escalável e eficiente. De seguida, destacam-se alguns dos componentes chave desta arquitetura:
 
 \begin{itemize}
     \item \textbf{Base de dados global.} Uma base de dados partilhada por todos os serviços que necessita de escalabilidade horizontal. O Kubernetes facilita a gestão de bases de dados distribuídas, como as suportadas por PostgreSQL com Citus, garantindo elevada performance nas consultas e capacidade de escala.
 
-    \item \textbf{Middleware e plataforma em nuvem.} Serviços responsáveis pela interoperabilidade entre os sistemas internos e pela gestão da infraestrutura na nuvem. O Kubernetes gere os recursos necessários para escalar estes serviços conforme as necessidades de tráfego, facilitando a implementação contínua das aplicações.
+    \item \textbf{\textit{Middleware} e plataforma em nuvem.} Serviços responsáveis pela interoperabilidade entre os sistemas internos e pela gestão da infraestrutura na nuvem. O Kubernetes gere os recursos necessários para escalar estes serviços conforme as necessidades de tráfego, facilitando a implementação contínua das aplicações.
 
     \item \textbf{Módulos específicos.} \textit{Tenant Management}, \textit{Ticket Management}, \textit{PDFBuilder}, \textit{IoT Manager}, \textit{Rules Engine}, \textit{DAE Authentication} são módulos da arquitetura. Cada um opera de forma independente em \textit{containers}, com comunicação entre serviços mediada através de APIs e filas de mensagens (Kafka).
 
@@ -91,9 +91,9 @@ Embora os detalhes sejam explicados nas secções seguintes, vale apresentar aqu
 \begin{itemize}
     \item \textbf{APIs / SDKs / Instrumentação.} As \textit{API} definem o contrato genérico para rastreamento, métricas e \textit{logs}, enquanto os \textit{SDKs} concretizam esse contrato em cada linguagem, permitindo tanto a instrumentação manual como automática.
     
-    \item \textbf{Exporters / Receivers.} Componentes responsáveis por enviar ou receber telemetria em formatos como \textit{OTLP}, \textit{Jaeger} e \textit{Prometheus}.
+    \item \textbf{\textit{Exporters / Receivers}.} Componentes responsáveis por enviar ou receber telemetria em formatos como \textit{OTLP}, \textit{Jaeger} e \textit{Prometheus}.
     
-    \item \textbf{Collector.} Componente neutro que organiza \textit{pipelines} (\textit{receivers - processors - exporters}), permitindo filtragem, enriquecimento, amostragem e distribuição (\textit{fan-out}) de telemetria.
+    \item \textbf{\textit{Collector}.} Componente neutro que organiza \textit{pipelines} (\textit{receivers - processors - exporters}), permitindo filtragem, enriquecimento, amostragem e distribuição (\textit{fan-out}) de telemetria.
 \end{itemize}
 
 Todos estes componentes trabalham em conjunto para garantir que a telemetria gerada pelo sistema seja relevante, consistente e útil para análise.
@@ -122,7 +122,7 @@ A adoção do \textit{OpenTelemetry} traz benefícios substanciais no contexto d
 \begin{itemize}
     \item \textbf{Padronização e portabilidade.} Uma única camada de instrumentação permite recolher telemetria de diferentes serviços e enviá-la para múltiplas ferramentas, reduzindo dependência de fornecedores e minimizando esforços em processos de migração ou integração.
     
-    \item \textbf{Flexibilidade através do Collector.} O \textit{OpenTelemetry Collector} oferece grande capacidade de adaptação, suportando exportação para múltiplos destinos, mecanismos de \textit{buffering} e \textit{retry}, amostragem inteligente e enriquecimento de dados antes do armazenamento, tudo num ponto central da arquitetura.
+    \item \textbf{Flexibilidade através do \textit{ Collector}.} O \textit{OpenTelemetry Collector} oferece grande capacidade de adaptação, suportando exportação para múltiplos destinos, mecanismos de \textit{buffering} e \textit{retry}, amostragem inteligente e enriquecimento de dados antes do armazenamento, tudo num ponto central da arquitetura.
     
     \item \textbf{Aderência ao ecossistema \textit{cloud-native}.} A ferramenta foi concebida para ambientes modernos, com suporte maduro para Kubernetes, serviços distribuídos e \textit{auto-instrumentation} disponível para várias linguagens, incluindo .NET.
 \end{itemize}
@@ -132,11 +132,11 @@ A adoção do \textit{OpenTelemetry}, contudo, não está isenta de desafios. A 
 \textbf{Limitações e Desafios:}
 
 \begin{itemize}
-    \item \textbf{Curva de configuração e operação.} Pipelines mal definidas podem provocar perda de dados, latências adicionais ou sobrecarga em recursos. O próprio Collector necessita de configuração cuidada e monitorização contínua.
+    \item \textbf{Curva de configuração e operação.} \textit{Pipelines} mal definidas podem provocar perda de dados, latências adicionais ou sobrecarga em recursos. O próprio Collector necessita de configuração cuidada e monitorização contínua.
     
     \item \textbf{Maturidade heterogénea entre sinais.} Embora \textit{tracing} e métricas estejam altamente estabilizados, a componente de logs continua em evolução e pode depender mais de integrações com ferramentas externas, como Loki ou ELK.
     
-    \item \textbf{Necessidade de stack complementar.} O \textit{OpenTelemetry} fornece coleta e processamento, mas não inclui armazenamento ou visualização, tornando obrigatória a utilização de ferramentas adicionais como Prometheus, Jaeger, Loki ou Grafana para consulta e análise.
+    \item \textbf{Necessidade de stack complementar.} O \textit{OpenTelemetry} fornece coleta e processamento, mas não inclui armazenamento ou visualização, tornando obrigatória a utilização de ferramentas adicionais como \textit{ Prometheus, Jaeger, Loki} ou \textit{ Grafana} para consulta e análise.
 \end{itemize}
 
 \break
@@ -145,15 +145,15 @@ A adoção do \textit{OpenTelemetry}, contudo, não está isenta de desafios. A 
 \section{Comparação entre OpenTelemetry e a Stack Tradicional de Monitorização (Prometheus, Grafana, Jaeger e Loki)}
 
 
-Antes de procedermos à comparação das diferentes alternativas, importa clarificar que a análise estabelecida entre \textit{OpenTelemetry} e a \textit{stack} composta por Prometheus, Grafana, Jaeger e Loki não deve ser interpretada como uma avaliação entre ferramentas equivalentes ou mutuamente exclusivas. O \textit{OpenTelemetry} não é um \textit{backend} de armazenamento ou visualização de dados. O seu papel situa-se na camada de instrumentação, recolha, normalização e encaminhamento de telemetria (métricas, rastreamentos e registos).
+Antes de procedermos à comparação das diferentes alternativas, importa clarificar que a análise estabelecida entre \textit{OpenTelemetry} e a \textit{stack} composta por \textit{ Prometheus, Grafana, Jaeger} e \textit{ Loki} não deve ser interpretada como uma avaliação entre ferramentas equivalentes ou mutuamente exclusivas. O \textit{OpenTelemetry} não é um \textit{backend} de armazenamento ou visualização de dados. O seu papel situa-se na camada de instrumentação, recolha, normalização e encaminhamento de telemetria (métricas, rastreamentos e registos).
 
 Ou seja, o \textit{OpenTelemetry} atua como um padrão unificador para a geração e transporte de telemetria, permitindo que diferentes linguagens, bibliotecas e serviços emitam dados num formato consistente (OTLP), que podem ser processados e exportados através do \textit{Collector}. Por contraste, a \textit{stack} tradicional composta por Prometheus, Grafana, Jaeger e Loki cobre essencialmente funções de armazenamento persistente, consulta e visualização dos dados recolhidos.
 
 \begin{itemize}
 \item \textbf{Prometheus} realiza a recolha e o armazenamento de séries temporais de métricas, com consultas via PromQL.
-\item \textbf{Grafana} fornece visualização e gestão de alertas sobre métricas, logs e outros dados operacionais.
+\item \textbf{Grafana} fornece visualização e gestão de alertas sobre métricas, \textit{logs} e outros dados operacionais.
 \item \textbf{Jaeger} armazena e permite consultar rastreamentos distribuídos.
-\item \textbf{Loki} gere a ingestão e consulta de logs.
+\item \textbf{Loki} gere a ingestão e consulta de \textit{logs}.
 \end{itemize}
 
 Assim, mesmo com \textit{OpenTelemetry}, continuam a ser necessários sistemas de \textit{backend} que garantam a persistência e exploração dos dados. A comparação, portanto, reflete abordagens arquiteturais distintas:
@@ -175,14 +175,14 @@ A Tabela \ref{tab:otel_vs_tradicional} resume as principais diferenças entre as
 \hline
 \textbf{Característica} & \textbf{OpenTelemetry (OTel)} & \textbf{Prometheus + Grafana + Jaeger + Loki} \\ \hline
 
-Instrumentação & Unificada (traces, métricas, logs) & Separada por ferramenta \\ \hline
+Instrumentação & Unificada (\textit{traces}, métricas, \textit{logs}) & Separada por ferramenta \\ \hline
 Padronização & Convenções Semânticas (\textit{SemConv}) & Cada ferramenta define o seu padrão \\ \hline
 Agnosticidade de \textit{backend} & Sim, exporta para múltiplos destinos & Não, acoplado a cada \textit{backend} \\ \hline
 \textit{Collector} Centralizado & Sim, pipelines flexíveis & Não, coletores independentes \\ \hline
 \textit{Auto-instrumentação} & Suporte amplo & Limitado por ferramenta \\ \hline
 Dependência de fornecedor & Baixa & Média / Alta \\ \hline
 Escalabilidade & Elevada & Elevada, mas com mais componentes dedicados \\ \hline
-Curva de aprendizagem & Moderada (pipelines OTel) & Mais baixa em cenários simples \\ \hline
+Curva de aprendizagem & Moderada \textit{(pipelines OTel)} & Mais baixa em cenários simples \\ \hline
 
 \end{tabular}
 \end{table}
@@ -203,21 +203,21 @@ A arquitetura do sistema de monitorização (Figura \ref{fig:otel_arch}) é conc
     \label{fig:otel_arch}
 \end{figure}
 
-A Figura \ref{fig:otel_arch} ilustra o fluxo de dados de telemetria desde a sua origem nos microsserviços até à visualização final no Grafana. Nesse fluxo, os dados são primeiro gerados e enriquecidos nas aplicações, depois enviados para o \textit{Collector}, onde são processados, transformados e encaminhados para diferentes sistemas de armazenamento, conforme o seu tipo (métricas, logs ou \textit{traces}). Finalmente, o Grafana agrega estes dados e proporciona uma visualização unificada para análise operacional e diagnóstico. Esta divisão clara entre instrumentação, processamento e visualização confere ao sistema maior flexibilidade e evita o acoplamento entre os serviços da aplicação e a infraestrutura de monitorização.
+A Figura \ref{fig:otel_arch} ilustra o fluxo de dados de telemetria desde a sua origem nos microsserviços até à visualização final no Grafana. Nesse fluxo, os dados são primeiro gerados e enriquecidos nas aplicações, depois enviados para o \textit{Collector}, onde são processados, transformados e encaminhados para diferentes sistemas de armazenamento, conforme o seu tipo (métricas, \textit{logs} ou \textit{traces}). Finalmente, o Grafana agrega estes dados e proporciona uma visualização unificada para análise operacional e diagnóstico. Esta divisão clara entre instrumentação, processamento e visualização confere ao sistema maior flexibilidade e evita o acoplamento entre os serviços da aplicação e a infraestrutura de monitorização.
 
 \subsubsection{APIs e SDKs}
-As API definem os contratos para a geração e correlação de dados de telemetria. Os SDK são implementações específicas de linguagem das APIs, fornecendo as ferramentas necessárias para instrumentar o código das aplicações. Estes SDK permitem aos utilizadores gerar dados de telemetria na sua linguagem de programação escolhida e exportá-los para um backend preferencial. Incluem bibliotecas de instrumentação que geram dados relevantes a partir de bibliotecas e frameworks populares (por exemplo, requisições HTTP) e detetores de recursos que adicionam atributos contextuais (como nome do pod ou namespace em Kubernetes) aos dados de telemetria (OpenTelemetry Authors, 2025; Thakur \& Chandak, 2022).
+As API definem os contratos para a geração e correlação de dados de telemetria. Os SDK são implementações específicas de linguagem das APIs, fornecendo as ferramentas necessárias para instrumentar o código das aplicações. Estes SDK permitem aos utilizadores gerar dados de telemetria na sua linguagem de programação escolhida e exportá-los para um \textit{backend} preferencial. Incluem bibliotecas de instrumentação que geram dados relevantes a partir de bibliotecas e \textit{frameworks} populares (por exemplo, requisições HTTP) e detetores de recursos que adicionam atributos contextuais (como nome do pod ou namespace em Kubernetes) aos dados de telemetria \cite{opentelemetry_docs,Thakur2022}.
 
 \subsubsection{Collector}
-O OpenTelemetry Collector é um componente independente e agnóstico de fornecedor, concebido para receber, processar e exportar dados de telemetria. Atua como um hub centralizado para gerir pipelines de telemetria, recebendo dados em vários formatos (como OTLP, Prometheus, Jaeger) e encaminhando-os para um ou mais backends. A sua capacidade de processar e filtrar dados antes da exportação otimiza o fluxo de dados, reduzindo a sobrecarga nas aplicações e melhorando a eficiência geral (OpenTelemetry Authors, 2025; Thakur \& Chandak, 2022).
+O OpenTelemetry Collector é um componente independente e agnóstico de fornecedor, concebido para receber, processar e exportar dados de telemetria. Atua como um hub centralizado para gerir \textit{pipelines} de telemetria, recebendo dados em vários formatos (como OTLP, Prometheus, Jaeger) e encaminhando-os para um ou mais \textit{backends}. A sua capacidade de processar e filtrar dados antes da exportação otimiza o fluxo de dados, reduzindo a sobrecarga nas aplicações e melhorando a eficiência geral \cite{opentelemetry_docs,Thakur2022}.
 
 \subsubsection{Exportadores (Exporters)}
-Os exportadores são componentes responsáveis por enviar os dados de telemetria (após serem gerados pelas aplicações ou processados pelo Collector) para ferramentas de backend específicas, como Grafana, Jaeger, Prometheus, Loki ou outros sistemas proprietários. A utilização de exportadores OTLP é considerada uma boa prática, pois são concebidos para emitir dados OpenTelemetry sem perda de informação e são amplamente suportados por diversas plataformas de monitorização (OpenTelemetry Authors, 2025; Thakur \& Chandak, 2022).
+Os exportadores são componentes responsáveis por enviar os dados de telemetria (após serem gerados pelas aplicações ou processados pelo Collector) para ferramentas de backend específicas, como Grafana, Jaeger, Prometheus, Loki ou outros sistemas proprietários. A utilização de exportadores OTLP é considerada uma boa prática, pois são concebidos para emitir dados OpenTelemetry sem perda de informação e são amplamente suportados por diversas plataformas de monitorização \cite{opentelemetry_docs,Thakur2022}.
 
 \subsubsection{Node Exporter}
 O Node Exporter é utilizado como agente de monitorização ao nível do sistema operativo, responsável por expor métricas relacionadas com CPU, memória, disco e rede. Embora não esteja diretamente integrado no pipeline do \textit{OpenTelemetry Collector}, este componente fornece ao Prometheus dados cruciais sobre a infraestrutura subjacente, permitindo complementar a monitorização das aplicações com indicadores do ambiente de execução.
 
-Inicialmente, tentou-se recolher estas métricas através do \textit{OpenTelemetry Collector}, de forma a centralizar todo o processo de monitorização, incluindo as métricas de infraestrutura num único pipeline de recolha e exportação. A intenção era utilizar o Collector como ponto único de integração, encaminhando todos os dados para os respetivos backends (Prometheus, Loki e Jaeger).
+Inicialmente, tentou-se recolher estas métricas através do \textit{OpenTelemetry Collector}, de forma a centralizar todo o processo de monitorização, incluindo as métricas de infraestrutura num único \textit{pipeline} de recolha e exportação. A intenção era utilizar o Collector como ponto único de integração, encaminhando todos os dados para os respetivos \textit{backends} (Prometheus, Loki e Jaeger).
 
 Contudo, durante a implementação, verificou-se que a configuração do Collector para recolher métricas do sistema operativo exigia componentes e \textit{receivers} adicionais, cuja compatibilidade e maturidade ainda se encontram limitadas. Para além disso, o nível de detalhe e granularidade obtido não correspondia ao fornecido pelo Node Exporter, tornando essa abordagem menos prática.
 
@@ -225,7 +225,7 @@ Por este motivo, optou-se por manter o Node Exporter como fonte dedicada para m�
 
 
 \subsubsection{Camada de Visualização e Análise}
-O Grafana atua como uma interface de utilizador unificada para visualizar e analisar os dados. Esta ferramenta integra os backends (Prometheus, Loki e Jaeger), permitindo a criação de dashboards interativos que mostram as métricas, logs e traces de maneira correlacionada, facilitando o diagnóstico e a tomada de decisões operacionais.
+O Grafana atua como uma interface de utilizador unificada para visualizar e analisar os dados. Esta ferramenta integra os backends (Prometheus, Loki e Jaeger), permitindo a criação de dashboards interativos que mostram as métricas, \textit{logs} e \textit{traces} de maneira correlacionada, facilitando o diagnóstico e a tomada de decisões operacionais.
 
 
 \subsection{Fluxo de Telemetria}
@@ -263,9 +263,9 @@ O fluxo de dados de telemetria segue um \textit{pipeline} bem definido que separ
 
 \subsection{Estratégia de Instrumentação em .NET}
 
-Do ponto de vista técnico, a instrumentação foi aplicada exclusivamente aos serviços criados internamente, evitando a recolha de dados de dependências externas. Desta forma, métricas, logs e traces refletem apenas o comportamento dos microsserviços proprietários, reduzindo o ruído e a sobrecarga de dados. Esta abordagem garante que a telemetria recolhida é relevante para a análise e otimização da plataforma R2UT, focando a monitorização nos elementos críticos sob responsabilidade direta da equipa de desenvolvimento.
+Do ponto de vista técnico, a instrumentação foi aplicada exclusivamente aos serviços criados internamente, evitando a recolha de dados de dependências externas. Desta forma, métricas, \textit{logs} e \textit{traces} refletem apenas o comportamento dos microsserviços proprietários, reduzindo o ruído e a sobrecarga de dados. Esta abordagem garante que a telemetria recolhida é relevante para a análise e otimização da plataforma R2UT, focando a monitorização nos elementos críticos sob responsabilidade direta da equipa de desenvolvimento.
 
-A instrumentação de aplicações é um passo crucial para gerar dados de telemetria significativos. Em ambientes de microsserviços com múltiplas APIs, a instrumentação individual de cada serviço pode ser repetitiva e propensa a erros. Para mitigar esta complexidade, foi adotada uma abordagem prática e reutilizável para a instrumentação de APIs ASP.NET Core, utilizando um pacote comum (\textit{DTX.Base.Common}). Este pacote encapsula toda a configuração necessária para a emissão de \textit{traces} distribuídos, métricas e logs estruturados, promovendo uma padronização e um desacoplamento eficaz entre o código da aplicação e a infraestrutura de monitorização.
+A instrumentação de aplicações é um passo crucial para gerar dados de telemetria significativos. Em ambientes de microsserviços com múltiplas APIs, a instrumentação individual de cada serviço pode ser repetitiva e propensa a erros. Para mitigar esta complexidade, foi adotada uma abordagem prática e reutilizável para a instrumentação de APIs ASP.NET Core, utilizando um pacote comum (\textit{DTX.Base.Common}). Este pacote encapsula toda a configuração necessária para a emissão de \textit{traces} distribuídos, métricas e \textit{logs} estruturados, promovendo uma padronização e um desacoplamento eficaz entre o código da aplicação e a infraestrutura de monitorização.
 
 Esta estratégia centraliza a lógica de monitorização num único ponto, reduzindo significativamente o código repetido. A configuração da telemetria pode ser ativada e controlada dinamicamente através de variáveis de ambiente, conferindo flexibilidade e portabilidade entre diferentes ambientes (desenvolvimento, homologação e produção). Para instrumentar novos serviços, a intervenção necessária é mínima: basta adicionar o pacote \textit{DTX.Base.Common}, invocar um método de extensão no \texttt{Program.cs} e definir as variáveis de ambiente correspondentes.
 
@@ -275,7 +275,7 @@ A lógica de monitorização foi centralizada num único método de extensão, a
 builder.ConfigureOpenTelemetry();
 \end{verbatim}
 
-Este método ativa automaticamente os componentes do OpenTelemetry responsáveis pela instrumentação de \textit{tracing} distribuído, recolha de métricas e exportação de logs estruturados. As opções de configuração são controladas dinamicamente por variáveis de ambiente, evitando alterações no código ou recompilação ao migrar entre ambientes.
+Este método ativa automaticamente os componentes do OpenTelemetry responsáveis pela instrumentação de \textit{tracing} distribuído, recolha de métricas e exportação de \textit{logs} estruturados. As opções de configuração são controladas dinamicamente por variáveis de ambiente, evitando alterações no código ou recompilação ao migrar entre ambientes.
 
 
 As variáveis de ambiente listadas na Tabela \ref{tab:otel_env_vars} são responsáveis por configurar a camada de exportação OTLP em cada microsserviço. Em vez de definir endpoints ou credenciais diretamente no código, estes parâmetros são injetados no ambiente de execução, permitindo separar configuração operacional da lógica de aplicação.
@@ -320,9 +320,9 @@ Com esta abordagem, a instrumentação de novos serviços pode ser realizada com
 
 \section{Coleta de dados com o OpenTelemetry Collector}
 
-A fase de coleta é o ponto de entrada para os dados de telemetria no pipeline de monitorização. É responsável por capturar logs, métricas e traces gerados pelas aplicações instrumentadas, agentes \textit{sidecar} ou ferramentas de terceiros. A coleta é feita principalmente através dos \textit{receivers} do \textit{OpenTelemetry Collector}, que atuam como ouvintes ou \textit{scrapers}, aceitando dados em vários formatos.
+A fase de coleta é o ponto de entrada para os dados de telemetria no pipeline de monitorização. É responsável por capturar \textit{logs}, métricas e \textit{traces} gerados pelas aplicações instrumentadas, agentes \textit{sidecar} ou ferramentas de terceiros. A coleta é feita principalmente através dos \textit{receivers} do \textit{OpenTelemetry Collector}, que atuam como ouvintes ou \textit{scrapers}, aceitando dados em vários formatos.
 
-O \textit{OpenTelemetry Collector}, um componente central do ecossistema, funciona como um hub de processamento centralizado, capaz de lidar com múltiplas fontes e destinos de dados. Na implementação em questão, o Collector foi configurado para escutar em duas portas principais para o protocolo OTLP: \texttt{4317} para \texttt{gRPC} e \texttt{4318} para \texttt{HTTP}. Esta configuração permite que as aplicações enviem telemetria usando o protocolo de sua preferência. A fase de coleta é crítica, uma vez que é ela que garante que os dados cheguem de forma consistente e em tempo real ao pipeline de monitorização.
+O \textit{OpenTelemetry Collector}, um componente central do ecossistema, funciona como um hub de processamento centralizado, capaz de lidar com múltiplas fontes e destinos de dados. Na implementação em questão, o Collector foi configurado para escutar em duas portas principais para o protocolo OTLP: \texttt{4317} para \texttt{gRPC} e \texttt{4318} para \texttt{HTTP}. Esta configuração permite que as aplicações enviem telemetria usando o protocolo de sua preferência. A fase de coleta é crítica, uma vez que é ela que garante que os dados cheguem de forma consistente e em tempo real ao \textit{pipeline} de monitorização.
 
 No ambiente \textit{Kubernetes}, a implantação do \textit{OpenTelemetry Collector} foi realizada como um \textit{DaemonSet}. Esta escolha de implantação garante que o Collector seja executado como um agente em cada nó (\textit{node}) do cluster, em vez de ser um serviço centralizado. Cada instância do \textit{DaemonSet Collector}, que age como um agente local, recebe a telemetria dos pods que estão no mesmo nó.
 
@@ -330,7 +330,7 @@ A principal vantagem desta abordagem é a redução de latência e a garantia de
 
 \subsection{O Protocolo OTLP (gRPC/HTTP)}
 
-O \textit{OpenTelemetry Protocol} (OTLP) é o protocolo padrão utilizado na plataforma de observabilidade para o transporte de dados de telemetria, como métricas, logs e \textit{tracing} distribuído. Desenvolvido como parte do ecossistema OpenTelemetry, o OTLP é um protocolo aberto, extensível e eficiente, que permite a comunicação entre aplicações instrumentadas, agentes de coleta como o \textit{OpenTelemetry Collector}, e sistemas de backend, como o \textit{Grafana Loki} (logs), o \textit{Jaeger} (traces) ou \textit{Prometheus} (métricas). O protocolo suporta os formatos \texttt{gRPC} e \texttt{HTTP/protobuf}, garantindo flexibilidade de integração com diversos ambientes e ferramentas. Num cluster Kubernetes, o uso do OTLP padroniza a coleta e exportação de dados de observabilidade entre os pods e os componentes da infraestrutura de monitorização, garantindo portabilidade, interoperabilidade e escalabilidade da solução implementada.
+O \textit{OpenTelemetry Protocol} (OTLP) é o protocolo padrão utilizado na plataforma de observabilidade para o transporte de dados de telemetria, como métricas, \textit{logs} e \textit{tracing} distribuído. Desenvolvido como parte do ecossistema OpenTelemetry, o OTLP é um protocolo aberto, extensível e eficiente, que permite a comunicação entre aplicações instrumentadas, agentes de coleta como o \textit{OpenTelemetry Collector}, e sistemas de backend, como o \textit{Grafana Loki} (logs), o \textit{Jaeger} (traces) ou \textit{Prometheus} (métricas). O protocolo suporta os formatos \texttt{gRPC} e \texttt{HTTP/protobuf}, garantindo flexibilidade de integração com diversos ambientes e ferramentas. Num \textit{cluster} Kubernetes, o uso do OTLP padroniza a coleta e exportação de dados de observabilidade entre os \textit{pods} e os componentes da infraestrutura de monitorização, garantindo portabilidade, interoperabilidade e escalabilidade da solução implementada.
 
 \subsection{OpenTelemetry Operator}
 
@@ -348,9 +348,9 @@ O \textit{OpenTelemetry Operator} expande o Kubernetes através de \textit{Custo
 O recurso \texttt{OpenTelemetryCollector}, disponibilizado pelo \textit{OpenTelemetry Operator}, permite definir, de forma declarativa, o modo de execução do Collector, conferindo elevada flexibilidade na adaptação da arquitetura de monitorização às características do sistema. Os principais modos de operação são:
 
 \begin{itemize}
-    \item \textbf{DaemonSet.} Executa uma instância do Collector em cada nó do cluster, recolhendo a telemetria localmente e reduzindo a latência e o tráfego de rede. Este modo é particularmente indicado para clusters de grande dimensão ou aplicações com elevado volume de métricas e logs.
+    \item \textbf{DaemonSet.} Executa uma instância do Collector em cada nó do cluster, recolhendo a telemetria localmente e reduzindo a latência e o tráfego de rede. Este modo é particularmente indicado para \textit{clusters} de grande dimensão ou aplicações com elevado volume de métricas e \textit{logs}.
 
-    \item \textbf{Deployment.} Executa o Collector como um serviço centralizado, atuando como \textit{gateway} e agregando telemetria antes de a reenviar para os backends definidos. É uma opção recomendada para ambientes de desenvolvimento ou para arquiteturas onde a centralização seja operacionalmente vantajosa.
+    \item \textbf{Deployment.} Executa o Collector como um serviço centralizado, atuando como \textit{gateway} e agregando telemetria antes de a reenviar para os \textit{backends} definidos. É uma opção recomendada para ambientes de desenvolvimento ou para arquiteturas onde a centralização seja operacionalmente vantajosa.
 
     \item \textbf{Sidecar.} Executa o Collector em conjunto com cada \textit{pod}, garantindo o nível máximo de isolamento e controlo sobre a instrumentação de cada serviço. Este modelo oferece monitorização altamente granular, embora com maior custo de recursos.
 
@@ -365,7 +365,7 @@ Além desta flexibilidade arquitetural, a utilização do \textit{OpenTelemetry 
 
     \item \textbf{Consistência e padronização.} Garante que todas as instâncias do Collector são configuradas de forma homogénea e alinhadas com boas práticas, assegurando uniformidade na recolha e processamento da telemetria em todo o cluster.
 
-    \item \textbf{Integração nativa com GitOps.} Por ser baseado em definições declarativas, integra-se facilmente com pipelines de CI/CD e ferramentas GitOps, como ArgoCD e Flux, facilitando a gestão versionada e auditável das configurações de monitorização.
+    \item \textbf{Integração nativa com GitOps.} Por ser baseado em definições declarativas, integra-se facilmente com \textit{pipelines} de CI/CD e ferramentas GitOps, como ArgoCD e Flux, facilitando a gestão versionada e auditável das configurações de monitorização.
 
     \item \textbf{Evolução contínua e alinhamento com a comunidade.} O Operator é mantido pela comunidade OpenTelemetry, garantindo compatibilidade com novas versões, boas práticas atualizadas e reduzindo o risco de configurações obsoletas ao longo do tempo.
 \end{itemize}
@@ -381,13 +381,13 @@ Em síntese, o \textit{OpenTelemetry Operator} simplifica substancialmente a ado
 \end{figure}
 
 
-A abordagem adotada neste trabalho foi a execução do \textit{OpenTelemetry Collector} como um \textbf{\textit{DaemonSet}}, disponibilizando um agente local em cada nó do cluster Kubernetes (Figura \ref{fig:otel-daemonset}). Em cada nó, um \textit{Pod} do Collector expõe \textit{receivers} OTLP por gRPC (porta 4317) e HTTP/Protobuf (porta 4318), recebendo métricas, logs e traces das \textit{workloads} residentes nesse nó.
+A abordagem adotada neste trabalho foi a execução do \textit{OpenTelemetry Collector} como um \textbf{\textit{DaemonSet}}, disponibilizando um agente local em cada nó do \textit{cluster} Kubernetes (Figura \ref{fig:otel-daemonset}). Em cada nó, um \textit{Pod} do Collector expõe \textit{receivers} OTLP por gRPC (porta 4317) e HTTP/Protobuf (porta 4318), recebendo métricas, \textit{logs} e \textit{traces} das \textit{workloads} residentes nesse nó.
 
 Esta decisão foi guiada por três objetivos principais:
 
 \begin{itemize}
     \item \textbf{Baixa latência na entrega de telemetria.} Evitando transmissões de rede adicionais antes do primeiro processamento;
-    \item \textbf{Resiliência local.} Confinando o impacto de eventuais falhas ao nó específico, sem afetar o resto do cluster;
+    \item \textbf{Resiliência local.} Confinando o impacto de eventuais falhas ao nó específico, sem afetar o resto do \textit{cluster};
     \item \textbf{Simplicidade de integração.} Permitindo que as aplicações publiquem telemetria para um único \textit{endpoint} local, sem a necessidade de mecanismos adicionais de descoberta.
 \end{itemize}
 
@@ -445,7 +445,7 @@ O processador \texttt{attributes} permite adicionar, modificar ou remover atribu
 % \subsubsection{Processador \texttt{resource}}
 
 
-Este processador tem como objetivo a modificação de atributos de recurso, os quais descrevem a entidade responsável pela geração da telemetria, como o serviço da aplicação, a máquina \textit{host} ou o \textit{container}. É essencial para anexar de forma consistente metadados fundamentais, tais como \textit{environment}, \textit{service version} ou \textit{region} às métricas e para enriquecer logs com informação contextual detalhada. O processador \texttt{resource} assegura que atributos de identificação comuns, nomeadamente \texttt{service.name}, são aplicados uniformemente a todos os sinais de telemetria (logs, \textit{traces} e métricas). Esta consistência é crucial para permitir uma correlação eficiente e precisa entre sinais no Grafana.
+Este processador tem como objetivo a modificação de atributos de recurso, os quais descrevem a entidade responsável pela geração da telemetria, como o serviço da aplicação, a máquina \textit{host} ou o \textit{container}. É essencial para anexar de forma consistente metadados fundamentais, tais como \textit{environment}, \textit{service version} ou \textit{region} às métricas e para enriquecer \textit{logs} com informação contextual detalhada. O processador \texttt{resource} assegura que atributos de identificação comuns, nomeadamente \texttt{service.name}, são aplicados uniformemente a todos os sinais de telemetria (\textit{logs}, \textit{traces} e métricas). Esta consistência é crucial para permitir uma correlação eficiente e precisa entre sinais no Grafana.
 
 \item \textbf{Processador \texttt{memory\_limiter}}\\
 % \subsubsection{Processador \texttt{memory\_limiter}}

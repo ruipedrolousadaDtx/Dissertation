@@ -24,14 +24,14 @@ O Grafana habilita uma abordagem de ``\textit{single pane of glass}'', essencial
 
 Para garantir uma análise sistemática e eficiente dos dados recolhidos, a plataforma de visualização foi estruturada em diferentes painéis temáticos no Grafana. Esta organização permite um fluxo analítico claro, desde a observação de métricas de alto nível até à inspeção detalhada de eventos específicos, facilitando o diagnóstico rápido de anomalias e a compreensão do comportamento global do sistema.
 
-De modo a assegurar uma exploração coerente e eficiente dos sinais de telemetria, os dashboards foram agrupados em três categorias principais:
+De modo a assegurar uma exploração coerente e eficiente dos sinais de telemetria, os \textit{dashboards} foram agrupados em três categorias principais:
 
 \begin{itemize}
     \item \textbf{Métricas da Aplicação.} Focadas no comportamento das APIs .NET, onde são monitorizados indicadores como o número de requisições HTTP por segundo, latência média e percentis (p95 e p99), taxas de erro (4xx e 5xx), bem como o consumo de CPU e memória por serviço. Estes painéis permitem identificar padrões de carga e avaliar a eficiência operacional dos microsserviços.
     
     \item \textbf{Infraestrutura Kubernetes.} Dedicados à monitorização dos recursos do cluster, através dos dados expostos pelo Node Exporter. Incluem métricas como utilização de CPU e memória por nó e por \textit{pod}, carga média do sistema (\textit{load average}), e capacidade e utilização de armazenamento. Estes dashboards fornecem uma visão sobre a saúde da infraestrutura e permitem antecipar situações de saturação ou falhas ao nível dos recursos físicos.
     
-    \item \textbf{Logs e Traces.} Concebidos para análise detalhada de eventos e interações entre serviços. Nesta secção é possível filtrar logs estruturados por nível de severidade, serviço ou mensagem, inspecionar \textit{spans} individuais e observar o encadeamento de operações entre microsserviços ao longo do tempo. Esta correlação entre logs e rastreamento distribuído suporta a identificação de pontos de falha, atrasos inesperados e comportamentos anómalos na comunicação entre componentes.
+    \item \textbf{\textit{Logs} e \textit{Traces}.} Concebidos para análise detalhada de eventos e interações entre serviços. Nesta secção é possível filtrar \textit{logs} estruturados por nível de severidade, serviço ou mensagem, inspecionar \textit{spans} individuais e observar o encadeamento de operações entre microsserviços ao longo do tempo. Esta correlação entre \textit{ logs} e rastreamento distribuído suporta a identificação de pontos de falha, atrasos inesperados e comportamentos anómalos na comunicação entre componentes.
 \end{itemize}
 
 Esta estrutura modular facilita a navegação entre diferentes perspetivas operacionais e acelera o processo de diagnóstico e resolução de problemas. Para além disso, os dashboards incluem gráficos de séries temporais, indicadores numéricos e filtros dinâmicos, permitindo uma interpretação prática e contextual dos dados. Assim, a solução não apenas centraliza a telemetria, mas também proporciona aos engenheiros uma visão unificada e acionável sobre a saúde, desempenho e fiabilidade do sistema distribuído.
@@ -43,7 +43,7 @@ para sistemas distribuídos. Após a instrumentação e recolha dos sinais de te
 capaz de sintetizar esta informação de forma clara, permitindo identificar rapidamente 
 anomalias, diagnosticar problemas e interpretar o comportamento operacional das aplicações.
 
-Nesta secção, apresentam-se os dashboards desenvolvidos no Grafana para demonstrar a 
+Nesta secção, apresentam-se os \textit{dashboards} desenvolvidos no Grafana para demonstrar a 
 eficácia da solução proposta. O objetivo é ilustrar o percurso analítico completo, desde 
 a deteção de um evento anómalo até à identificação da sua causa, evidenciando o valor 
 prático da integração entre métricas, \textit{logs} e rastreamento distribuído.
@@ -92,7 +92,7 @@ A Figura~\ref{fig:dash-3} apresenta o detalhe de um evento de \textit{log}, incl
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{images/Grafana/log_expanded.png}
-    \caption{Detalhe de \textit{log} com metadados e referência direta ao trace.}
+    \caption{Detalhe de \textit{log} com metadados e referência direta ao \textit{trace}.}
     \label{fig:dash-3}
 \end{figure}
 
@@ -137,7 +137,7 @@ A Figura~\ref{fig:dash-6} ilustra um rastreamento completo associado ao incident
 
 \break
 
-\subsection{Correlação entre Logs e Traces}
+\subsection{Correlação entre \textit{Logs} e \textit{Traces}}
 
 Um dos principais benefícios da solução implementada reside na correlação direta entre \textit{logs} 
 e \textit{traces}. A Figura~\ref{fig:dash-7} apresenta um painel que liga cada registo de \textit{log} ao 

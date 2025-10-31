@@ -32,7 +32,7 @@ As Figuras \ref{fig:r2ut-ui} apresentam alguns ecrãs representativos da aplica�
     \label{fig:r2ut-ui}
 \end{figure}
 
-A Figura\ref{fig:otel_arch} apresenta uma visão geral da arquitetura de microsserviços que suporta este ecossistema distribuído, destacando os principais serviços e os seus fluxos de comunicação. Embora esta arquitetura seja composta por múltiplos módulos, o objetivo deste trabalho não é aprofundar o seu funcionamento interno, mas sim utilizá-la como sistema real para demonstrar a integração de ferramentas de monitorização. 
+A Figura \ref{fig:otel_arch} apresenta uma visão geral da arquitetura de microsserviços que suporta este ecossistema distribuído, destacando os principais serviços e os seus fluxos de comunicação. Embora esta arquitetura seja composta por múltiplos módulos, o objetivo deste trabalho não é aprofundar o seu funcionamento interno, mas sim utilizá-la como sistema real para demonstrar a integração de ferramentas de monitorização. 
 
 \begin{figure}[H]
     \centering
@@ -54,9 +54,6 @@ A variedade de serviços e operações representada nestes módulos evidencia a 
 A arquitetura do R2UT segue os princípios das arquiteturas de microsserviços com o objetivo de garantir flexibilidade, escalabilidade e resiliência na gestão do ciclo de vida da construção modular. Esta arquitetura é composta por diversos componentes (ou módulos), cada um responsável por uma funcionalidade específica, Figura~\ref{fig:otel_arch} . A estrutura modular facilita a manutenção, o desenvolvimento e a integração de novas capacidades sem impactar a operação dos restantes serviços.
 
 A solução está organizada em camadas funcionais, nas quais cada serviço é executado de forma isolada num \textit{container} Docker, posteriormente gerido e orquestrado pelo Kubernetes. Esta abordagem permite que os serviços operem de forma autónoma, escalando conforme necessário de acordo com a carga e as necessidades operacionais. A comunicação entre os serviços é assegurada através de \textit{REST APIs}, \textit{gRPC} permitindo interoperabilidade eficiente tanto em cenários síncronos como assíncronos.
-
-
-
 
 
 
@@ -238,10 +235,12 @@ A arquitetura do sistema de monitorização (Figura \ref{fig:otel_arch}) é conc
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{images/Diagramas/arquitetura_da_solucao.png}
+    \includegraphics[width=0.80\textwidth]{images/Diagramas/arquitetura_da_solucao.png}
     \caption{Arquitetura da solução de monitorização com OpenTelemetry, Prometheus, Loki, Jaeger e Grafana}
     \label{fig:otel_arch}
 \end{figure}
+
+\clearpage
 
 A Figura \ref{fig:otel_arch} ilustra o fluxo de dados de telemetria desde a sua origem nos microsserviços até à visualização final no Grafana. Nesse fluxo, os dados são primeiro gerados e enriquecidos nas aplicações, depois enviados para o \textit{Collector}, onde são processados, transformados e encaminhados para diferentes sistemas de armazenamento, conforme o seu tipo (métricas, \textit{logs} ou \textit{traces}). Finalmente, o Grafana agrega estes dados e proporciona uma visualização unificada para análise operacional e diagnóstico. Esta divisão clara entre instrumentação, processamento e visualização confere ao sistema maior flexibilidade e evita o acoplamento entre os serviços da aplicação e a infraestrutura de monitorização.
 
@@ -251,10 +250,12 @@ As API definem os contratos para a geração e correlação de dados de telemetr
 \subsubsection{Collector}
 O OpenTelemetry Collector é um componente independente e agnóstico de fornecedor, concebido para receber, processar e exportar dados de telemetria. Atua como um hub centralizado para gerir \textit{pipelines} de telemetria, recebendo dados em vários formatos (como OTLP, Prometheus, Jaeger) e encaminhando-os para um ou mais \textit{backends}. A sua capacidade de processar e filtrar dados antes da exportação otimiza o fluxo de dados, reduzindo a sobrecarga nas aplicações e melhorando a eficiência geral \cite{opentelemetry_docs,Thakur2022}.
 
+\clearpage
+
 \subsubsection{Exportadores (Exporters)}
 Os exportadores são componentes responsáveis por enviar os dados de telemetria (após serem gerados pelas aplicações ou processados pelo Collector) para ferramentas de backend específicas, como Grafana, Jaeger, Prometheus, Loki ou outros sistemas proprietários. A utilização de exportadores OTLP é considerada uma boa prática, pois são concebidos para emitir dados OpenTelemetry sem perda de informação e são amplamente suportados por diversas plataformas de monitorização \cite{opentelemetry_docs,Thakur2022}.
 
-\clearpage
+
 
 \subsubsection{Node Exporter}
 O Node Exporter é utilizado como agente de monitorização ao nível do sistema operativo, responsável por expor métricas relacionadas com CPU, memória, disco e rede. Embora não esteja diretamente integrado no pipeline do \textit{OpenTelemetry Collector}, este componente fornece ao Prometheus dados cruciais sobre a infraestrutura subjacente, permitindo complementar a monitorização das aplicações com indicadores do ambiente de execução.

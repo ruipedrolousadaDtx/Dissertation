@@ -8,13 +8,56 @@ O cenário atual do desenvolvimento de software é marcado pela crescente adoç�
 Neste contexto, a monitorização avançada torna-se uma disciplina fundamental para garantir a fiabilidade, o desempenho e a resiliência destes sistemas distribuídos \cite{Salah2017}.
 
 
+Antes de descrever a arquitetura técnica, importa apresentar brevemente o contexto funcional da plataforma R2UT. A solução é composta por vários módulos aplicacionais, cada um responsável por funcionalidades específicas, tais como \textit{Tenant Manager}, \textit{IOT Platform}, \textit{Tickets Management} e \textit{DAE Authentication}. Estas interfaces ilustram a diversidade operacional da plataforma e ajudam a enquadrar a necessidade de uma solução de monitorização transversal e escalável.
+
+\clearpage
+
+As Figuras \ref{fig:r2ut-ui} apresentam alguns ecrãs representativos da aplicação.
+
+
+\begin{figure}[H]
+    \centering
+        \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{images/r2ut/dtx_1.jpg}
+        \caption{Gestão de \textit{Tickets} por \textit{AssetGroup}.}
+        \label{fig:r2utBoard}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{images/r2ut/dtx_2.jpg}
+        \caption{Gestão de \textit{Tickets} por \textit{Device}.}
+        \label{fig:r2utBoard_diagram}
+    \end{subfigure}
+    \caption{Ecrãs representativos da plataforma R2UT, incluindo (a) gestão de \textit{Tenants} e \textit{AssetGroups}, e (b) gestão \textit{Tickets}.}
+    \label{fig:r2ut-ui}
+\end{figure}
+
+A Figura\ref{fig:otel_arch} apresenta uma visão geral da arquitetura de microsserviços que suporta este ecossistema distribuído, destacando os principais serviços e os seus fluxos de comunicação. Embora esta arquitetura seja composta por múltiplos módulos, o objetivo deste trabalho não é aprofundar o seu funcionamento interno, mas sim utilizá-la como sistema real para demonstrar a integração de ferramentas de monitorização. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/r2ut/diagrama_new.png}
+    \caption{Visão geral da arquitetura de microsserviços do sistema R2UT.}
+    \label{fig:otel_arch}
+\end{figure}
+
+
+A variedade de serviços e operações representada nestes módulos evidencia a importância de monitorizar de forma integrada o comportamento da plataforma, incluindo o desempenho e a fiabilidade de cada componente. 
+
+ 
+
+\clearpage
+
+
 \subsection{Visão geral da Arquitetura do Sistema R2UT}
 
-A arquitetura do R2UT segue os princípios das arquiteturas de microsserviços com o objetivo de garantir flexibilidade, escalabilidade e resiliência na gestão do ciclo de vida da construção modular. Esta arquitetura é composta por diversos componentes (ou módulos), cada um responsável por uma funcionalidade específica. A estrutura modular facilita a manutenção, o desenvolvimento e a integração de novas capacidades sem impactar a operação dos restantes serviços.
+A arquitetura do R2UT segue os princípios das arquiteturas de microsserviços com o objetivo de garantir flexibilidade, escalabilidade e resiliência na gestão do ciclo de vida da construção modular. Esta arquitetura é composta por diversos componentes (ou módulos), cada um responsável por uma funcionalidade específica, Figura~\ref{fig:otel_arch} . A estrutura modular facilita a manutenção, o desenvolvimento e a integração de novas capacidades sem impactar a operação dos restantes serviços.
 
-A solução está organizada em camadas, sendo que cada serviço é executado de forma isolada num \textit{container} Docker, posteriormente gerido e orquestrado pelo Kubernetes. Esta abordagem permite que os serviços operem de forma autónoma, escalando conforme necessário de acordo com a carga e as necessidades operacionais. A comunicação entre os serviços é assegurada através de \textit{REST APIs}, \textit{gRPC} e mensagens via \textit{Kafka}, permitindo interoperabilidade eficiente tanto em cenários síncronos como assíncronos.
+A solução está organizada em camadas funcionais, nas quais cada serviço é executado de forma isolada num \textit{container} Docker, posteriormente gerido e orquestrado pelo Kubernetes. Esta abordagem permite que os serviços operem de forma autónoma, escalando conforme necessário de acordo com a carga e as necessidades operacionais. A comunicação entre os serviços é assegurada através de \textit{REST APIs}, \textit{gRPC} permitindo interoperabilidade eficiente tanto em cenários síncronos como assíncronos.
 
-Além disso, a comunicação entre os diferentes componentes é realizada através de interfaces bem definidas, assegurando um elevado nível de desacoplamento entre os microsserviços e promovendo uma arquitetura extensível, robusta e facilmente evolutiva.
+
+
+
 
 
 \subsection{Papel do Kubernetes na Arquitetura do R2UT}
@@ -32,22 +75,18 @@ O Kubernetes desempenha um papel central na arquitetura do R2UT, fornecendo a in
 \end{itemize}
 
 
-
 \subsection{Arquitetura de Microsserviços no Kubernetes}
 
-
-A plataforma R2UT é composta por diversos serviços que interagem entre si, cada um implementado como um microsserviço em \textit{containers}. Esses serviços são organizados num cluster Kubernetes, no qual a comunicação entre os componentes é feita através de APIs e de mensagens assíncronas via \textit{ Kafka}. Isto permite que o sistema seja altamente escalável e eficiente. De seguida, destacam-se alguns dos componentes chave desta arquitetura:
+A plataforma R2UT é composta por vários serviços que interagem entre si, cada um implementado como um microsserviço em \textit{containers}. Estes serviços são executados num \textit{cluster} Kubernetes; a comunicação entre componentes faz-se por APIs (HTTP/gRPC) e por integrações assíncronas quando necessário. Esta abordagem favorece evolução independente, escalabilidade e resiliência. De seguida, destacam-se alguns componentes chave:
 
 \begin{itemize}
-    \item \textbf{Base de dados global.} Uma base de dados partilhada por todos os serviços que necessita de escalabilidade horizontal. O Kubernetes facilita a gestão de bases de dados distribuídas, como as suportadas por PostgreSQL com Citus, garantindo elevada performance nas consultas e capacidade de escala.
+  \item \textbf{Base de dados partilhada.} Um \textit{data store} utilizado por múltiplos serviços, com isolamento lógico por \textit{tenant}/domínio e capacidade de escala horizontal. O Kubernetes simplifica a operação de bases de dados distribuídas (p.ex., PostgreSQL com Citus).
 
-    \item \textbf{\textit{Middleware} e plataforma em nuvem.} Serviços responsáveis pela interoperabilidade entre os sistemas internos e pela gestão da infraestrutura na nuvem. O Kubernetes gere os recursos necessários para escalar estes serviços conforme as necessidades de tráfego, facilitando a implementação contínua das aplicações.
+  \item \textbf{\textit{Middleware} e plataforma em nuvem.} Serviços transversais de interoperabilidade e suporte (\textit{API gateway}, \textit{reverse proxy}, serviços de ficheiros, \textit{CI/CD}), geridos pelo Kubernetes para assegurar implantação contínua e escalonamento automático.
 
-    \item \textbf{Módulos específicos.} \textit{Tenant Management}, \textit{Ticket Management}, \textit{PDFBuilder}, \textit{IoT Manager}, \textit{Rules Engine}, \textit{DAE Authentication} são módulos da arquitetura. Cada um opera de forma independente em \textit{containers}, com comunicação entre serviços mediada através de APIs e filas de mensagens (Kafka).
+  \item \textbf{Módulos de negócio.} \textit{Tenant Management}, \textit{Ticket Management}, \textit{PDFBuilder}, \textit{IoT Manager}, \textit{Rules Engine} e \textit{DAE Authentication}, entre outros. Cada módulo executa em \textit{containers} isolados, expõe APIs próprias e integra-se com os restantes serviços. A integração com o mundo físico é realizada via \textit{MQTT} (ver arquitetura IoT).
 
-    \item \textbf{Cluster Kafka.} O Kafka é utilizado como \textit{broker} de mensagens para garantir a comunicação assíncrona entre os microsserviços, especialmente quando é necessário gerir grandes volumes de dados e eventos gerados por dispositivos IoT ou interações de utilizadores. O Kubernetes permite a escalabilidade do Kafka através de clusters e réplicas dos \textit{brokers}, assegurando alta disponibilidade e tolerância a falhas.
 \end{itemize}
-
 
 \subsection{Desafios da Monitorização em Sistemas Distribuídos}
 
@@ -127,7 +166,8 @@ A adoção do \textit{OpenTelemetry} traz benefícios substanciais no contexto d
     \item \textbf{Aderência ao ecossistema \textit{cloud-native}.} A ferramenta foi concebida para ambientes modernos, com suporte maduro para Kubernetes, serviços distribuídos e \textit{auto-instrumentation} disponível para várias linguagens, incluindo .NET.
 \end{itemize}
 
-A adoção do \textit{OpenTelemetry}, contudo, não está isenta de desafios. A complexidade de sistemas distribuídos faz com que a instrumentação, operação e gestão da telemetria requeiram planeamento cuidadoso e boas práticas consolidadas.
+Embora estes benefícios representem um avanço significativo face a soluções tradicionais, a adoção do \textit{OpenTelemetry} ainda apresenta desafios relevantes. A complexidade inerente aos sistemas distribuídos, combinada com a evolução contínua deste ecossistema, exige planeamento cuidadoso, maturidade operacional e decisões técnicas bem fundamentadas para garantir uma implementação eficaz.
+
 
 \textbf{Limitações e Desafios:}
 

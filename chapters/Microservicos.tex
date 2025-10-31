@@ -6,15 +6,9 @@ Nos últimos anos, as arquiteturas de microsserviços tornaram-se uma das aborda
 
 \subsection{Limitações das Arquiteturas Monolíticas}
 
-Antes da emergência dos microsserviços, a maioria das aplicações empresariais eram desenvolvidas seguindo uma arquitetura monolítica, na qual todos os componentes do sistema - interface de utilizador, lógica de negócio e acesso a dados - estão integrados num único bloco de código. Uma única “peça” de software. Embora esta abordagem simplifique o desenvolvimento inicial, à medida que a aplicação vai crescendo e evoluindo vão surgindo vários problemas devido a essa tão grande concentração de serviços num único sistema \cite{Villamizar2015}. A Figura \ref{fig:monolitica_microservicos} apresenta uma comparação estrutural entre uma arquitetura monolítica e uma arquitetura baseada em microsserviços. Entre os principais problemas identificados destacam-se:
+Antes da emergência dos microsserviços, a maioria das aplicações empresariais eram desenvolvidas seguindo uma arquitetura monolítica, na qual todos os componentes do sistema - interface de utilizador, lógica de negócio e acesso a dados - estão integrados num único bloco de código. Uma única “peça” de software. Embora esta abordagem simplifique o desenvolvimento inicial, à medida que a aplicação vai crescendo e evoluindo vão surgindo vários problemas devido a essa tão grande concentração de serviços num único sistema \cite{Villamizar2015}. A Figura \ref{fig:monolitica_microservicos} apresenta uma comparação estrutural entre uma arquitetura monolítica e uma arquitetura baseada em microsserviços.
 
-\begin{itemize}
-    \item Dificuldade de escalar equipas de desenvolvimento. Diferentes equipas precisam de trabalhar no mesmo código, o que provoca frequentemente conflitos e a necessidade de uma coordenação intensiva.
-    \item Ciclo de \textit{deployment} prolongados. A necessidade de testar e distribuir toda a aplicação torna os processos de atualização complexos e arriscados;
-    \item Falta de resiliência. A ocorrência de uma falha, num único componente, pode comprometer toda a aplicação, o que pode gerar uma interrupção generalizada dos serviços do sistema.
-\end{itemize}
-
-Estas limitações tornaram-se ainda mais evidentes com o avanço da computação em nuvem e a exigência por uma disponibilização contínua de serviços.
+\clearpage
 
 A Figura \ref{fig:monolitica_microservicos} evidencia estas diferenças, mostrando como, numa arquitetura monolítica, todos os módulos se encontram num único artefacto, enquanto na arquitetura de microsserviços cada componente opera de forma independente, comunicando através de um API Gateway e podendo utilizar bases de dados próprias.
 
@@ -25,6 +19,22 @@ A Figura \ref{fig:monolitica_microservicos} evidencia estas diferenças, mostran
     \caption{Comparação entre arquitetura monolítica e arquitetura de microsserviços}
     \label{fig:monolitica_microservicos}
 \end{figure}
+
+Entre os principais problemas identificados destacam-se:
+
+\begin{itemize}
+    \item Dificuldade de escalar equipas de desenvolvimento. Diferentes equipas precisam de trabalhar no mesmo código, o que provoca frequentemente conflitos e a necessidade de uma coordenação intensiva.
+    \item Ciclo de \textit{deployment} prolongados. A necessidade de testar e distribuir toda a aplicação torna os processos de atualização complexos e arriscados;
+    \item Falta de resiliência. A ocorrência de uma falha, num único componente, pode comprometer toda a aplicação, o que pode gerar uma interrupção generalizada dos serviços do sistema.
+\end{itemize}
+
+
+Estas limitações tornaram-se ainda mais evidentes com o avanço da computação em nuvem e a necessidade
+de disponibilização contínua de serviços. Assim, a adoção de arquiteturas distribuídas baseadas em
+microsserviços surge como uma resposta natural para mitigar estas restrições e aumentar a escalabilidade,
+flexibilidade e resiliência das aplicações modernas.
+
+
 
 \clearpage
 

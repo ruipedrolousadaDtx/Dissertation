@@ -66,8 +66,12 @@ distribuição por severidade e principais \textit{endpoints} envolvidos. Este �
     \label{fig:dash-1}
 \end{figure}
 
-\textit{Transição:} Identifica-se um pico de erros ou eventos suspeitos e aplica-se filtragem 
-por \texttt{service.name = TicketsManagement} e severidade (\texttt{ERROR}/\texttt{WARN}), avançando para o foco em erros.
+Ao identificar um pico anómalo ou um conjunto recorrente de eventos, o próximo passo consiste em 
+aprofundar a investigação, isolando apenas as entradas relevantes, nomeadamente erros e avisos críticos. Esta transição operacional permite filtrar ruído e focar exclusivamente na informação que pode suportar um diagnóstico de falha.
+
+
+% \textit{Transição:} Identifica-se um pico de erros ou eventos suspeitos e aplica-se filtragem 
+% por \texttt{service.name = TicketsManagement} e severidade (\texttt{ERROR}/\texttt{WARN}), avançando para o foco em erros.
 
 \paragraph{2) Foco exclusivo nos erros.}
 
@@ -82,7 +86,14 @@ Este painel acelera a identificação de falhas e reduz o \textit{MTTR} ao torna
     \label{fig:dash-2}
 \end{figure}
 
-\textit{Transição:} Seleciona-se um evento concreto para análise detalhada do registo.
+Uma vez isolado um erro relevante, o passo seguinte consiste em examinar o registo completo 
+associado ao evento. Isto permite compreender o contexto e identificar indicadores fundamentais, 
+como o \texttt{trace\_id}, que serve como elo de ligação para análise correlacionada com métricas e 
+traces distribuídos.
+
+% \textit{Transição:} Seleciona-se um evento concreto para análise detalhada do registo.
+
+\clearpage
 
 \paragraph{3) Expansão do registo e metadados.}
 
@@ -96,7 +107,12 @@ A Figura~\ref{fig:dash-3} apresenta o detalhe de um evento de \textit{log}, incl
     \label{fig:dash-3}
 \end{figure}
 
-\textit{Transição:} A partir do \texttt{trace\_id}, o analista segue para o rastreamento associado.
+A partir deste ponto, a investigação prossegue de forma guiada: com base no identificador de \texttt{trace}, 
+o analista pode correlacionar a ocorrência do erro com o comportamento temporal e estrutural do sistema, 
+através da análise das métricas agregadas.
+
+
+% \textit{Transição:} A partir do \texttt{trace\_id}, o analista segue para o rastreamento associado.
 
 \paragraph{4) Métricas da aplicação.}
 
@@ -109,7 +125,11 @@ A Figura~\ref{fig:dash-4} apresenta indicadores operacionais da API: pedidos por
     \label{fig:dash-4}
 \end{figure}
 
-\textit{Transição.} Se houver degradação, o analista volta aos eventos e segue para o \textit{trace} para localizar gargalos. Em paralelo, valida se há limitação de recursos na infraestrutura.
+Caso se observem anomalias de desempenho, a próxima etapa consiste em perceber se essas 
+alterações derivam do código ou de limitações da infraestrutura subjacente, nomeadamente do cluster Kubernetes.
+
+
+% \textit{Transição.} Se houver degradação, o analista volta aos eventos e segue para o \textit{trace} para localizar gargalos. Em paralelo, valida se há limitação de recursos na infraestrutura.
 
 \paragraph{5) Recursos da infraestrutura Kubernetes.}
 
@@ -122,7 +142,10 @@ A Figura~\ref{fig:dash-5} consolida métricas do cluster: utilização de CPU e 
     \label{fig:dash-5}
 \end{figure}
 
- \textit{Transição.} Com os recursos estáveis, a investigação regressa ao encadeamento distribuído das chamadas para localizar a origem funcional do problema.
+Se os recursos se encontram estáveis, torna-se possível concluir que o problema tem origem no fluxo lógico da aplicação e não na sua execução física. Assim, a investigação regressa à análise distribuída das chamadas entre serviços.
+
+
+%  \textit{Transição.} Com os recursos estáveis, a investigação regressa ao encadeamento distribuído das chamadas para localizar a origem funcional do problema.
 
 \paragraph{6) Rastreio distribuído.}
 
@@ -135,7 +158,9 @@ A Figura~\ref{fig:dash-6} ilustra um rastreamento completo associado ao incident
     \label{fig:dash-6}
 \end{figure}
 
-\break
+Esta visão final fecha o ciclo analítico, fornecendo evidências concretas sobre a origem do problema 
+e permitindo validar hipóteses levantadas nas etapas anteriores. A combinação integrada de \textit{logs}, métricas e \textit{traces} constitui, assim, um processo sistemático e completo para diagnóstico eficiente em arquiteturas distribuídas.
+
 
 \subsection{Correlação entre \textit{Logs} e \textit{Traces}}
 

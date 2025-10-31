@@ -43,6 +43,8 @@ flexibilidade e resiliência das aplicações modernas.
 
 O conceito de decompor aplicações monolíticas em serviços autónomos não é novo. As Arquiteturas Orientadas a Serviços (SOA) surgiram no final dos anos 1990 e início dos anos 2000, como uma primeira forma de abordar os problemas impostos pelas arquiteturas monolíticas. Numa arquitetura deste tipo, as aplicações são organizadas como uma coleção de serviços que interagem por meio de um “barramento” de mensagens - \textit{Enterprise Service Bus} (ESB). Um ESB é um sistema de \textit{middleware} que permite a comunicação entre serviços distintos numa SOA. O ESB atua como um único intermediário central que gere toda a integração, faz o encaminhamento de mensagens, a transformação de dados e aplica as políticas de segurança definidas para os vários serviços do sistema. Embora um ESB simplifique a integração inicial, a sua centralização cria dependências e um potencial ponto de falha do sistema. Fragilidades como estas, fizeram com que se procurassem alternativas mais descentralizadas, como as arquiteturas baseadas em microsserviços \cite{Aziz2020}.
 
+
+
 Embora as SOA tenham introduzido avanços significativos na modularização de sistemas, também criaram alguns desafios consideráveis, nomeadamente:
 
 
@@ -64,6 +66,8 @@ A Figura \ref{fig:soa_microservicos} ilustra estas diferenças, evidenciando a c
     \caption{Comparação entre arquitetura SOA e arquitetura de microsserviços}
     \label{fig:soa_microservicos}
 \end{figure}
+
+Esta evolução arquitetural reflete uma mudança fundamental na forma como sistemas distribuídos são concebidos e operados: em vez de depender de um núcleo central altamente complexo, as arquiteturas modernas privilegiam autonomia, escalabilidade e observabilidade. 
 
 \subsection{Fatores Tecnológicos e Organizacionais}
 

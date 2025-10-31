@@ -405,19 +405,21 @@ Após a fase de recolha, os dados de telemetria passam por um estágio fundament
 
 De forma a consolidar o papel de cada componente, a Tabela \ref{tab:otel-processors} apresenta os principais \textit{processors} utilizados, a sua função primária e respetivas aplicações práticas.
 
+
+
 \begin{table}[H]
 \centering
 \caption{Principais \textit{processors} do OpenTelemetry Collector utilizados}
 \label{tab:otel-processors}
-\begin{tabular}{|p{3cm}|p{4cm}|p{4.2cm}|p{4.2cm}|}
+\begin{tabular}{|p{2.7cm}|p{3.5cm}|p{4.2cm}|p{4.2cm}|}
 \hline
 \textbf{Processor} & \textbf{Função Primária} & \textbf{Aplicações Chave} & \textbf{Benefício para Monitorização} \\ \hline
-\texttt{transform} & Modifica dados com OTTL. & Adiciona \texttt{service.name}, normaliza severidade, converte timestamps. & Consistência semântica e refinamento da telemetria. \\ \hline
-\texttt{batch} & Agrupa dados em lotes. & Reduz chamadas de rede e overhead. & Melhora o débito e otimiza a exportação. \\ \hline
+\texttt{transform} & Modifica dados com OTTL. & Adiciona \texttt{service.name}, normaliza severidade, converte \textit{timestamps}. & Consistência semântica e refinamento da telemetria. \\ \hline
+\texttt{batch} & Agrupa dados em lotes. & Reduz chamadas de rede e \textit{overhead}. & Melhora o débito e otimiza a exportação. \\ \hline
 \texttt{attributes} & Adiciona ou altera atributos. & Injeta metadados como ambiente e host. & Melhora correlação, filtragem e contexto. \\ \hline
 \texttt{resource} & Modifica atributos de recurso. & Garante aplicação uniforme de \texttt{service.name}, versão, ambiente. & Uniformidade e correta identificação de origem dos dados. \\ \hline
 \texttt{memory\_limiter} & Controla consumo de memória. & Evita saturação e falha do Collector. & Estabilidade operacional. \\ \hline
-\texttt{tail\_sampling} & Amostragem com base no trace completo. & Seleciona traces críticos (ex.: erros, alta latência). & Reduz volume e custo mantendo visibilidade de incidentes. \\ \hline
+\texttt{tail\_sampling} & Amostragem com base no \textit{trace} completo. & Seleciona \textit{traces} críticos (ex.: erros, alta latência). & Reduz volume e custo mantendo visibilidade de incidentes. \\ \hline
 \end{tabular}
 \end{table}
 
